@@ -1,3 +1,19 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{JULIA-PUB}
+S.~K. Jeff~Bezanson, Alan~Edelman,  V.~B. Shah.
+\newblock Julia: A fresh approach to numerical computing.
+\newblock {\em SIAM Review}, 59:65--98, 2017.
+
+\bibitem{JULIA-PERFORMANCE}
+V.~B.~S. Jeff~Bezanson, Stefan~Karpinski,  A.~Edelman.
+\newblock Julia: A fast dynamic language for technical computing.
+\newblock {\em ArXiv:1209.5145}, September 2012.
+
+\bibitem{SELECTION-METHODS}
+N.~Saini.
+\newblock Review of selection methods in genetic algorithms.
+\newblock {\em International Journal of Engineering and Computer Science},
+  6(12):22261--22263, Dec. 2017.
 
 \end{thebibliography}

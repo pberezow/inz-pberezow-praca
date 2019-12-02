@@ -2,21 +2,201 @@
 \thispagestyle{chapterBeginStyle}
 
 \section{Użyte technologie}
+Do implementacji algorytmu zastosowano język Julia\cite{JULIA-PUB} w wersji 1.3. Julia jest stosunkowo nowym językiem programowania. Został on zaprojektowany 
+z myślą o zastosowaniach w obliczeniach numerycznych. Łączy on w sobie zalety języków niskopoziomowych i wysokopoziomowych takie jak szybkość 
+i czytelność kodu. Testy pokazują, że program napisany w Julii może być równie szybki, jak program napisany w C\cite{JULIA-PERFORMANCE}. 
+
+Ostatnie aktualizacje w znaczącym stopniu rozwinęły wsparcie języka dla obliczeń równoległych. W tym momencie Julia oferuje wsparcie dla 
+równoległości na poziomie wątków jak i procesów, co dodatkowo wpłynęło na wybór tego właśnie języka. 
 
 
 \section{Reprezentacja chromosomu}
+W opisywanej implementacji jako reprezentacje rozwiązania przyjęto macierz:
+$$V = (v_{ij}) \text{, gdzie } 1 \le i \le length(demand) \land 1 \le j \le length(supply)$$
+
+Rozwiązanie jest zakodowane w taki sposób, że komórka macierzy o indeksie $[i, j]$ określa ilość transportowanego towaru 
+między $i$-tym punketm nadania i $j$-tym punktem odbioru. Jest to jedna z najbardziej naturalnych reprezentacji rozwiązania 
+dla zadania transportowego.
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{c|ccccc}
+            i\textbackslash{j} & 10.0 & 7.0 & 5.0 & 13.0 & 12.0 \\ 
+            \hline
+            12.0 & 0.0 & 7.0 & 5.0 & 0.0 & 0.0 \\
+            10.0 & 5.0 & 0.0 & 0.0 & 0.0 & 5.0 \\
+            3.0 & 3.0 & 0.0 & 0.0 & 0.0 & 0.0 \\
+            10.0 & 0.0 & 0.0 & 0.0 & 3.0 & 7.0 \\
+            12.0 & 2.0 & 0.0 & 0.0 & 10.0 & 0.0 \\
+        \end{tabular}
+    \end{center}
+    \caption{Przykładowe rozwiązanie(pierwszy wiersz - wektor punktów odbioru, pierwsza kolumna - wektor punktów nadania).}
+\end{table}
+
+Aby ograniczenia zadania zostały zachowane macierz rozwiązania musi spełniać następujące warunki:
+$$\sum_{j=1}^{m} v_{ij} = supply[i], \text{ dla } i = 1, 2, \dots, n \text{, gdzie } n = length(demand)$$
+$$\sum_{i=1}^{n} v_{ij} = demand[j], \text{ dla } j = 1, 2, \dots, m \text{, gdzie } m = length(supply)$$
+$$v_{ij} \ge 0, \text{ dla } i = 1, 2, \dots, n \text{ i } j = 1, 2, \dots, m$$
+
+
+\section{Inicjalizacja chromosomu}
+[TODO: Opis]
+[TODO: Przykład]
 
 
 \section{Operator krzyżowania}
+Operator krzyżowania został zdefiniowany jako kombinacja wypukła dwóch rodziców.
 
+\begin{pseudokod}
+    \KwData{$P_1, P_2$ - rodzice wybrani do krzyżowania}
+    \KwResult{$O_1, O_2$ - otrzymane dzieci}
+    $c_1 \gets rand(0,\dots,1)$\;
+    $c_2 \gets 1.0 - c_1$\;
+    $O_1 \gets c_1 * P_1 + c_2 * P_2$\;
+    $O_2 \gets c_2 * P_1 + c_1 * P_2$\;
+    \Return{$(O_1, O_2)$}\;
+\end{pseudokod}
+
+Zdefiniowany tak operator krzyżowania nie narusza ograniczeń zadania, ponieważ przestrzeń rozwiązań jest wypukła. Wynika z tego, że jeśli 
+rodzice spełniali ograniczenia, to otrzymane w ten sposób dzieci również muszą spełniać ograniczenia.
+
+[TODO: Dodać przykład zastosowania operatora]
 
 \section{Operator mutacji}
+Operator mutacji opiera się na modyfikacji rozwiązania poprzez wybranie z niego podmacierzy i jej ponowną inicjalizacje. Załóżmy, że 
+mamy $n$ punktów nadania i $m$ punktów odbioru. Wybierzmy jako kandydata do mutacji macierz $V = (v_{ij})$, gdzie $1 \le i \le n$ i 
+$1 \le j \le m$. Podmacierz $W = w_{ij}$ jest tworzona w następujący sposób:
 
+\begin{itemize}
+    \item Losujemy podzbiór $k$ indeksów $\{i_1, \dots, i_k\}$ ze zbioru $\{1, \dots, n\}$ oraz podzbiór $l$ indeksów $\{j_1, \dots, j_l\}$ 
+    ze zbioru $\{1, \dots, m\}$, $2 \le k \le n$ i $2 \le l \le m$.
+    \item Tworzymy podmacierz $W$ składającą się z takich elementów macierzy $V$, które zostały wylosowane, tzn. element $v_{ij} \in V$ 
+    zostaje włączony do podmacierzy $W$ tylko jeśli $i \in \{i_1, \dots, i_n\}$ oraz $j \in \{j_1, \dots, j_l\}$.
+\end{itemize}
+
+Dla stworzonej macierzy $W$ tworzymy nowe wektory $demand_W$ i $supply_W$ w następujący sposób:
+$$demand_W[i] = \sum_{j \in \{j_1, \dots, j_l\}} v_{ij}, \text{ dla } 1 \le i \le k$$
+$$supply_W[j] = \sum_{i \in \{i_1, \dots, i_k\}} v_{ij}, \text{ dla } 1 \le j \le l$$
+
+Następnie na nowo inicjalizujemy podmacierz $W$ macierzy $V$ używając stworzonych wektorów $demand_W$ oraz $supply_W$ do określenia popytu i podaży
+w wybranych punktach nadania i odbioru. Po zakończeniu inicjalizacji przepisujemy wartości z podmacierzy $W$ z powrotem do macierzy $V$.
+
+\begin{pseudokod}
+    \KwData{$V$ - osobnik wybrany do mutacji wielkości $n \times m$, $k, l$ - wielkość podmacierzy}
+    \KwResult{$V$ - osobnik po mutacji}
+    $demand\_idx \gets$ wylosuj podzbiór długości $k$ ze zbioru $\{1, \dots, n\}$\;
+    $supply\_idx \gets$ wylosuj podzbiór długości $l$ ze zbioru $\{1, \dots, m\}$\;
+    $W \gets zeros(k, l)$ \tcc*[r]{generujemy macierz zerową rozmiaru $k \times l$}
+    \For{$i \in \{1, \dots, k\}$} {
+        \For{$j \in \{1, \dots, l\}$} {
+            $W[i, j] \gets V[demand\_idx[i], supply\_idx[j]]$\;
+        }
+    }
+    $demand\_vec \gets zeros(k)$ \tcc*[r]{generujemy wektor zerowy długości k}
+    $supply\_vec \gets zeros(l)$ \tcc*[r]{generujemy wektor zerowy długości l}
+    \For{$i \in demand\_idx$} {
+        $demand\_vec[i] \gets \sum_{j \in supply\_idx} V[i, j]$\;
+    }
+    \For{$j \in supply\_idx$} {
+        $supply\_vec[j] \gets \sum_{i \in supply\_idx} V[i, j]$\;
+    }
+    $W \gets inicjalizacja(W, demand\_vec, supply\_vec)$\;
+    \For{$i \in \{1, \dots, k\}$} {
+        \For{$j \in \{1, \dots, l\}$} {
+            $V[demand\_idx[i], supply\_idx[j]] \gets W[i, j]$\;
+        }
+    }
+    \Return{$V$}
+\end{pseudokod}
+
+Zdefiniowano dwa operatory mutacji różniące się jedynie procedurą inicjalizacji. W pierwszym używamy tej samej procedury, którą inicjalizujemy 
+nowe chromosomy podczas generowania populacji początkowej. Druga jest modyfikacją tej procedury. Modyfikacja polega na tym, że zamiast wybierać 
+jako wartość pola $val = min(demand[i], supply[j])$ wybieramy liczbę z zakresu $[0, val]$. Zmiana ta powoduje, że otrzymana macierz może naruszać 
+ograniczenia zadania, dlatego po wstępnym wyznaczeniu wartości naprawiamy rozwiązanie poprzez zrobienie wymaganych dodawań w taki sposób, żeby 
+rozwiązanie spełniało ograniczenia.
+
+[TODO: Pseudokod]
+[TODO: Przykład]
 
 \section{Funkcje oceny}
 
 
 \section{Metoda selekcji}
-
+W algorytmie zastosowano standardową metodę selekcji - metodę koła ruletki. W tej metodzie lepiej przystosowane osobniki mają odpowiednio większe 
+szanse na to, że zostaną wybrane do puli rodziców dla następnej generacji. Na początku obliczana jest suma kumulatywna dla całego pokolenia. Następnie 
+otrzymane wartości skalujemy tak, aby znajdowały się w przedziale $[0, 1]$. W ten sposób przedział $[0, 1]$ zostaje podzielony na mniejsze, które 
+odpowiadają pojedynczym osobnikom z populacji. Następnie generujemy losową liczbę z tego przedziału. Do zbioru rodziców dodawany jest osobnik, 
+w którego przedziale znajduje się wylosowana liczba. Warto zauważyć że tak zaprojektowana selekcja pozwala na to, że jeden osobnik zostanie wybany 
+kilkukrotnie na rodzica.
+[TODO: obrazek ilustrujący algorytm]
 
 \section{Wersja równoległa}
+Algorytm może działać w dwóch trybach:
+\begin{itemize}
+    \item Klasycznym
+    \item Wyspowym
+\end{itemize}
+
+Model klasyczny nie różni się wiele od standardowego algorytmu ewolucyjnego. Mamy tutaj standardowo jedną populacje, która ewoluuje przez 
+określoną na starcie liczbę pokoleń. Wszystkie dostępne parametry algorytmu oraz ich dopuszczalne wartości opisane są w dalczej części pracy, 
+w sekcji \textit{Pliki konfiguracyjne}.
+
+W modelu klasycznym zrównoleglenie odbywa się na poziomie pojedynczej iteracji. Ewolucje populacji możemy podzielić tutaj na dwie części:
+\begin{itemize}
+    \item Krzyżowanie - w tej części między wątki rozdzielani są rodzice wybrani do krzyżowania. Następnie każdy z wątków generuje swoją część 
+    dzieci, następnie z określonym prawdopodobieństwem stostuje na dzieciach operator mutacji i ostatecznie oblicza dla nich wartość funkcji oceny. 
+    Dzieci są dodawane do kolejnej populacji.
+    \item Dopełnienie populacji - w tej części do kolejnej populacji przepisywana jest część najlepszych rozwiązań oraz losowo wybranych osobników 
+    z poprzedniej populacji. Następnie te dodane osobniki są poddawane mutacji i obliczana jest dla nich funkcja oceny.
+\end{itemize}
+
+Model wyspowy różni się od klasycznego podejścia tym, że całkowita populacja jest tutaj rozdzielana na kilka mniejszych. Następnie każda z 
+populacji częściowych ewoluuje niezależnie od innych przez określoną liczbę pokoleń. Po zakończeniu tego procesu wszystkie częściowe populacje 
+są na nowo łączone w jedną. Następnie najlepsze rozwiązywanie jest zapisywane, a populacja zostaje na nowo podzielona na kilka mniejszych i 
+cały proces się powtarza, do momentu w którym ilość generacji przekroczy określoną na początku liczbę. Na końcu najlepsze rozwiązanie jest zwracane.
+
+W tym modelu zrównoleglenie obliczeń polega na tym, że przy każdym podziale populacji jeden wątek zarządza pojedynczą częścią populacji.
+Model ten skaluje się lepiej niż model klasyczny ze względu na to że podzadania przydzielane wątkom są większe. Minusem jest tutaj to, że populacja 
+musi być odpowiednio duża, żeby jej podział na mniejsze części się sprawdził.
+[TODO: Algorytm w wersji graficznej]
+
+W tym momencie każda z częściowych populacji w modelu wyspowym posiada takie same parametry. [...]
+
+\section{Pliki konfiguracyjne}
+Dodatkowo do algorytmu został dodany moduł obsługi plików konfiguracyjnych. Używają one formatu JSON. Moduł pozwala na zapisywanie i wczytywanie 
+całej konfiguracji algorytmu, w skład której wchodzą wektory popytu i podaży, macierz kosztu, oraz wszystkie parametry programu.
+Definicja poszczególnych parametrów:
+
+\begin{itemize}
+    \item populationSize - rozmiar całkowitej populacji. Powinien być dodatnią liczbą całkowitą.
+    \item eliteProc - ułamek najlepszych rozwiązań, które zostają przepisane do następnego pokolenia. 
+    Wartość powinna znajdować się w przedziale $[0, 1]$. Testy pokazują, że najlepsze rozwiązania są generowane dla wartości parametru w przedziale
+    $[0.1, 0.3]$.
+    \item mutationProb - prawdopodobieństwo mutacji. Przyjmuje wartość z zakresu $[0, 1]$. Warto pamiętać o tym, że zalecane prawdopodobieństwo 
+    mutacji nie powinno przekraczać kilkanastu procent.
+    \item mutationRate - wielkość mutacji, określa stosunek rozmiaru podmacierzy, wybieranej do ponownej inicjalizacji podczas mutacji, 
+    do macierzy rozwiązania. Przyjmuje wartości z zakresu $[0, 1]$. Tak jak w przypadku prawdopodobieństwa mutacji, jej wielkość nie powinna 
+    przekraczać kilkunastu procent, ponieważ zbyt duża mutacja może niszczyć znalezione rozwiązania.
+    \item crossoverProb - prawdopodobieństwo krzyżowania. Przyjmuje wartości z przedziału $[0, 1]$. Zaleca się ustawialnie wartości z przedziału 
+    $[0.5, 0.9]$. Należy pamiętać o tym, że suma parametrów eliteProc i crossoverProb nie może być większa niż $1$.
+    \item mode - tryb w jakim ma działać algorytm. Przyjmuje wartości "regular"(w przypadku wyboru klasycznego modelu) lub "island"(w przypadku 
+    modelu wyspowego).
+    \item numberOfSeparateGenerations - liczba naturalna określająca ilość iteracji jakie wykona algorytm pomiędzy rozdzieleniem populacji na 
+    mniejsze części, a ponownym jej scaleniem. Dla wyboru modelu klasycznego należy ustawić wartość parametru na $1$.
+\end{itemize}
+
+Dodatkowo w pliku konfiguracyjnym określamy wektor popytu, podaży i macierz kosztów:
+
+\begin{itemize}
+    \item demand - wektor popytu. Przyjmuje jako wartość listę elementów, które składają się z dwóch pól - "i", które określa indeks wektora i 
+    "val", które określa wartosć wektora w miejscu $i$ - $demand[i] = val$.
+    \item supply - wektor podaży. Przyjmuje jako wartość listę elementów, o polach takich samych jak w przypadku wektora popytu. Pojedynczy element 
+    opisuje pole wektora $supply[i] = val$.
+    \item costMatrix - macierz kosztu, która może być wykorzystywana w funkcji celu. Przyjmuje jako wartość listę elementów, które składają się 
+    z trzech pól: "s" - określa indeks odpowiadający indeksowi wektora podaży, "d" - określa indeks odpowiadający indeksowi wektora popytu, oraz 
+    "val" - określa wartość macierzy w polu o podanych indeksach $costMatrix[d, s] = val$.
+\end{itemize}
+
+Przykładowy plik konfiguracyjny:
+
+[TODO: dodać przykładowy plik]

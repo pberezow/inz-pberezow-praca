@@ -8,17 +8,19 @@
 \contentsline {section}{\numberline {2.2}Klasyczne rozwi\IeC {\k a}zania}{4}{section.2.2}
 \contentsline {section}{\numberline {2.3}Algorytmy metaheurystyczne}{4}{section.2.3}
 \contentsline {subsection}{\numberline {2.3.1}Algorytmy ewolucyjne}{4}{subsection.2.3.1}
-\contentsline {chapter}{\numberline {3}R\IeC {\'o}wnoleg\IeC {\l }\IeC {\k a} implementacja algorytmu ewolucyjnego}{5}{chapter.3}
-\contentsline {section}{\numberline {3.1}U\IeC {\.z}yte technologie}{5}{section.3.1}
-\contentsline {section}{\numberline {3.2}Reprezentacja chromosomu}{5}{section.3.2}
-\contentsline {section}{\numberline {3.3}Operator krzy\IeC {\.z}owania}{5}{section.3.3}
-\contentsline {section}{\numberline {3.4}Operator mutacji}{5}{section.3.4}
-\contentsline {section}{\numberline {3.5}Funkcje oceny}{5}{section.3.5}
-\contentsline {section}{\numberline {3.6}Metoda selekcji}{5}{section.3.6}
-\contentsline {section}{\numberline {3.7}Wersja r\IeC {\'o}wnoleg\IeC {\l }a}{5}{section.3.7}
-\contentsline {chapter}{\numberline {4}Wyniki eksperymentalne}{7}{chapter.4}
-\contentsline {section}{\numberline {4.1}Model klasyczny algorytmu genetycznego}{7}{section.4.1}
-\contentsline {section}{\numberline {4.2}Model wyspowy algorytmu genetycznego}{7}{section.4.2}
-\contentsline {chapter}{\numberline {5}Podsumowanie}{9}{chapter.5}
-\contentsline {chapter}{Bibliografia}{11}{chapter*.1}
-\contentsline {chapter}{\numberline {A}Zawarto\IeC {\'s}\IeC {\'c} p\IeC {\l }yty CD}{13}{appendix.A}
+\contentsline {chapter}{\numberline {3}R\IeC {\'o}wnoleg\IeC {\l }\IeC {\k a} implementacja algorytmu ewolucyjnego}{7}{chapter.3}
+\contentsline {section}{\numberline {3.1}U\IeC {\.z}yte technologie}{7}{section.3.1}
+\contentsline {section}{\numberline {3.2}Reprezentacja chromosomu}{7}{section.3.2}
+\contentsline {section}{\numberline {3.3}Inicjalizacja chromosomu}{8}{section.3.3}
+\contentsline {section}{\numberline {3.4}Operator krzy\IeC {\.z}owania}{8}{section.3.4}
+\contentsline {section}{\numberline {3.5}Operator mutacji}{8}{section.3.5}
+\contentsline {section}{\numberline {3.6}Funkcje oceny}{9}{section.3.6}
+\contentsline {section}{\numberline {3.7}Metoda selekcji}{9}{section.3.7}
+\contentsline {section}{\numberline {3.8}Wersja r\IeC {\'o}wnoleg\IeC {\l }a}{9}{section.3.8}
+\contentsline {section}{\numberline {3.9}Pliki konfiguracyjne}{10}{section.3.9}
+\contentsline {chapter}{\numberline {4}Wyniki eksperymentalne}{13}{chapter.4}
+\contentsline {section}{\numberline {4.1}Model klasyczny algorytmu genetycznego}{13}{section.4.1}
+\contentsline {section}{\numberline {4.2}Model wyspowy algorytmu genetycznego}{13}{section.4.2}
+\contentsline {chapter}{\numberline {5}Podsumowanie}{15}{chapter.5}
+\contentsline {chapter}{Bibliografia}{17}{chapter*.5}
+\contentsline {chapter}{\numberline {A}Zawarto\IeC {\'s}\IeC {\'c} p\IeC {\l }yty CD}{19}{appendix.A}
