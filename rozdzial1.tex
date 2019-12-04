@@ -50,6 +50,8 @@ rozwiązania przybliżone, takich jak algorytmy metaheurystyczne.
 Algorytmy metaheurystyczne znajdują zastosowanie szczególnie przy rozwiązywaniu nieliniowego zadania transportowego, ponieważ w tym przypadku 
 nie są znane algorytmy, które wyznaczają dokładne rozwiązanie w akceptowalnym czasie. 
 
+[TODO: dopisac]
+
 \subsection{Algorytmy ewolucyjne}
 Algorytmy ewolucyjne stanowią podzbiór algorytmów metaheurystycznych. Sposób ich działania jest inspirowany przez zjawisko ewolucji występujące 
 w naturze. Na początku działania algorytmu generowana jest w sposób losowy populacja startowa. Procedurę generowania pojedynczego osobnika lub 
@@ -79,7 +81,12 @@ przejście określonej liczby iteracji.
     \Return{najlepszy osobnik z $P(t)$}\;
 \end{pseudokod}
 
-[TODO: Dodać algorytm w wersji graficznej]
+\begin{figure}[h]
+    \centering        
+    \includegraphics[width=0.4\textwidth]{img/alg_ewo_szkic.png}
+    \caption{Ogólny schemat działania algorytmu ewolucyjnego}
+    \label{alg_ewo_img}
+\end{figure}
 
 Projektowanie algorytmu ewolucyjnego możemy podzielić na kilka oddzielnych części, są to: 
 \begin{itemize}

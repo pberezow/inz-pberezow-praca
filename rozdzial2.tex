@@ -40,7 +40,29 @@ $$v_{ij} \ge 0, \text{ dla } i = 1, 2, \dots, n \text{ i } j = 1, 2, \dots, m$$
 
 
 \section{Inicjalizacja chromosomu}
-[TODO: Opis]
+Projektując procedurę inicjalizacji rozwiązania musimy pamiętać o tym, żeby generowane rozwiązania spełniały ograniczenia przedstawione 
+w poprzedniej sekcji oraz obejmowały jak największą część przestrzeni wszystkich rozwiązań. Zaproponowana procedura przyjmuje jako argumenty 
+wektory popytu i podaży. Iterując po kolejnych, losowych polach macierzy przypisujemy im wartość $val = min(demand[i], supply[j])$, gdzie 
+$i, j$ są indeksami wylosowanej komórki macierzy, $demand[i]$ oraz $supply[j]$ odpowiadającymi im wartościami w wektorach popytu i podaży. 
+Następnie zmniejszamy wartości w wektorach o wpisaną wartość $val$. W ten sposób spełniamy ograniczenia zadania. Wygenerowane rozwiązania są 
+wierzchołkami sympleksu, opisującego wypukły brzeg przestrzeni dopuszczalnych rozwiązań.
+
+\begin{pseudokod}
+    \KwData{$demand$ - wektor popytu rozmiaru $n$, $supply$ - wektor podaży rozmiaru $m$}
+    \KwResult{$V$ - zainicjalizowana macierz}
+    $V \gets zeros(n, m)$\tcc*[r]{generujemy macierz zerową rozmiaru $n \times m$}
+    $indices \gets$ lista wszystkich indeksów macierzy $V$ w losowej kolejności\;
+    
+    \For{$(d, s) \in indices$} {
+        $val \gets min(demand[d], supply[s])$\;
+        $demand[d] \gets demand[d] - val$\;
+        $supply[s] \gets supply[s] - val$\;
+        $V[d, s] \gets val$\;
+    }
+
+    \Return{$V$}
+\end{pseudokod}
+
 [TODO: Przykład]
 
 
@@ -84,28 +106,36 @@ w wybranych punktach nadania i odbioru. Po zakończeniu inicjalizacji przepisuje
 \begin{pseudokod}
     \KwData{$V$ - osobnik wybrany do mutacji wielkości $n \times m$, $k, l$ - wielkość podmacierzy}
     \KwResult{$V$ - osobnik po mutacji}
+    
     $demand\_idx \gets$ wylosuj podzbiór długości $k$ ze zbioru $\{1, \dots, n\}$\;
     $supply\_idx \gets$ wylosuj podzbiór długości $l$ ze zbioru $\{1, \dots, m\}$\;
-    $W \gets zeros(k, l)$ \tcc*[r]{generujemy macierz zerową rozmiaru $k \times l$}
+    $W \gets zeros(k, l)$\tcc*[r]{generujemy macierz zerową rozmiaru $k \times l$}
+
     \For{$i \in \{1, \dots, k\}$} {
         \For{$j \in \{1, \dots, l\}$} {
             $W[i, j] \gets V[demand\_idx[i], supply\_idx[j]]$\;
         }
     }
-    $demand\_vec \gets zeros(k)$ \tcc*[r]{generujemy wektor zerowy długości k}
-    $supply\_vec \gets zeros(l)$ \tcc*[r]{generujemy wektor zerowy długości l}
+    
+    $demand\_vec \gets zeros(k)$\tcc*[r]{generujemy wektor zerowy długości k}
+    $supply\_vec \gets zeros(l)$\tcc*[r]{generujemy wektor zerowy długości l}
+    
     \For{$i \in demand\_idx$} {
         $demand\_vec[i] \gets \sum_{j \in supply\_idx} V[i, j]$\;
     }
+    
     \For{$j \in supply\_idx$} {
         $supply\_vec[j] \gets \sum_{i \in supply\_idx} V[i, j]$\;
     }
+    
     $W \gets inicjalizacja(W, demand\_vec, supply\_vec)$\;
+    
     \For{$i \in \{1, \dots, k\}$} {
         \For{$j \in \{1, \dots, l\}$} {
             $V[demand\_idx[i], supply\_idx[j]] \gets W[i, j]$\;
         }
     }
+    
     \Return{$V$}
 \end{pseudokod}
 
@@ -115,7 +145,29 @@ jako wartość pola $val = min(demand[i], supply[j])$ wybieramy liczbę z zakres
 ograniczenia zadania, dlatego po wstępnym wyznaczeniu wartości naprawiamy rozwiązanie poprzez zrobienie wymaganych dodawań w taki sposób, żeby 
 rozwiązanie spełniało ograniczenia.
 
-[TODO: Pseudokod]
+\begin{pseudokod}
+    \KwData{$demand$ - wektor popytu rozmiaru $n$, $supply$ - wektor podaży rozmiaru $m$}
+    \KwResult{$V$ - zainicjalizowana macierz}
+    $V \gets zeros(n, m)$\tcc*[r]{generujemy macierz zerową rozmiaru $n \times m$}
+    $indices \gets$ lista wszystkich indeksów macierzy $V$ w losowej kolejności\;
+    
+    \For{$(d, s) \in indices$} {
+        $val \gets$ wartość z przedziału $[0, min(demand[d], supply[s])]$\;
+        $demand[d] \gets demand[d] - val$\;
+        $supply[s] \gets supply[s] - val$\;
+        $V[d, s] \gets val$\;
+    }
+
+    \For{$(d, s) \in indices$} {
+        $val \gets min(demand[d], supply[s])$\;
+        $demand[d] \gets demand[d] - val$\;
+        $supply[s] \gets supply[s] - val$\;
+        $V[d, s] \gets V[d, s] + val$\;
+    }
+
+    \Return{$V$}
+\end{pseudokod}
+
 [TODO: Przykład]
 
 \section{Funkcje oceny}
@@ -137,11 +189,23 @@ Algorytm może działać w dwóch trybach:
     \item Wyspowym
 \end{itemize}
 
-Model klasyczny nie różni się wiele od standardowego algorytmu ewolucyjnego. Mamy tutaj standardowo jedną populacje, która ewoluuje przez 
+Na początku procedura inicjalizacji generuje losową populacje o określonej liczbie osobników i oblicza wartość funkcji oceny dla każdego z nich. 
+Następnie przechodzimy do głównej pętli algorytmu, która kończy się w momencie kiedy populacja osiągnie maksymalną ilość generacji. 
+Każdy z trybów różni się przebiegiem procedury \textit{nextGeneration}(patrz \ref{alg_main_img}), która tworzy nową generacje osobników.
+
+\begin{figure}[H]
+    \centering        
+    \includegraphics[width=0.4\textwidth]{img/alg_main.png}
+    \caption{Przebieg zaimplementowanego algorytmu ewolucyjnego}
+    \label{alg_main_img}
+\end{figure}
+
+Model klasyczny nie różni się wiele od standardowego algorytmu ewolucyjnego. Mamy tutaj jedną populacje, która ewoluuje przez 
 określoną na starcie liczbę pokoleń. Wszystkie dostępne parametry algorytmu oraz ich dopuszczalne wartości opisane są w dalczej części pracy, 
 w sekcji \textit{Pliki konfiguracyjne}.
 
-W modelu klasycznym zrównoleglenie odbywa się na poziomie pojedynczej iteracji. Ewolucje populacji możemy podzielić tutaj na dwie części:
+W modelu klasycznym zrównoleglenie odbywa się na poziomie pojedynczej iteracji(patrz \ref{next_gen_klasyczny_img}). 
+Ewolucję populacji możemy podzielić tutaj na dwie części:
 \begin{itemize}
     \item Krzyżowanie - w tej części między wątki rozdzielani są rodzice wybrani do krzyżowania. Następnie każdy z wątków generuje swoją część 
     dzieci, następnie z określonym prawdopodobieństwem stostuje na dzieciach operator mutacji i ostatecznie oblicza dla nich wartość funkcji oceny. 
@@ -150,15 +214,28 @@ W modelu klasycznym zrównoleglenie odbywa się na poziomie pojedynczej iteracji
     z poprzedniej populacji. Następnie te dodane osobniki są poddawane mutacji i obliczana jest dla nich funkcja oceny.
 \end{itemize}
 
+\begin{figure}[H]
+    \centering        
+    \includegraphics[width=0.2\textwidth]{img/next_gen_klasyczny.png}
+    \caption{Przebieg procedury nextGeneration dla modelu klasycznego}
+    \label{next_gen_klasyczny_img}
+\end{figure}
+
 Model wyspowy różni się od klasycznego podejścia tym, że całkowita populacja jest tutaj rozdzielana na kilka mniejszych. Następnie każda z 
 populacji częściowych ewoluuje niezależnie od innych przez określoną liczbę pokoleń. Po zakończeniu tego procesu wszystkie częściowe populacje 
 są na nowo łączone w jedną. Następnie najlepsze rozwiązywanie jest zapisywane, a populacja zostaje na nowo podzielona na kilka mniejszych i 
 cały proces się powtarza, do momentu w którym ilość generacji przekroczy określoną na początku liczbę. Na końcu najlepsze rozwiązanie jest zwracane.
 
-W tym modelu zrównoleglenie obliczeń polega na tym, że przy każdym podziale populacji jeden wątek zarządza pojedynczą częścią populacji.
+W tym modelu zrównoleglenie obliczeń polega na tym, że przy każdym podziale populacji jeden wątek zarządza pojedynczą częścią populacji(patrz \ref{next_gen_wyspowy_img}).
 Model ten skaluje się lepiej niż model klasyczny ze względu na to że podzadania przydzielane wątkom są większe. Minusem jest tutaj to, że populacja 
 musi być odpowiednio duża, żeby jej podział na mniejsze części się sprawdził.
-[TODO: Algorytm w wersji graficznej]
+
+\begin{figure}[H]
+    \centering        
+    \includegraphics[width=0.5\textwidth]{img/next_gen_wyspowy.png}
+    \caption{Przebieg procedury nextGeneration dla modelu wyspowego}
+    \label{next_gen_wyspowy_img}
+\end{figure}
 
 W tym momencie każda z częściowych populacji w modelu wyspowym posiada takie same parametry. [...]
 

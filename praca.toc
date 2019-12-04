@@ -16,11 +16,11 @@
 \contentsline {section}{\numberline {3.5}Operator mutacji}{8}{section.3.5}
 \contentsline {section}{\numberline {3.6}Funkcje oceny}{9}{section.3.6}
 \contentsline {section}{\numberline {3.7}Metoda selekcji}{9}{section.3.7}
-\contentsline {section}{\numberline {3.8}Wersja r\IeC {\'o}wnoleg\IeC {\l }a}{9}{section.3.8}
-\contentsline {section}{\numberline {3.9}Pliki konfiguracyjne}{10}{section.3.9}
-\contentsline {chapter}{\numberline {4}Wyniki eksperymentalne}{13}{chapter.4}
-\contentsline {section}{\numberline {4.1}Model klasyczny algorytmu genetycznego}{13}{section.4.1}
-\contentsline {section}{\numberline {4.2}Model wyspowy algorytmu genetycznego}{13}{section.4.2}
-\contentsline {chapter}{\numberline {5}Podsumowanie}{15}{chapter.5}
-\contentsline {chapter}{Bibliografia}{17}{chapter*.5}
-\contentsline {chapter}{\numberline {A}Zawarto\IeC {\'s}\IeC {\'c} p\IeC {\l }yty CD}{19}{appendix.A}
+\contentsline {section}{\numberline {3.8}Wersja r\IeC {\'o}wnoleg\IeC {\l }a}{10}{section.3.8}
+\contentsline {section}{\numberline {3.9}Pliki konfiguracyjne}{13}{section.3.9}
+\contentsline {chapter}{\numberline {4}Wyniki eksperymentalne}{15}{chapter.4}
+\contentsline {section}{\numberline {4.1}Model klasyczny algorytmu genetycznego}{15}{section.4.1}
+\contentsline {section}{\numberline {4.2}Model wyspowy algorytmu genetycznego}{15}{section.4.2}
+\contentsline {chapter}{\numberline {5}Podsumowanie}{17}{chapter.5}
+\contentsline {chapter}{Bibliografia}{19}{chapter*.11}
+\contentsline {chapter}{\numberline {A}Zawarto\IeC {\'s}\IeC {\'c} p\IeC {\l }yty CD}{21}{appendix.A}

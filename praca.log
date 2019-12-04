@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.15)  2 DEC 2019 22:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.15)  4 DEC 2019 14:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -629,16 +629,23 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \tabu@hleads=\box31
 \tabu@vleads=\box32
 \tabu@cellskip=\skip53
+) (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count114
+\float@exts=\toks26
+\float@box=\box33
+\@float@everytoks=\toks27
+\@floatcapt=\box34
 ) (/usr/share/texlive/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
 Package: algorithm2e 2017/07/18 v5.2 algorithms environments
-\c@AlgoLine=\count114
+\c@AlgoLine=\count115
  (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
 \algocf@hangindent=\skip54
  (/usr/share/texlive/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
 Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
-\c@checkoddpage=\count115
+\c@checkoddpage=\count116
 ) (/usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 ) (/usr/share/texlive/texmf-dist/tex/latex/relsize/relsize.sty
@@ -659,26 +666,26 @@ Package: relsize 2013/03/29 ver 4.1
 \interspacealgoruled=\dimen143
 \interspacetitleboxruled=\dimen144
 \algocf@ruledwidth=\skip63
-\algocf@inoutbox=\box33
-\algocf@inputbox=\box34
+\algocf@inoutbox=\box35
+\algocf@inputbox=\box36
 \AlCapSkip=\skip64
 \AlCapHSkip=\skip65
 \algoskipindent=\skip66
-\algocf@nlbox=\box35
-\algocf@hangingbox=\box36
-\algocf@untilbox=\box37
+\algocf@nlbox=\box37
+\algocf@hangingbox=\box38
+\algocf@untilbox=\box39
 \algocf@skipuntil=\skip67
-\algocf@capbox=\box38
+\algocf@capbox=\box40
 \algocf@lcaptionbox=\skip68
 \algoheightruledefault=\skip69
 \algoheightrule=\skip70
 \algotitleheightruledefault=\skip71
 \algotitleheightrule=\skip72
-\c@algocfline=\count116
-\c@algocfproc=\count117
-\c@algocf=\count118
-\algocf@algoframe=\box39
-\algocf@algobox=\box40
+\c@algocfline=\count117
+\c@algocfproc=\count118
+\c@algocf=\count119
+\algocf@algoframe=\box41
+\algocf@algobox=\box42
 ) (/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2017/04/05 v2.0i Standard LaTeX package
 Package textcomp Info: Sub-encoding information:
@@ -832,23 +839,23 @@ Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 407.
 Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 408.
 Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 409.
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count119
-\lst@gtempboxa=\box41
-\lst@token=\toks26
-\lst@length=\count120
+\lst@mode=\count120
+\lst@gtempboxa=\box43
+\lst@token=\toks28
+\lst@length=\count121
 \lst@currlwidth=\dimen145
-\lst@column=\count121
-\lst@pos=\count122
+\lst@column=\count122
+\lst@pos=\count123
 \lst@lostspace=\dimen146
 \lst@width=\dimen147
-\lst@newlines=\count123
-\lst@lineno=\count124
+\lst@newlines=\count124
+\lst@lineno=\count125
 \lst@maxwidth=\dimen148
  (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
-\c@lstnumber=\count125
-\lst@skipnumbers=\count126
-\lst@framebox=\box42
+\c@lstnumber=\count126
+\lst@skipnumbers=\count127
+\lst@framebox=\box44
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2015/06/04 1.6 listings configuration
 ))
@@ -863,9 +870,9 @@ Package ifvtex Info: VTeX not detected.
 ) (/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
-\Gm@cnth=\count127
-\Gm@cntv=\count128
-\c@Gm@tempcnt=\count129
+\Gm@cnth=\count128
+\Gm@cntv=\count129
+\c@Gm@tempcnt=\count130
 \Gm@bindingoffset=\dimen149
 \Gm@wd@mp=\dimen150
 \Gm@odd@mp=\dimen151
@@ -874,7 +881,7 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layoutheight=\dimen154
 \Gm@layouthoffset=\dimen155
 \Gm@layoutvoffset=\dimen156
-\Gm@dimlist=\toks27
+\Gm@dimlist=\toks29
 ) (/usr/share/texlive/texmf-dist/tex/latex/titling/titling.sty
 Package: titling 2009/09/04 v2.1d maketitle typesetting
 \thanksmarkwidth=\skip73
@@ -912,8 +919,8 @@ Package tocloft Info: The document has chapter divisions on input line 51.
 \cftbeforefigskip=\skip102
 \cftfigindent=\skip103
 \cftfignumwidth=\skip104
-\c@lofdepth=\count130
-\c@lotdepth=\count131
+\c@lofdepth=\count131
+\c@lotdepth=\count132
 \cftbeforelottitleskip=\skip105
 \cftafterlottitleskip=\skip106
 \cftbeforetabskip=\skip107
@@ -932,12 +939,12 @@ Package: fancyhdr 2017/06/30 v3.9a Extensive control of page headers and footers
 \f@nch@O@orf=\skip118
 ) (/usr/share/texlive/texmf-dist/tex/latex/titlesec/titlesec.sty
 Package: titlesec 2016/03/21 v2.10.2 Sectioning titles
-\ttl@box=\box43
+\ttl@box=\box45
 \beforetitleunit=\skip119
 \aftertitleunit=\skip120
 \ttl@plus=\dimen157
 \ttl@minus=\dimen158
-\ttl@toksa=\toks28
+\ttl@toksa=\toks30
 \titlewidth=\dimen159
 \titlewidthlast=\dimen160
 \titlewidthfirst=\dimen161
@@ -987,14 +994,14 @@ Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 )
 \@linkdim=\dimen162
-\Hy@linkcounter=\count132
-\Hy@pagecounter=\count133
+\Hy@linkcounter=\count133
+\Hy@pagecounter=\count134
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2018/02/06 v6.86b Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
-\Hy@SavedSpaceFactor=\count134
+\Hy@SavedSpaceFactor=\count135
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
@@ -1005,14 +1012,14 @@ Package hyperref Info: Plain pages OFF on input line 4524.
 Package hyperref Info: Backreferencing OFF on input line 4529.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4762.
-\c@Hy@tempcnt=\count135
+\c@Hy@tempcnt=\count136
  (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip11
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 5115.
 \XeTeXLinkMargin=\dimen163
-\Fld@menulength=\count136
+\Fld@menulength=\count137
 \Field@Width=\dimen164
 \Fld@charsize=\dimen165
 Package hyperref Info: Hyper figures OFF on input line 6369.
@@ -1024,31 +1031,31 @@ Package hyperref Info: Link coloring with OCG OFF on input line 6394.
 Package hyperref Info: PDF/A mode OFF on input line 6399.
 LaTeX Info: Redefining \ref on input line 6439.
 LaTeX Info: Redefining \pageref on input line 6443.
-\Hy@abspage=\count137
-\c@Item=\count138
-\c@Hfootnote=\count139
+\Hy@abspage=\count138
+\c@Item=\count139
+\c@Hfootnote=\count140
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2018/02/06 v6.86b Hyperref driver for pdfTeX
-\Fld@listcount=\count140
-\c@bookmark@seq@number=\count141
+\Fld@listcount=\count141
+\c@bookmark@seq@number=\count142
  (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary files (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 282.
 )
 \Hy@SectionHShift=\skip121
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 368.
+Package hyperref Info: Option `colorlinks' set `true' on input line 370.
  (/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \labelindent=\skip122
 \enit@outerparindent=\dimen166
-\enit@toks=\toks29
-\enit@inbox=\box44
-\enitdp@description=\count142
+\enit@toks=\toks31
+\enit@inbox=\box46
+\enitdp@description=\count143
 )
-\enitdp@myitemize=\count143
+\enitdp@myitemize=\count144
  (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
  (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
@@ -1075,16 +1082,17 @@ Package caption3 Info: TeX engine: e-TeX on input line 67.
 \caption@parindent=\dimen174
 \caption@hangindent=\dimen175
 )
-\c@ContinuedFloat=\count144
+\c@ContinuedFloat=\count145
+Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 ) (/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
 Package: subcaption 2016/05/22 v1.1-161 Sub-captions (AR)
-\c@subfigure=\count145
-\c@subtable=\count146
+\c@subfigure=\count146
+\c@subtable=\count147
 ) (/usr/share/texlive/texmf-dist/tex/latex/mdwtools/footnote.sty
 Package: footnote 1997/01/28 1.13 Save footnotes around boxes
-\fn@notes=\box45
+\fn@notes=\box47
 \fn@width=\dimen176
 ) (/usr/share/texlive/texmf-dist/tex/generic/dirtree/dirtree.sty
 Package: dirtree 2012/12/11 v0.32 package wrapper for dirtree
@@ -1096,10 +1104,10 @@ Package: dirtree 2012/12/11 v0.32 package wrapper for dirtree
 \DT@rulewidth=\dimen181
 \DT@dotwidth=\dimen182
 \DTbaselineskip=\dimen183
-\DT@counti=\count147
-\DT@countii=\count148
-\DT@countiii=\count149
-\DT@countiv=\count150
+\DT@counti=\count148
+\DT@countii=\count149
+\DT@countiii=\count150
+\DT@countiv=\count151
 \DT@indent=\dimen184
 \DT@parskip=\dimen185
 \DT@baselineskip=\dimen186
@@ -1108,56 +1116,56 @@ File: dirtree.tex 2012/12/11 v0.32 `dirtree' (jcc)
 ) (/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2016/11/25 v2.2 Span multiple rows of a table
 \multirow@colwidth=\skip123
-\multirow@cntb=\count151
+\multirow@cntb=\count152
 \multirow@dima=\skip124
 \bigstrutjot=\dimen187
 )
-\c@theorem=\count152
-\c@lemma=\count153
-\c@example=\count154
-\c@corollary=\count155
-\c@definition=\count156
+\c@theorem=\count153
+\c@lemma=\count154
+\c@example=\count155
+\c@corollary=\count156
+\c@definition=\count157
  (/home/piotr/Dokumenty/studia/praca/praca.aux)
 \openout1 = `praca.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 505.
-LaTeX Font Info:    ... okay on input line 505.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 505.
-LaTeX Font Info:    ... okay on input line 505.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 505.
-LaTeX Font Info:    ... okay on input line 505.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 505.
-LaTeX Font Info:    ... okay on input line 505.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 505.
-LaTeX Font Info:    ... okay on input line 505.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 505.
-LaTeX Font Info:    ... okay on input line 505.
-LaTeX Font Info:    Checking defaults for OT4/cmr/m/n on input line 505.
-LaTeX Font Info:    ... okay on input line 505.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 505.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 505.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 507.
+LaTeX Font Info:    ... okay on input line 507.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 507.
+LaTeX Font Info:    ... okay on input line 507.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 507.
+LaTeX Font Info:    ... okay on input line 507.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 507.
+LaTeX Font Info:    ... okay on input line 507.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 507.
+LaTeX Font Info:    ... okay on input line 507.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 507.
+LaTeX Font Info:    ... okay on input line 507.
+LaTeX Font Info:    Checking defaults for OT4/cmr/m/n on input line 507.
+LaTeX Font Info:    ... okay on input line 507.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 507.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 507.
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 505.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 505.
-LaTeX Font Info:    ... okay on input line 505.
-LaTeX Font Info:    Try loading font information for OT4+lmr on input line 505.
+LaTeX Font Info:    ... okay on input line 507.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 507.
+LaTeX Font Info:    ... okay on input line 507.
+LaTeX Font Info:    Try loading font information for OT4+lmr on input line 507.
  (/usr/share/texmf/tex/latex/lm/ot4lmr.fd
 File: ot4lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count157
+\scratchcounter=\count158
 \scratchdimen=\dimen188
-\scratchbox=\box46
-\nofMPsegments=\count158
-\nofMParguments=\count159
-\everyMPshowfont=\toks30
-\MPscratchCnt=\count160
+\scratchbox=\box48
+\nofMPsegments=\count159
+\nofMParguments=\count160
+\everyMPshowfont=\toks32
+\MPscratchCnt=\count161
 \MPscratchDim=\dimen189
-\MPnumerator=\count161
-\makeMPintoPDFobject=\count162
-\everyMPtoPDFconversion=\toks31
+\MPnumerator=\count162
+\makeMPintoPDFobject=\count163
+\everyMPtoPDFconversion=\toks33
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
  (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
@@ -1170,7 +1178,7 @@ Package grfext Info: Graphics extension search list:
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-\c@lstlisting=\count163
+\c@lstlisting=\count164
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1206,18 +1214,18 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\AtBeginShipoutBox=\box47
-Package hyperref Info: Link coloring ON on input line 505.
+\AtBeginShipoutBox=\box49
+Package hyperref Info: Link coloring ON on input line 507.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
  (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count164
+\c@section@level=\count165
 )
-LaTeX Info: Redefining \ref on input line 505.
-LaTeX Info: Redefining \pageref on input line 505.
-LaTeX Info: Redefining \nameref on input line 505.
+LaTeX Info: Redefining \ref on input line 507.
+LaTeX Info: Redefining \pageref on input line 507.
+LaTeX Info: Redefining \nameref on input line 507.
  (/home/piotr/Dokumenty/studia/praca/praca.out) (/home/piotr/Dokumenty/studia/praca/praca.out)
 \@outlinefile=\write3
 \openout3 = `praca.out'.
@@ -1227,7 +1235,7 @@ Package caption Info: End \AtBeginDocument code.
 <pwr.png, id=100, 260.975pt x 370.38374pt>
 File: pwr.png Graphic file (type png)
 <use pwr.png>
-Package pdftex.def Info: pwr.png  used on input line 526.
+Package pdftex.def Info: pwr.png  used on input line 528.
 (pdftex.def)             Requested size: 70.8018pt x 100.48532pt.
  [1
 
@@ -1279,7 +1287,7 @@ Rozdzia\l  1.
 <wppt-logo.png, id=153, 75.8835pt x 66.4884pt>
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
-Package pdftex.def Info: wppt-logo.png  used on input line 552.
+Package pdftex.def Info: wppt-logo.png  used on input line 554.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
  [2
 
@@ -1288,28 +1296,35 @@ Rozdzia\l  2.
 [3
 
 ]
-LaTeX Font Info:    Try loading font information for TS1+lmr on input line 86.
- (/usr/share/texmf/tex/latex/lm/ts1lmr.fd
+<img/alg_ewo_szkic.png, id=171, 249.93375pt x 526.96875pt>
+File: img/alg_ewo_szkic.png Graphic file (type png)
+<use img/alg_ewo_szkic.png>
+Package pdftex.def Info: img/alg_ewo_szkic.png  used on input line 86.
+(pdftex.def)             Requested size: 188.8096pt x 398.10422pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+LaTeX Font Info:    Try loading font information for TS1+lmr on input line 93.
+(/usr/share/texmf/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
-Package pdftex.def Info: wppt-logo.png  used on input line 92.
+Package pdftex.def Info: wppt-logo.png  used on input line 99.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
- [4])
+ [4]
 <pwr-logo.png, id=193, 217.81375pt x 216.81pt>
 File: pwr-logo.png Graphic file (type png)
 <use pwr-logo.png>
-Package pdftex.def Info: pwr-logo.png  used on input line 555.
+Package pdftex.def Info: pwr-logo.png  used on input line 112.
 (pdftex.def)             Requested size: 23.603pt x 23.49188pt.
- [5 </home/piotr/Dokumenty/studia/praca/pwr-logo.png>]
+ [5 </home/piotr/Dokumenty/studia/praca/pwr-logo.png> </home/piotr/Dokumenty/studia/praca/img/alg_ewo_szkic.png>])
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
-Package pdftex.def Info: wppt-logo.png  used on input line 555.
+Package pdftex.def Info: wppt-logo.png  used on input line 557.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
- [6
-
-] (/home/piotr/Dokumenty/studia/praca/rozdzial2.tex
+ [6] (/home/piotr/Dokumenty/studia/praca/rozdzial2.tex
 Rozdzia\l  3.
 LaTeX Font Info:    Try loading font information for OMS+lmr on input line 24.
 (/usr/share/texmf/tex/latex/lm/omslmr.fd
@@ -1323,102 +1338,136 @@ LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 24.
  [7
 
+
 ]
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <8> on input line 89.
+(Font)              <8> on input line 53.
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <6> on input line 89.
+(Font)              <6> on input line 53.
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
-Package pdftex.def Info: wppt-logo.png  used on input line 132.
+Package pdftex.def Info: wppt-logo.png  used on input line 97.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
  [8]
 File: pwr-logo.png Graphic file (type png)
 <use pwr-logo.png>
-Package pdftex.def Info: pwr-logo.png  used on input line 149.
+Package pdftex.def Info: pwr-logo.png  used on input line 184.
 (pdftex.def)             Requested size: 23.603pt x 23.49188pt.
  [9]
+<img/alg_main.png, id=271, 259.97125pt x 325.215pt>
+File: img/alg_main.png Graphic file (type png)
+<use img/alg_main.png>
+Package pdftex.def Info: img/alg_main.png  used on input line 198.
+(pdftex.def)             Requested size: 188.8096pt x 236.19415pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
-Package pdftex.def Info: wppt-logo.png  used on input line 198.
+Package pdftex.def Info: wppt-logo.png  used on input line 202.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
- [10])
+ [10]
+<img/next_gen_klasyczny.png, id=293, 123.46124pt x 606.265pt>
+File: img/next_gen_klasyczny.png Graphic file (type png)
+<use img/next_gen_klasyczny.png>
+Package pdftex.def Info: img/next_gen_klasyczny.png  used on input line 219.
+(pdftex.def)             Requested size: 94.4048pt x 463.6062pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 File: pwr-logo.png Graphic file (type png)
 <use pwr-logo.png>
-Package pdftex.def Info: pwr-logo.png  used on input line 558.
+Package pdftex.def Info: pwr-logo.png  used on input line 223.
 (pdftex.def)             Requested size: 23.603pt x 23.49188pt.
- [11]
+ [11 </home/piotr/Dokumenty/studia/praca/img/alg_main.png>]
+<img/next_gen_wyspowy.png, id=301, 340.27126pt x 506.89375pt>
+File: img/next_gen_wyspowy.png Graphic file (type png)
+<use img/next_gen_wyspowy.png>
+Package pdftex.def Info: img/next_gen_wyspowy.png  used on input line 235.
+(pdftex.def)             Requested size: 236.01561pt x 351.59016pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
-Package pdftex.def Info: wppt-logo.png  used on input line 558.
+Package pdftex.def Info: wppt-logo.png  used on input line 239.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
- [12
-
-] (/home/piotr/Dokumenty/studia/praca/rozdzial3.tex
+ [12 </home/piotr/Dokumenty/studia/praca/img/next_gen_klasyczny.png>]
+File: pwr-logo.png Graphic file (type png)
+<use pwr-logo.png>
+Package pdftex.def Info: pwr-logo.png  used on input line 259.
+(pdftex.def)             Requested size: 23.603pt x 23.49188pt.
+ [13 </home/piotr/Dokumenty/studia/praca/img/next_gen_wyspowy.png>])
+File: wppt-logo.png Graphic file (type png)
+<use wppt-logo.png>
+Package pdftex.def Info: wppt-logo.png  used on input line 560.
+(pdftex.def)             Requested size: 23.603pt x 20.68018pt.
+ [14] (/home/piotr/Dokumenty/studia/praca/rozdzial3.tex
 Rozdzia\l  4.
-) [13
-
-]
-File: wppt-logo.png Graphic file (type png)
-<use wppt-logo.png>
-Package pdftex.def Info: wppt-logo.png  used on input line 561.
-(pdftex.def)             Requested size: 23.603pt x 20.68018pt.
- [14
-
-] (/home/piotr/Dokumenty/studia/praca/podsumowanie.tex
-Rozdzia\l  5.
 ) [15
 
+
 ]
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
-Package pdftex.def Info: wppt-logo.png  used on input line 567.
+Package pdftex.def Info: wppt-logo.png  used on input line 563.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
  [16
 
-] (/home/piotr/Dokumenty/studia/praca/praca.bbl) [17
+] (/home/piotr/Dokumenty/studia/praca/podsumowanie.tex
+Rozdzia\l  5.
+) [17
 
 ]
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
-Package pdftex.def Info: wppt-logo.png  used on input line 580.
+Package pdftex.def Info: wppt-logo.png  used on input line 569.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
  [18
 
-] (/home/piotr/Dokumenty/studia/praca/dodatek1.tex
-Dodatek A.
-) [19
+] (/home/piotr/Dokumenty/studia/praca/praca.bbl) [19
 
 ]
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
-Package pdftex.def Info: wppt-logo.png  used on input line 590.
+Package pdftex.def Info: wppt-logo.png  used on input line 582.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
  [20
 
+] (/home/piotr/Dokumenty/studia/praca/dodatek1.tex
+Dodatek A.
+) [21
+
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 592.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 592.
+File: wppt-logo.png Graphic file (type png)
+<use wppt-logo.png>
+Package pdftex.def Info: wppt-logo.png  used on input line 592.
+(pdftex.def)             Requested size: 23.603pt x 20.68018pt.
+ [22
+
+]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 594.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 594.
  (/home/piotr/Dokumenty/studia/praca/praca.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 592.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 592.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 594.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 594.
 Package rerunfilecheck Info: File `praca.out' has not changed.
-(rerunfilecheck)             Checksum: CC5046A46453E7D766396F9288576112;1570.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 592.
+(rerunfilecheck)             Checksum: 4A31B0AF5B4A9EE0B9A5579420C74F42;1571.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 594.
  ) 
 Here is how much of TeX's memory you used:
- 14662 strings out of 492982
- 215421 string characters out of 6134895
- 349545 words of memory out of 5000000
- 17793 multiletter control sequences out of 15000+600000
+ 14766 strings out of 492982
+ 217026 string characters out of 6134895
+ 351174 words of memory out of 5000000
+ 17857 multiletter control sequences out of 15000+600000
  72607 words of font info for 66 fonts, out of 8000000 for 9000
  1180 hyphenation exceptions out of 8191
- 41i,18n,49p,429b,587s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plms.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plmi.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plsc.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plrm.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plme.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rmsc.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx7.pfb></usr/share/texmf/fonts/type1/public/lm/lmcsc10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy8.pfb>
-Output written on /home/piotr/Dokumenty/studia/praca/praca.pdf (24 pages, 362672 bytes).
+ 41i,18n,43p,429b,591s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plmi.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plsc.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plms.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plrm.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plme.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rmsc.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx7.pfb></usr/share/texmf/fonts/type1/public/lm/lmcsc10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy8.pfb>
+Output written on /home/piotr/Dokumenty/studia/praca/praca.pdf (26 pages, 412676 bytes).
 PDF statistics:
- 401 PDF objects out of 1000 (max. 8388607)
- 344 compressed objects within 4 object streams
- 93 named destinations out of 1000 (max. 500000)
- 208 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 456 PDF objects out of 1000 (max. 8388607)
+ 389 compressed objects within 4 object streams
+ 124 named destinations out of 1000 (max. 500000)
+ 228 words of extra memory for PDF output out of 10000 (max. 10000000)
 
