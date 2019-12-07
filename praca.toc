@@ -14,14 +14,14 @@
 \contentsline {section}{\numberline {3.3}Inicjalizacja chromosomu}{8}{section.3.3}
 \contentsline {section}{\numberline {3.4}Operator krzy\IeC {\.z}owania}{9}{section.3.4}
 \contentsline {section}{\numberline {3.5}Operator mutacji}{9}{section.3.5}
-\contentsline {section}{\numberline {3.6}Funkcje oceny}{10}{section.3.6}
-\contentsline {section}{\numberline {3.7}Metoda selekcji}{10}{section.3.7}
-\contentsline {section}{\numberline {3.8}Wersja r\IeC {\'o}wnoleg\IeC {\l }a}{10}{section.3.8}
-\contentsline {section}{\numberline {3.9}Pliki konfiguracyjne}{13}{section.3.9}
+\contentsline {section}{\numberline {3.6}Funkcje oceny}{11}{section.3.6}
+\contentsline {section}{\numberline {3.7}Metoda selekcji}{11}{section.3.7}
+\contentsline {section}{\numberline {3.8}Wersja r\IeC {\'o}wnoleg\IeC {\l }a}{11}{section.3.8}
+\contentsline {section}{\numberline {3.9}Pliki konfiguracyjne}{14}{section.3.9}
 \contentsline {chapter}{\numberline {4}Wyniki eksperymentalne}{17}{chapter.4}
 \contentsline {section}{\numberline {4.1}Model klasyczny algorytmu genetycznego}{17}{section.4.1}
 \contentsline {section}{\numberline {4.2}Model wyspowy algorytmu genetycznego}{17}{section.4.2}
 \contentsline {section}{\numberline {4.3}Por\IeC {\'o}wnanie modelu klasycznego i wyspowego}{17}{section.4.3}
 \contentsline {chapter}{\numberline {5}Podsumowanie}{19}{chapter.5}
-\contentsline {chapter}{Bibliografia}{21}{chapter*.10}
+\contentsline {chapter}{Bibliografia}{21}{chapter*.6}
 \contentsline {chapter}{\numberline {A}Zawarto\IeC {\'s}\IeC {\'c} p\IeC {\l }yty CD}{23}{appendix.A}

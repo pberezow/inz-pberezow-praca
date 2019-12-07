@@ -34,7 +34,7 @@ znacznie przyspiesza znajdowanie błędów.
 
 \section{Reprezentacja chromosomu}
 W opisywanej implementacji jako reprezentacje rozwiązania przyjęto macierz:
-$$V = (v_{ij}) \text{, gdzie } 1 \le i \le length(demand) \land 1 \le j \le length(supply)$$
+$$V = (v_{ij}) \text{, gdzie } 1 \le i \le length(supply) \land 1 \le j \le length(demand)$$
 
 Rozwiązanie jest zakodowane w taki sposób, że komórka macierzy o indeksie $[i, j]$ określa ilość transportowanego towaru 
 między $i$-tym punketm nadania i $j$-tym punktem odbioru. Jest to jedna z najbardziej naturalnych reprezentacji rozwiązania 
@@ -64,38 +64,43 @@ $$v_{ij} \ge 0, \text{ dla } i = 1, 2, \dots, n \text{ i } j = 1, 2, \dots, m$$
 \section{Inicjalizacja chromosomu}
 Projektując procedurę inicjalizacji rozwiązania musimy pamiętać o tym, żeby generowane rozwiązania spełniały ograniczenia przedstawione 
 w poprzedniej sekcji oraz obejmowały jak największą część przestrzeni wszystkich rozwiązań. Zaproponowana procedura przyjmuje jako argumenty 
-wektory popytu i podaży. Iterując po kolejnych, losowych komórkach macierzy przypisujemy im wartość $val = min(demand[i], supply[j])$, gdzie 
-$i, j$ są indeksami wylosowanej komórki macierzy, $demand[i]$ oraz $supply[j]$ odpowiadającymi im wartościami w wektorach popytu i podaży. 
-Następnie zmniejszamy wartości w wektorach o wpisaną wartość $val$. W ten sposób spełniamy ograniczenia zadania. Wygenerowane rozwiązania są 
+wektory popytu i podaży. Iterując po kolejnych, losowych komórkach macierzy przypisujemy im wartość $val = min(supply[i], demand[j])$, gdzie 
+$i, j$ są indeksami wylosowanej komórki macierzy, a $supply[i]$ oraz $demand[j]$ odpowiadającymi im wartościami w wektorach popytu i podaży. 
+Następnie zmniejszamy wartości w wektorach o wpisaną wartość $val$. W ten sposób ograniczenia zadania zostają spełnione. Wygenerowane rozwiązania są 
 wierzchołkami sympleksu, opisującego wypukły brzeg przestrzeni dopuszczalnych rozwiązań.
 
-\begin{pseudokod}
+\begin{pseudokod}[H]
+    \label{inicjalizacja-1}
     \caption{Procedura inicjalizacji chromosomu}
-    \KwData{$demand$ - wektor popytu rozmiaru $n$, $supply$ - wektor podaży rozmiaru $m$}
+    \KwData{$supply$ - wektor popytu rozmiaru $n$, $demand$ - wektor podaży rozmiaru $m$}
     \KwResult{$V$ - zainicjalizowana macierz}
+    \BlankLine
     $V \gets zeros(n, m)$\tcc*[r]{generujemy macierz zerową rozmiaru $n \times m$}
     $indices \gets$ lista wszystkich indeksów macierzy $V$ w losowej kolejności\;
-    
-    \For{$(d, s) \in indices$} {
+    \BlankLine
+    \For{$(s, d) \in indices$} {
         $val \gets min(demand[d], supply[s])$\;
         $demand[d] \gets demand[d] - val$\;
         $supply[s] \gets supply[s] - val$\;
-        $V[d, s] \gets val$\;
+        $V[s, d] \gets val$\;
     }
 
     \Return{$V$}
 \end{pseudokod}
 
-[TODO: Przykład]
+[TODO: Przykład zastosowania]
 
 
 \section{Operator krzyżowania}
-Operator krzyżowania został zdefiniowany jako kombinacja wypukła dwóch rodziców.
+Operator krzyżowania został zdefiniowany jako kombinacja wypukła dwóch rodziców. W ten sposób w wyniku jednego krzyżowania powstają dwa nowe 
+rozwiązania.
 
-\begin{pseudokod}
+\begin{pseudokod}[H]
+    \label{krzyżowanie}
     \caption{Operator krzyżowania}
     \KwData{$P_1, P_2$ - rodzice wybrani do krzyżowania}
     \KwResult{$O_1, O_2$ - otrzymane dzieci}
+    \BlankLine
     $c_1 \gets rand(0,\dots,1)$\tcc*[r]{losujemy liczbę z przedziału $[0,1]$}
     $c_2 \gets 1.0 - c_1$\;
     $O_1 \gets c_1 * P_1 + c_2 * P_2$\;
@@ -106,11 +111,11 @@ Operator krzyżowania został zdefiniowany jako kombinacja wypukła dwóch rodzi
 Zdefiniowany tak operator krzyżowania nie narusza ograniczeń zadania, ponieważ przestrzeń rozwiązań jest wypukła. Wynika z tego, że jeśli 
 rodzice spełniali ograniczenia, to otrzymane w ten sposób dzieci również muszą spełniać ograniczenia.
 
-[TODO: Przykład]
+[TODO: Przykład zastosowania]
 
 \section{Operator mutacji}
-Operator mutacji opiera się na modyfikacji rozwiązania poprzez wybranie z niego podmacierzy i jej ponowną inicjalizacje. Załóżmy, że 
-mamy $n$ punktów nadania i $m$ punktów odbioru. Wybierzmy jako kandydata do mutacji macierz $V = (v_{ij})$, gdzie $1 \le i \le n$ i 
+Operator mutacji opiera się na modyfikacji rozwiązania poprzez wybranie z niego podmacierzy i jej ponowną inicjalizacje(patrz \ref{mutacja}). 
+Załóżmy, że mamy $n$ punktów nadania i $m$ punktów odbioru. Wybierzmy jako kandydata do mutacji macierz $V = (v_{ij})$, gdzie $1 \le i \le n$ i 
 $1 \le j \le m$. Podmacierz $W = w_{ij}$ jest tworzona w następujący sposób:
 
 \begin{itemize}
@@ -124,37 +129,39 @@ Dla stworzonej macierzy $W$ tworzymy nowe wektory $demand_W$ i $supply_W$ w nast
 $$supply_W[i] = \sum_{j \in \{j_1, \dots, j_l\}} v_{ij}, \text{ dla } 1 \le i \le k$$
 $$demand_W[j] = \sum_{i \in \{i_1, \dots, i_k\}} v_{ij}, \text{ dla } 1 \le j \le l$$
 
-Następnie na nowo inicjalizujemy podmacierz $W$ macierzy $V$ używając stworzonych wektorów $demand_W$ oraz $supply_W$ do określenia popytu i podaży
-w wybranych punktach nadania i odbioru. Po zakończeniu inicjalizacji przepisujemy wartości z podmacierzy $W$ z powrotem do macierzy $V$.
+Następnie na nowo inicjalizujemy podmacierz $W$ macierzy $V$ używając stworzonych wektorów $demand_W$ oraz $supply_W$ do określenia popytu i podaży 
+w wybranych punktach nadania i odbioru. Po zakończeniu inicjalizacji przepisujemy wartości z podmacierzy $W$ z powrotem w odpowiadające miejsca 
+macierzy $V$.
 
-\begin{pseudokod}
+\begin{pseudokod}[H]
+    \label{mutacja}
     \caption{Operator mutacji}
     \KwData{$V$ - osobnik wybrany do mutacji wielkości $n \times m$, $k, l$ - wielkość podmacierzy}
     \KwResult{$V$ - osobnik po mutacji}
-    
+    \BlankLine
     $supply\_idx \gets$ wylosuj podzbiór długości $k$ ze zbioru $\{1, \dots, n\}$\;
     $demand\_idx \gets$ wylosuj podzbiór długości $l$ ze zbioru $\{1, \dots, m\}$\;
     $W \gets zeros(k, l)$\tcc*[r]{generujemy macierz zerową rozmiaru $k \times l$}
-
+    \BlankLine
     \For{$i \in \{1, \dots, k\}$} {
         \For{$j \in \{1, \dots, l\}$} {
             $W[i, j] \gets V[demand\_idx[j], supply\_idx[i]]$\;
         }
     }
-    
+    \BlankLine
     $supply\_vec \gets zeros(k)$\tcc*[r]{generujemy wektor zerowy długości k}
     $demand\_vec \gets zeros(l)$\tcc*[r]{generujemy wektor zerowy długości l}
-    
+    \BlankLine
     \For{$i \in supply\_idx$} {
         $supply\_vec[i] \gets \sum_{j \in demand\_idx} V[i, j]$\;
     }
-        
+    \BlankLine
     \For{$j \in demand\_idx$} {
         $demand\_vec[j] \gets \sum_{i \in supply\_idx} V[i, j]$\;
     }
-    
+    \BlankLine
     $W \gets inicjalizacja(W, demand\_vec, supply\_vec)$\;
-    
+    \BlankLine
     \For{$i \in \{1, \dots, k\}$} {
         \For{$j \in \{1, \dots, l\}$} {
             $V[demand\_idx[j], supply\_idx[i]] \gets W[i, j]$\;
@@ -164,26 +171,30 @@ w wybranych punktach nadania i odbioru. Po zakończeniu inicjalizacji przepisuje
     \Return{$V$}
 \end{pseudokod}
 
-Zdefiniowano dwa operatory mutacji różniące się jedynie procedurą inicjalizacji. W pierwszym używamy tej samej procedury, którą inicjalizujemy 
-nowe chromosomy podczas generowania populacji początkowej. Druga jest modyfikacją tej procedury. Modyfikacja polega na tym, że zamiast wybierać 
-jako wartość pola $val = min(demand[i], supply[j])$ wybieramy liczbę z zakresu $[0, val]$. Zmiana ta powoduje, że otrzymana macierz może naruszać 
+Zdefiniowano dwa operatory mutacji. Różnią się one jedynie procedurą inicjalizacji. W pierwszym używamy tej samej procedury, którą inicjalizujemy 
+nowe chromosomy podczas generowania populacji początkowej(patrz \ref{inicjalizacja-1}). Druga jest modyfikacją tej procedury. Modyfikacja polega na tym, że zamiast wybierać 
+jako wartość pola $val = min(demand[j], supply[i])$ wybieramy liczbę z zakresu $[0, val]$. Zmiana ta powoduje, że otrzymana macierz może naruszać 
 ograniczenia zadania, dlatego po wstępnym wyznaczeniu wartości naprawiamy rozwiązanie poprzez zrobienie wymaganych dodawań w taki sposób, żeby 
-rozwiązanie spełniało ograniczenia.
+rozwiązanie spełniało ograniczenia. 
 
-\begin{pseudokod}
+Poniżej przedstawiono schemat zmodyfikowanej procedury inicjalizacji w postaci pseudokodu.
+
+\begin{pseudokod}[H]
+    \label{inicjalizacja-2}
     \caption{Zmodyfikowana procedura inicjalizacji}
     \KwData{$supply$ - wektor podaży rozmiaru $n$, $demand$ - wektor popytu rozmiaru $m$}
     \KwResult{$V$ - zainicjalizowana macierz}
+    \BlankLine
     $V \gets zeros(n, m)$\tcc*[r]{generujemy macierz zerową rozmiaru $n \times m$}
     $indices \gets$ lista wszystkich indeksów macierzy $V$ w losowej kolejności\;
-    
+    \BlankLine
     \For{$(s, d) \in indices$} {
         $val \gets$ wartość z przedziału $[0, min(demand[d], supply[s])]$\;
         $demand[d] \gets demand[d] - val$\;
         $supply[s] \gets supply[s] - val$\;
         $V[s, d] \gets val$\;
     }
-
+    \BlankLine
     \For{$(s, d) \in indices$} {
         $val \gets min(demand[d], supply[s])$\;
         $demand[d] \gets demand[d] - val$\;
@@ -194,22 +205,53 @@ rozwiązanie spełniało ograniczenia.
     \Return{$V$}
 \end{pseudokod}
 
-[TODO: Przykład]
+[TODO: Przykład zastosowania]
 
 \section{Funkcje oceny}
 W przypadku omawianego problemu funkcja oceny jest równoważna funkcji celu dla zadania transportowego. Powinna więc mieć postać:
 $$\sum_{i=1}^{n}\sum_{j=1}^{m} f(v_{ij})$$, 
 gdzie $f(v_{ij})$ jest dowolną funkcją przyjmującą jako argument ilość towaru transportowanego między punktami $i$ oraz $j$.
 
-[TODO: Przykłady funkcji oceny + wykresy]
+[TODO: Przykłady funkcji oceny użyte w części eksperymentalnej + wykresy]
 
 \section{Metoda selekcji}
 W algorytmie zastosowano standardową metodę selekcji - metodę koła ruletki. W tej metodzie lepiej przystosowane osobniki mają odpowiednio większe 
-szanse na to, że zostaną wybrane do puli rodziców dla następnej generacji. Na początku obliczana jest suma kumulatywna dla całego pokolenia. Następnie 
-otrzymane wartości skalujemy tak, aby znajdowały się w przedziale $[0, 1]$. W ten sposób przedział $[0, 1]$ zostaje podzielony na mniejsze, które 
-odpowiadają pojedynczym osobnikom z populacji. Następnie generujemy losową liczbę z tego przedziału. Do zbioru rodziców dodawany jest osobnik, 
-w którego przedziale znajduje się wylosowana liczba. Warto zauważyć że tak zaprojektowana selekcja pozwala na to, że jeden osobnik zostanie wybany 
-kilkukrotnie na rodzica.
+szanse na to, że zostaną wybrane do puli rodziców dla następnej generacji. Polega ona na tym, że dla każdego osobnika z populacji 
+przyporzątkowujemy odpowiednio duży wycinek koła. Wielkość wycinka zależy od wartości funkcji przystosowania, jaką osiągnął dany chromosom. 
+Następnie losujemy kołem tyle razy, ile rodziców chcemy otrzymać. Metoda ta pozwala na to, że jeden osobnik zostanie wybrany na rodzica kilkukrotnie.
+
+Bardziej formalnie procedura została przedstawiona na poniższym pseudokodzie.
+
+\begin{pseudokod}[H]
+    \label{selekcja}
+    \caption{Procedura selekcji}
+    \KwData{$population$ - populacja chromosomów, $n$ - ilość rodziców do wybrania}
+    \KwResult{$parents$ - wektor wybranych rodziców}
+    \BlankLine
+    $parents \gets$ stwórz pusty wektor długości n\;
+    $k \gets length(population)$\;
+    $wheel \gets zeros(k)$\tcc*[r]{Generujemy wektor zerowy długości $n$}
+    \BlankLine
+    $total \gets \sum_{i=1}^{k} population[i].cost$\;
+    $wheel[1] \gets population[1].cost / total$\;
+    \For{$i \in 2,\dots, k$} {
+        $wheel[i] \gets population[i].cost / total + wheel[i-1]$\;
+    }
+    \BlankLine
+    \For{$i \in 1,\dots, n$} {
+        $num \gets rand(0,\dots, 1)$\tcc*[r]{losujemy wycinek koła}
+        $selectedIdx \gets$ wybierz pierwszy taki $x$, że $x \le num$\;
+        $parents[i] \gets population[selectedIdx]$\;
+    }
+
+    \Return{$parents$}
+\end{pseudokod}
+
+% Na początku obliczana jest suma kumulatywna dla całego pokolenia. Następnie 
+% otrzymane wartości skalujemy tak, aby znajdowały się w przedziale $[0, 1]$. W ten sposób przedział $[0, 1]$ zostaje podzielony na mniejsze, które 
+% odpowiadają pojedynczym osobnikom z populacji. Następnie generujemy losową liczbę z tego przedziału. Do zbioru rodziców dodawany jest osobnik, 
+% w którego przedziale znajduje się wylosowana liczba. Warto zauważyć że tak zaprojektowana selekcja pozwala na to, że jeden osobnik zostanie wybany 
+% kilkukrotnie na rodzica.
 
 [TODO: obrazek ilustrujący algorytm]
 
