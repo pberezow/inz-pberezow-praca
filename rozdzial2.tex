@@ -1,39 +1,138 @@
-\chapter{Równoległą implementacja algorytmu ewolucyjnego}
+\chapter{Ewolucyjne podejście do nieliniowego zadania transportowego}
 \thispagestyle{chapterBeginStyle}
 
-\section{Użyte technologie}
-Do implementacji algorytmu zastosowano język Julia\cite{JULIA-PUB} w wersji 1.3. Julia jest stosunkowo nowym językiem programowania. Został zaprojektowany 
-z myślą o zastosowaniach w obliczeniach numerycznych i analizie danych. Łączy on w sobie zalety języków niskopoziomowych i wysokopoziomowych takie jak szybkość 
-i czytelność kodu. Testy pokazują, że program napisany w Julii może być równie szybki, jak odpowiadający mu program napisany w C\cite{JULIA-PERFORMANCE}. 
-Dodatkową zaletą jest możliwość bezpośredniego wywoływania bibliotek napisanych w C, Fortranie i kilku innych językach popularnych w dziedzinie 
-obliczeń numerycznych bezpośrednio z Julii.
+Tak jak powiedzieliśmy w poprzednim rozdziale, nieliniowe zadanie transportowe należy do zadań optymalizacyjnych, dla których trudno jest 
+wyznaczyć dokładne rozwiązanie. Możemy za to za pomocą algorytmów przeszukujących zbiór dopuszczalnych rozwiązań, czyli algorytmów metaheurystycznych 
+postarać się wyznaczyć wystarczająco dobre rozwiązanie przybliżone. 
 
-Ostatnie aktualizacje w znaczącym stopniu rozwinęły wsparcie języka dla obliczeń równoległych i rozproszonych. W tym momencie Julia oferuje wsparcie dla 
-równoległości na poziomie wątków jak i procesów, co dodatkowo wpłynęło na wybór tego właśnie języka. Posiada własny protokół komunikacji między procesami, jednak 
-istnieje również biblioteka implementująca najbardziej powszechny protokół MPI.
+\section{Algorytmy metaheurystyczne}
 
-Julia jest językiem kompilowanym. Używa kompilatora JIT(just-in-time), który kompiluje program tuż przed jego wykonaniem, dzięki czemu jest szybsza 
-niż języki interpretowane. Należy pamiętać o tym, że nie każdy program napisany w Julii będzie szybki. Wszystko zależy od jakości dostarczonego kodu.
-Głównym czynnikiem, który wpływa na szybkość są typy. Julia jest językiem dynamicznie typowanym, jednak podczas kompilacji tworzone są warianty tej samej 
-funkcji dla różnych typów(o ile to możliwe). Pozwala to pominąć kontrolę typów podczas wykonywania kodu i tym samym znacząco przyspieszyć jego działanie.
-Dlatego pisząc kod w julii powinniśmy pamiętać o tym, żeby unikać miejsc, w których kompilator będzie zmuszony do konwersji zmiennych do konkretnego typu. 
-Aby identyfikować tego typu miejsca możemy używać dostarczonych w bibliotece standardowej narzędzi, które pomagają analizować nasz kod. 
-Warte wymienienia są tutaj:
+Powiedzmy najpierw czym są algorytmy metaheurystyczne. Metaheurystyki są to algorytmy, które definiują sposób w jaki ma być przeszukiwany zbiór 
+dopuszczalnych rozwiązań zdefiniowanego problemu. Znajdują one zastosowanie w przypadkach kiedy nie znamy algorytmów, które wyznaczają rozwiązanie 
+dokładne lub ich koszt jest zbyt duży. Do tego typu problemów możemy zaliczyć rozważane tutaj nieliniowe zadanie transportowe. Minusem 
+stosowania algorytmów metaheurystycznych jest fakt, że nie dają one gwarancji na znalezienie wystarczająco dobrego rozwiązania.
+
+\subsection{Algorytmy ewolucyjne}
+Algorytmy ewolucyjne stanowią podzbiór algorytmów metaheurystycznych. Sposób ich działania jest inspirowany przez zjawisko ewolucji występujące 
+w naturze. Działają one na podzbiorach przestrzeni wszystkich rozwiązań, które nazywamy \textbf{populacjami}. Przy użyciu specjalnie zdefiniowanych 
+operatorów, na podstawie jednej populacji tworzona jest kolejna zawierająca w sobie lepsze rozwiązania, nazywane dalej \textbf{chromosomami} 
+lub \textbf{osobnikami}.
+
+Na początku działania algorytmu generowana jest w sposób losowy populacja startowa. Procedurę generowania pojedynczego osobnika lub 
+całej populacji nazywać będziemy \textbf{inicjalizacją}. Następnie na przestrzeni pokoleń(iteracji algorytmu) 
+populacja ewoluuje generując coraz lepsze rozwiązania. W każdej iteracji pewna część osobników zostaje wybrana do reprodukcji. Procedurę wyboru 
+rodziców do reprodukcji nazywać będziemy \textbf{selekcją}. Wybrane osobniki krzyżujemy między sobą, tworząc w ten sposób nowe, 
+posiadające cechy wybranych wczesniej rodziców. Następnie losowo wybrane osobniki ulegają mutacji. 
+Ostatecznie z otrzymanych osobników tworzona jest nowa populacja, która będzie stanowić bazę dla kolejnej iteracji algorytmu. Algorytm kończy 
+działanie w momencie kiedy zostanie spełniony warunek końcowy, którym może być np. wygenerowanie wystarczająco dobrego rozwiązania lub 
+przejście określonej liczby iteracji.
+
+Ogólny schemat działania algorytmu ewolucyjnego przedstawiono w postaci pseudokodu \ref{alg_ewo} oraz schematu blokowego \ref{alg_ewo_img}.
+
+\begin{pseudokod}[H]
+\caption{Ogólny schemat działania algorytmu ewolucyjnego}
+\label{alg_ewo}
+    $P(t)$: Populacja w t-tej iteracji algorytmu\;
+    $O(t)$: Populacja dzieci w t-tej iteracji algorytmu\;
+    \BlankLine
+    $t \gets 0$\;
+    inicjalizacja $P(t)$\;
+    \BlankLine
+    \While{Warunek końcowy nie został spełniony} {
+        $parents \gets$ selekcja z $P(t)$\;
+        $O(t+1) \gets$ zastosuj operator krzyżowania na $parents$\;
+        $O(t+1) \gets$ zastosuj operator mutacji na $O(t+1)$\;
+        $P(t+1) \gets$ wybierz osobniki do następnej generacji z $O(t+1)$\;
+        $t \gets t+1$\;
+    }
+    \Return{najlepszy osobnik z $P(t)$}\;
+\end{pseudokod}
+
+\begin{figure}[H]
+    \centering        
+    \includegraphics[width=0.4\textwidth]{img/alg_ewo_szkic.png}
+    \caption{Ogólny schemat działania algorytmu ewolucyjnego}
+    \label{alg_ewo_img}
+\end{figure}
+
+Projektowanie algorytmu ewolucyjnego możemy podzielić na kilka oddzielnych części, są to: 
 \begin{itemize}
-    \item pakiet $Profile$, który zbiera informacje o czasie wywołania kolejnych fragmentów kodu, dzięki czemu w łatwy sposób 
-    możemy zidentyfikować fragmenty do dalszej optymalizacji. Pozwala on też śledzić liczbę ilość pamięci alokowanej przez konkretne fragmenty 
-    kodu, co również w wielu przypadkach może okazać się przydatną informacją.
-    \item makro $@code\_warntype$, które zwraca strukturę AST(abstract syntax tree) dla wykonywanego kodu, dzięki czemu możemy zobaczyć możliwe typy dla wszystkich zmiennych. 
-    Dodatkowo miejsca w których kompilator nie jest w stanie jednoznacznie określić typu danej zmiennej jest zaznaczony na czerwono.
+    \item \textbf{Reprezentacja} - określa sposób zakodowania rozwiązania w chromosomie(osobniku). Wybór reprezentacji chromosomu jest bardzo ważnym etapem 
+    projektowania algorytmu. Odpowiednia reprezentacja może w znacznym stopniu wpłynąć na szybkość i jakość rozwiązań znajdowanych przez 
+    algorytm, ponieważ to ona w dużej mierze określa sposób w jaki przeszukiwana będzie przestrzeń rozwiązań zadania. 
+    Jako reprezentacje bardzo często stosowane są wektory lub macierze genów, gdzie gen może być pojedynczą liczbą całkowitą lub rzeczywistą. 
+    Oczywiście jako sposób reprezentacji rozwiązania możemy wybrać dowolną strukturę danych, należy jednak pamiętać, że zdefiniowane później 
+    operacje mutacji i krzyżowania muszą być dostosowane do wybranej struktury.
+    
+    \item \textbf{Funkcja oceny} - określa stopień przystosowania danego osobnika. Bardzo często funkcja oceny jest równoważna funkcji celu, którą 
+    nasz algorytm ma minimalizować/maksymalizować, nie jest to jednak regułą. 
+
+    \item \textbf{Operator krzyżowania} - jest jednym z operatorów używanych do generowania kolejnego pokolenia w algorytmach ewolucyjnych. Z założenia 
+    przyjmuje on jako argumenty dwa lub więcej rozwiązań(rodziców) i generuje na ich podstawie nowe(dzieci), które łączą w sobie cechy rodziców. 
+    
+    [TODO: przykład]
+
+    \item \textbf{Operator mutacji} - jest drugim z operatorów używanych do generowania następnych pokoleń w algorytmach ewolucyjnych. Jego celem jest 
+    poszerzene obszaru przeszukiwanych rozwiązań. Ten operator powinien wprowadzać minimalną zmianę w rozwiązaniu, co zapobiega zbyt szybkiej 
+    zbieżności algorytmu i pozwala na wprowadzenie dodatkowej różnorodności w populacji. Należy pamiętać o tym, że wprowadzana zmiana nie może 
+    być za duża, bo może to prowadzić do odwrotnego rezultatu, czyli zamiast różnicować rozwiązania nasz operator może je niszczyć.
+    
+    [TODO: przykład]
+
+    \item \textbf{Selekcja} - określa sposób wyboru rodziców na których użyjemy operatora krzyżowania. Istnieje wiele opisanych metod selekcji\cite{SELECTION-METHODS} 
+    takich jak np. metoda koła ruletki czy metoda rankingowa. Przy tworzeniu procedury selekcji należy pamiętać 
+    o tym, że rozwiązania lepiej przystosowane powinny mieć większe szanse na zostanie rodzicami dla kolejnego pokolenia. Zapewnia to większe 
+    szanse na wygenerowanie lepszych dzieci do następnej generacji.
+    
+    [TODO: przyklad]
+
+    \item \textbf{Wybór następnego pokolenia} - ostateczny krok algorytmu, w którym wybieramy które osobniki wejdą w skład populacji początkowej w 
+    kolejnej iteracji algorytmu. Podstawową składową tej populacji powinny być oczywiście osobniki wygenerowane za pomącą krzyżowania. Często 
+    stosowaną praktyką jest również przepisywanie części najlepszych rozwiązań oraz kilku losowo wybranych z poprzedniego pokolenia. 
+
+    \item \textbf{Parametry algorytmu} - do standardowych parametrów należą wielkość populacji, prawdopodobieństwo krzyżowania oraz prawdopodobieństwo 
+    mutacji. Odpowiedni dobór parametrów ma kluczowe znaczenie dla efektywności oraz szybkości algorytmu.
+
 \end{itemize}
 
-Julia udostępnia też środowisko uruchomieniowe $REPL$(read-eval-print loop), dzięki któremu możemy w bardzo łatwy sposób testować napisany kod. 
-Dzięki dostępnym bibliotekom takim jak $Debugger.jl$ oraz $Rebugger.jl$ możemy w razie potrzeby debugować napisany kod z poziomu $REPL$ co 
-znacznie przyspiesza znajdowanie błędów.
+W kolejnych sekcjach zaproponujemy algorytm ewolucyjny przystosowany dla zadania transportowego oparty na algorytmie zaprezentowanym przez 
+dr. Zbigniewa Michalewicza\cite{ALG-GEN-BOOK}.
+
+% NA KONIEC
+% \section{Użyte technologie}
+% Do implementacji algorytmu zastosowano język Julia\cite{JULIA-PUB} w wersji 1.3. Julia jest stosunkowo nowym językiem programowania. Został zaprojektowany 
+% z myślą o zastosowaniach w obliczeniach numerycznych i analizie danych. Łączy on w sobie zalety języków niskopoziomowych i wysokopoziomowych takie jak szybkość 
+% i czytelność kodu. Testy pokazują, że program napisany w Julii może być równie szybki, jak odpowiadający mu program napisany w C\cite{JULIA-PERFORMANCE}. 
+% Dodatkową zaletą jest możliwość bezpośredniego wywoływania bibliotek napisanych w C, Fortranie i kilku innych językach popularnych w dziedzinie 
+% obliczeń numerycznych bezpośrednio z Julii.
+
+% Ostatnie aktualizacje w znaczącym stopniu rozwinęły wsparcie języka dla obliczeń równoległych i rozproszonych. W tym momencie Julia oferuje wsparcie dla 
+% równoległości na poziomie wątków jak i procesów, co dodatkowo wpłynęło na wybór tego właśnie języka. Posiada własny protokół komunikacji między procesami, jednak 
+% istnieje również biblioteka implementująca najbardziej powszechny protokół MPI.
+
+% Julia używa kompilatora JIT(just-in-time), który kompiluje program tuż przed jego wykonaniem, dzięki czemu jest szybsza 
+% niż języki interpretowane. Należy pamiętać o tym, że nie każdy program napisany w Julii będzie szybki. Wszystko zależy od jakości dostarczonego kodu.
+% Głównym czynnikiem, który wpływa na szybkość są typy. Julia jest językiem dynamicznie typowanym, jednak podczas kompilacji tworzone są warianty tej samej 
+% funkcji dla różnych typów(o ile to możliwe). Pozwala to pominąć kontrolę typów podczas wykonywania kodu i tym samym znacząco przyspieszyć jego działanie.
+% Dlatego pisząc kod w julii powinniśmy pamiętać o tym, żeby unikać miejsc, w których kompilator będzie zmuszony do konwersji zmiennych do konkretnego typu. 
+% Aby identyfikować tego typu miejsca możemy używać dostarczonych w bibliotece standardowej narzędzi, które pomagają analizować nasz kod. 
+% Warte wymienienia są tutaj:
+
+% \begin{itemize}
+%     \item pakiet $Profile$, który zbiera informacje o czasie wywołania kolejnych fragmentów kodu, dzięki czemu w łatwy sposób 
+%     możemy zidentyfikować fragmenty do dalszej optymalizacji. Pozwala on też śledzić liczbę ilość pamięci alokowanej przez konkretne fragmenty 
+%     kodu, co również w wielu przypadkach może okazać się przydatną informacją.
+%     \item makro $@code\_warntype$, które zwraca strukturę AST(abstract syntax tree) dla wykonywanego kodu, dzięki czemu możemy zobaczyć możliwe typy dla wszystkich zmiennych. 
+%     Dodatkowo miejsca w których kompilator nie jest w stanie jednoznacznie określić typu danej zmiennej jest zaznaczony na czerwono.
+% \end{itemize}
+
+% Julia udostępnia też środowisko uruchomieniowe $REPL$(read-eval-print loop), dzięki któremu możemy w bardzo łatwy sposób testować napisany kod. 
+% Dzięki dostępnym bibliotekom takim jak $Debugger.jl$ oraz $Rebugger.jl$ możemy w razie potrzeby debugować napisany kod z poziomu $REPL$ co 
+% znacznie przyspiesza znajdowanie błędów.
 
 
 \section{Reprezentacja chromosomu}
-W opisywanej implementacji jako reprezentacje rozwiązania przyjęto macierz:
+W opisywanym algorytmie jako reprezentacje rozwiązania przyjęto macierz:
 $$V = (v_{ij}) \text{, gdzie } 1 \le i \le length(supply) \land 1 \le j \le length(demand)$$
 
 Rozwiązanie jest zakodowane w taki sposób, że komórka macierzy o indeksie $[i, j]$ określa ilość transportowanego towaru 
@@ -42,17 +141,21 @@ dla zadania transportowego.
 
 \begin{table}[h!]
     \begin{center}
-        \begin{tabular}{c|ccccc}
-            i\textbackslash{j} & 10.0 & 7.0 & 5.0 & 13.0 & 12.0 \\ 
+        \begin{tabular}{c||ccccc||c}
+              & $s_1$ & $s_2$ & $s_3$ & $s_4$ & $s_5$ & $demand$ \\ 
             \hline
-            12.0 & 0.0 & 7.0 & 5.0 & 0.0 & 0.0 \\
-            10.0 & 5.0 & 0.0 & 0.0 & 0.0 & 5.0 \\
-            3.0 & 3.0 & 0.0 & 0.0 & 0.0 & 0.0 \\
-            10.0 & 0.0 & 0.0 & 0.0 & 3.0 & 7.0 \\
-            12.0 & 2.0 & 0.0 & 0.0 & 10.0 & 0.0 \\
+            \hline
+            $d_1$ & 0.0 & 7.0 & 5.0 & 0.0 & 0.0 & 12.0 \\
+            $d_2$ & 5.0 & 0.0 & 0.0 & 0.0 & 5.0 & 10.0 \\
+            $d_3$ & 3.0 & 0.0 & 0.0 & 0.0 & 0.0 & 3.0 \\
+            $d_4$ & 0.0 & 0.0 & 0.0 & 3.0 & 7.0 & 10.0 \\
+            $d_5$ & 2.0 & 0.0 & 0.0 & 10.0 & 0.0 & 12.0 \\
+            \hline
+            \hline
+            $supply$ & 10.0 & 7.0 & 5.0 & 13.0 & 12.0 & \\ 
         \end{tabular}
     \end{center}
-    \caption{Przykładowe rozwiązanie(pierwszy wiersz - wektor punktów odbioru, pierwsza kolumna - wektor punktów nadania).}
+    \caption{Przykładowe rozwiązanie.}
 \end{table}
 
 Aby ograniczenia zadania zostały zachowane macierz rozwiązania musi spełniać następujące warunki:
@@ -212,7 +315,7 @@ W przypadku omawianego problemu funkcja oceny jest równoważna funkcji celu dla
 $$\sum_{i=1}^{n}\sum_{j=1}^{m} f(v_{ij})$$, 
 gdzie $f(v_{ij})$ jest dowolną funkcją przyjmującą jako argument ilość towaru transportowanego między punktami $i$ oraz $j$.
 
-[TODO: Przykłady funkcji oceny użyte w części eksperymentalnej + wykresy]
+[TODO: Przykłady funkcji oceny użytych w części eksperymentalnej + wykresy]
 
 \section{Metoda selekcji}
 W algorytmie zastosowano standardową metodę selekcji - metodę koła ruletki. W tej metodzie lepiej przystosowane osobniki mają odpowiednio większe 
@@ -253,13 +356,33 @@ Bardziej formalnie procedura została przedstawiona na poniższym pseudokodzie.
 % w którego przedziale znajduje się wylosowana liczba. Warto zauważyć że tak zaprojektowana selekcja pozwala na to, że jeden osobnik zostanie wybany 
 % kilkukrotnie na rodzica.
 
-[TODO: obrazek ilustrujący algorytm]
+[TODO: przykład]
 
 \section{Wersja równoległa}
-Algorytm może działać w dwóch trybach:
+
+Zaprojektowany w ten sposób algorytm możemy w dość łatwy sposób zrównoleglić. Przyjżyjmy się jeszcze raz jego strukturze. Bazą algorytmu jest 
+populacja, która ewoluuje tworząc coraz lepsze, bardziej przystosowane rozwiązania. Zauważmy, że składa się ona z określonej liczby osobników, 
+które są od siebie niezależne, to znaczy, że operacje wykonane na jednym osobniku populacji nie wpływają na inne osobniki. Przykładowo 
+obliczając wartość funkcji przystosowania dla całej populacji nie musimy się martwić o kolejność w jakiej będziemy wybierać osobniki. Możemy więc 
+podzielić populacje na mniejsze części i następnie zlecić obliczenie funkcji przystosowania poszczególnych części pojedynczym wątkom. W ten 
+sposób, wszystkie części mogą być obliczane w tym samym czasie, co powinno skutkować skróceniem czasu całkowitych obliczeń dla całej populacji.
+
+[TODO: obrazek przedstawiający proces]
+
+Podobnie możemy postąpić w przypadku zastosowania operatorów genetycznych, które również wpływają tylko na poszczególne osobniki, a nie całą 
+populację.
+
+Kolejną opcją zrównoleglenia jest podział populacji na kilka mniejszych, które przez określoną liczbę pokoleń mogą ewoluować niezależnie 
+od siebie. Dodatkowo dzięki temu, że częściowe populacje ewoluują niezależnie od siebie, mogą one przeszukiwać osobne części przestrzeni 
+rozwiązań, co może pozytywnie wpłynąć na ostateczne rozwiązanie znalezione przez algorytm\cite{ISLAND-MODEL-PERFORMANCE}.
+
+
+\subsection{Modele algorytmu}
+
+Zaproponujmy i opiszmy dwa modele dla algorytmu:
 \begin{itemize}
-    \item Klasycznym
-    \item Wyspowym
+    \item Klasyczny
+    \item Wyspowy
 \end{itemize}
 
 Na początku procedura inicjalizacji generuje losową populacje o określonej liczbie osobników i oblicza wartość funkcji oceny dla każdego z nich. 
@@ -274,7 +397,7 @@ Każdy z trybów różni się przebiegiem procedury \textit{nextGeneration}(patr
 \end{figure}
 
 Model klasyczny nie różni się wiele od standardowego algorytmu ewolucyjnego. Mamy tutaj jedną populacje, która ewoluuje przez 
-określoną na starcie liczbę pokoleń. Wszystkie dostępne parametry algorytmu oraz ich dopuszczalne wartości opisane są w dalczej części pracy, 
+określoną przy starcie liczbę pokoleń. Wszystkie dostępne parametry algorytmu oraz ich dopuszczalne wartości opisane są w dalczej części pracy, 
 w sekcji \textit{Pliki konfiguracyjne}.
 
 W modelu klasycznym zrównoleglenie odbywa się na poziomie pojedynczej iteracji(patrz \ref{next_gen_klasyczny_img}). 
@@ -311,109 +434,127 @@ musi być odpowiednio duża, żeby jej podział na mniejsze części się sprawd
     \label{next_gen_wyspowy_img}
 \end{figure}
 
-W tym momencie każda z częściowych populacji w modelu wyspowym posiada takie same parametry. [...]
+% W tym momencie każda z częściowych populacji w modelu wyspowym posiada takie same parametry. [...]
 
-\section{Pliki konfiguracyjne}
-Dodatkowo do algorytmu został dodany moduł obsługi plików konfiguracyjnych. Używają one formatu JSON. Moduł pozwala na zapisywanie i wczytywanie 
-całej konfiguracji algorytmu, w skład której wchodzą wektory popytu i podaży, macierz kosztu, oraz wszystkie parametry programu.
-Definicja poszczególnych parametrów:
+\section{Parametry algorytmu}
+Opiszmy teraz krótko jakie parametry muszą zostać określone dla prezentowanego algorytmu i o czym będą decydować.
 
 \begin{itemize}
-    \item $populationSize$ - rozmiar całkowitej populacji. Powinien być dodatnią liczbą całkowitą.
-    \item $eliteProc$ - ułamek najlepszych rozwiązań, które zostają przepisane do następnego pokolenia. 
-    Wartość powinna znajdować się w przedziale $[0, 1]$. Testy pokazują, że najlepsze rozwiązania są generowane dla wartości parametru w przedziale
-    $[0.1, 0.3]$.
-    \item $mutationProb$ - prawdopodobieństwo mutacji. Przyjmuje wartość z zakresu $[0, 1]$. Warto pamiętać o tym, że zalecane prawdopodobieństwo 
-    mutacji nie powinno przekraczać kilkanastu procent.
+    \item $populationSize$ - rozmiar całkowitej populacji.
+    \item $eliteProc$ - ułamek najlepszych rozwiązań, które zostają przepisane do następnego pokolenia.
+    \item $mutationProb$ - prawdopodobieństwo mutacji.
     \item $mutationRate$ - wielkość mutacji, określa stosunek rozmiaru podmacierzy, wybieranej do ponownej inicjalizacji podczas mutacji, 
-    do macierzy rozwiązania. Przyjmuje wartości z zakresu $[0, 1]$. Tak jak w przypadku prawdopodobieństwa mutacji, jej wielkość nie powinna 
-    przekraczać kilkunastu procent, ponieważ zbyt duża mutacja może niszczyć znalezione rozwiązania.
-    \item $crossoverProb$ - prawdopodobieństwo krzyżowania. Przyjmuje wartości z przedziału $[0, 1]$. Zaleca się ustawialnie wartości z przedziału 
-    $[0.5, 0.9]$. Należy pamiętać o tym, że suma parametrów eliteProc i crossoverProb nie może być większa niż $1$.
-    \item mode - tryb w jakim ma działać algorytm. Przyjmuje wartości $regular$(w przypadku wyboru klasycznego modelu) lub $island$(w przypadku 
-    modelu wyspowego).
-    \item $numberOfSeparateGenerations$ - liczba naturalna określająca ilość iteracji jakie wykona algorytm pomiędzy rozdzieleniem populacji na 
-    mniejsze części, a ponownym jej scaleniem. Dla wyboru modelu klasycznego należy ustawić wartość parametru na $1$.
+    do macierzy rozwiązania.
+    \item $crossoverProb$ - prawdopodobieństwo krzyżowania. Należy pamiętać o tym, że suma parametrów eliteProc i crossoverProb nie 
+    może być większa niż $1$.
+    \item mode - tryb w jakim ma działać algorytm. Określa wybrany model ewolucji.
+    \item $numberOfSeparateGenerations$ - określa ilość iteracji jakie wykona algorytm pomiędzy rozdzieleniem populacji na 
+    mniejsze części, a ponownym jej scaleniem. Ma wpływ jedynie na model wyspowy. 
 \end{itemize}
 
-Dodatkowo w pliku konfiguracyjnym określamy wektor popytu, podaży i macierz kosztów:
 
-\begin{itemize}
-    \item $demand$ - wektor popytu. Przyjmuje jako wartość listę elementów, które składają się z dwóch pól - $i$, które określa indeks wektora i 
-    $val$, które określa wartosć wektora w miejscu $i$ - $demand[i] = val$.
-    \item $supply$ - wektor podaży. Przyjmuje jako wartość listę elementów, o polach takich samych jak w przypadku wektora popytu. Pojedynczy element 
-    opisuje pole wektora $supply[i] = val$.
-    \item $costMatrix$ - macierz kosztu, która może być wykorzystywana w funkcji celu. Przyjmuje jako wartość listę elementów, które składają się 
-    z trzech pól: $s$ - określa indeks odpowiadający indeksowi wektora podaży, $d$ - określa indeks odpowiadający indeksowi wektora popytu, oraz 
-    $val$ - określa wartość macierzy w polu o podanych indeksach $costMatrix[d, s] = val$.
-\end{itemize}
+% Przeniesc
+% \section{Pliki konfiguracyjne}
+% Dodatkowo do algorytmu został dodany moduł obsługi plików konfiguracyjnych. Używają one formatu JSON. Moduł pozwala na zapisywanie i wczytywanie 
+% całej konfiguracji algorytmu, w skład której wchodzą wektory popytu i podaży, macierz kosztu, oraz wszystkie parametry programu.
+% Definicja poszczególnych parametrów:
 
-Przykładowy plik konfiguracyjny:
+% \begin{itemize}
+%     \item $populationSize$ - rozmiar całkowitej populacji. Powinien być dodatnią liczbą całkowitą.
+%     \item $eliteProc$ - ułamek najlepszych rozwiązań, które zostają przepisane do następnego pokolenia. 
+%     Wartość powinna znajdować się w przedziale $[0, 1]$. Testy pokazują, że najlepsze rozwiązania są generowane dla wartości parametru w przedziale
+%     $[0.1, 0.3]$.
+%     \item $mutationProb$ - prawdopodobieństwo mutacji. Przyjmuje wartość z zakresu $[0, 1]$. Warto pamiętać o tym, że zalecane prawdopodobieństwo 
+%     mutacji nie powinno przekraczać kilkanastu procent.
+%     \item $mutationRate$ - wielkość mutacji, określa stosunek rozmiaru podmacierzy, wybieranej do ponownej inicjalizacji podczas mutacji, 
+%     do macierzy rozwiązania. Przyjmuje wartości z zakresu $[0, 1]$. Tak jak w przypadku prawdopodobieństwa mutacji, jej wielkość nie powinna 
+%     przekraczać kilkunastu procent, ponieważ zbyt duża mutacja może niszczyć znalezione rozwiązania.
+%     \item $crossoverProb$ - prawdopodobieństwo krzyżowania. Przyjmuje wartości z przedziału $[0, 1]$. Zaleca się ustawialnie wartości z przedziału 
+%     $[0.5, 0.9]$. Należy pamiętać o tym, że suma parametrów eliteProc i crossoverProb nie może być większa niż $1$.
+%     \item mode - tryb w jakim ma działać algorytm. Przyjmuje wartości $regular$(w przypadku wyboru klasycznego modelu) lub $island$(w przypadku 
+%     modelu wyspowego).
+%     \item $numberOfSeparateGenerations$ - liczba naturalna określająca ilość iteracji jakie wykona algorytm pomiędzy rozdzieleniem populacji na 
+%     mniejsze części, a ponownym jej scaleniem. Dla wyboru modelu klasycznego należy ustawić wartość parametru na $1$.
+% \end{itemize}
 
-\begin{lstlisting}[language=json, firstnumber=1, frame=single]
-{
-    "populationSize": 100,
-    "eliteProc": 0.3,
-    "mutationProb": 0.1,
-    "mutationRate": 0.05,
-    "crossoverProb": 0.2,
-    "mode": "regular",
-    "numberOfSeparateGenerations": 1,
-    "demand": [
-        {
-            "val": 1.0,
-            "i": 1
-        },
-        {
-            "val": 10.0,
-            "i": 2
-        }
-    ],
-    "supply": [
-        {
-            "val": 1.0,
-            "i": 1
-        },
-        {
-            "val": 5.0,
-            "i": 2
-        },
-        {
-            "val": 5.0,
-            "i": 3
-        }
-    ],
-    "costMatrix": [
-        {
-            "val": 1.0,
-            "s": 1,
-            "d": 1
-        },
-        {
-            "val": 2.0,
-            "s": 2,
-            "d": 1
-        },
-        {
-            "val": 3.0,
-            "s": 3,
-            "d": 1
-        },
-        {
-            "val": 10.0,
-            "s": 1,
-            "d": 2
-        },
-        {
-            "val": 20.0,
-            "s": 2,
-            "d": 2
-        },
-        {
-            "val": 30.0,
-            "s": 3,
-            "d": 2
-        }
-    ]
-}
-\end{lstlisting}
+% Dodatkowo w pliku konfiguracyjnym określamy wektor popytu, podaży i macierz kosztów:
+
+% \begin{itemize}
+%     \item $demand$ - wektor popytu. Przyjmuje jako wartość listę elementów, które składają się z dwóch pól - $i$, które określa indeks wektora i 
+%     $val$, które określa wartosć wektora w miejscu $i$ - $demand[i] = val$.
+%     \item $supply$ - wektor podaży. Przyjmuje jako wartość listę elementów, o polach takich samych jak w przypadku wektora popytu. Pojedynczy element 
+%     opisuje pole wektora $supply[i] = val$.
+%     \item $costMatrix$ - macierz kosztu, która może być wykorzystywana w funkcji celu. Przyjmuje jako wartość listę elementów, które składają się 
+%     z trzech pól: $s$ - określa indeks odpowiadający indeksowi wektora podaży, $d$ - określa indeks odpowiadający indeksowi wektora popytu, oraz 
+%     $val$ - określa wartość macierzy w polu o podanych indeksach $costMatrix[d, s] = val$.
+% \end{itemize}
+
+% Przykładowy plik konfiguracyjny:
+
+% \begin{lstlisting}[language=json, firstnumber=1, frame=single]
+% {
+%     "populationSize": 100,
+%     "eliteProc": 0.3,
+%     "mutationProb": 0.1,
+%     "mutationRate": 0.05,
+%     "crossoverProb": 0.2,
+%     "mode": "regular",
+%     "numberOfSeparateGenerations": 1,
+%     "demand": [
+%         {
+%             "val": 1.0,
+%             "i": 1
+%         },
+%         {
+%             "val": 10.0,
+%             "i": 2
+%         }
+%     ],
+%     "supply": [
+%         {
+%             "val": 1.0,
+%             "i": 1
+%         },
+%         {
+%             "val": 5.0,
+%             "i": 2
+%         },
+%         {
+%             "val": 5.0,
+%             "i": 3
+%         }
+%     ],
+%     "costMatrix": [
+%         {
+%             "val": 1.0,
+%             "s": 1,
+%             "d": 1
+%         },
+%         {
+%             "val": 2.0,
+%             "s": 2,
+%             "d": 1
+%         },
+%         {
+%             "val": 3.0,
+%             "s": 3,
+%             "d": 1
+%         },
+%         {
+%             "val": 10.0,
+%             "s": 1,
+%             "d": 2
+%         },
+%         {
+%             "val": 20.0,
+%             "s": 2,
+%             "d": 2
+%         },
+%         {
+%             "val": 30.0,
+%             "s": 3,
+%             "d": 2
+%         }
+%     ]
+% }
+% \end{lstlisting}

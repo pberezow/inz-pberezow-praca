@@ -3,23 +3,23 @@
 \BOOKMARK [1][-]{section.2.1}{Zadanie transportowe}{chapter.2}% 3
 \BOOKMARK [2][-]{subsection.2.1.1}{Wersja liniowa}{section.2.1}% 4
 \BOOKMARK [2][-]{subsection.2.1.2}{Wersja nieliniowa}{section.2.1}% 5
-\BOOKMARK [1][-]{section.2.2}{Klasyczne rozwiazania}{chapter.2}% 6
-\BOOKMARK [1][-]{section.2.3}{Algorytmy metaheurystyczne}{chapter.2}% 7
-\BOOKMARK [2][-]{subsection.2.3.1}{Algorytmy ewolucyjne}{section.2.3}% 8
-\BOOKMARK [0][-]{chapter.3}{R\363wnoleg\233a implementacja algorytmu ewolucyjnego}{}% 9
-\BOOKMARK [1][-]{section.3.1}{Uzyte technologie}{chapter.3}% 10
-\BOOKMARK [1][-]{section.3.2}{Reprezentacja chromosomu}{chapter.3}% 11
-\BOOKMARK [1][-]{section.3.3}{Inicjalizacja chromosomu}{chapter.3}% 12
-\BOOKMARK [1][-]{section.3.4}{Operator krzyzowania}{chapter.3}% 13
-\BOOKMARK [1][-]{section.3.5}{Operator mutacji}{chapter.3}% 14
-\BOOKMARK [1][-]{section.3.6}{Funkcje oceny}{chapter.3}% 15
-\BOOKMARK [1][-]{section.3.7}{Metoda selekcji}{chapter.3}% 16
-\BOOKMARK [1][-]{section.3.8}{Wersja r\363wnoleg\233a}{chapter.3}% 17
-\BOOKMARK [1][-]{section.3.9}{Pliki konfiguracyjne}{chapter.3}% 18
-\BOOKMARK [0][-]{chapter.4}{Wyniki eksperymentalne}{}% 19
-\BOOKMARK [1][-]{section.4.1}{Model klasyczny algorytmu genetycznego}{chapter.4}% 20
-\BOOKMARK [1][-]{section.4.2}{Model wyspowy algorytmu genetycznego}{chapter.4}% 21
-\BOOKMARK [1][-]{section.4.3}{Por\363wnanie modelu klasycznego i wyspowego}{chapter.4}% 22
+\BOOKMARK [0][-]{chapter.3}{Ewolucyjne podejscie do nieliniowego zadania transportowego}{}% 6
+\BOOKMARK [1][-]{section.3.1}{Algorytmy metaheurystyczne}{chapter.3}% 7
+\BOOKMARK [2][-]{subsection.3.1.1}{Algorytmy ewolucyjne}{section.3.1}% 8
+\BOOKMARK [1][-]{section.3.2}{Reprezentacja chromosomu}{chapter.3}% 9
+\BOOKMARK [1][-]{section.3.3}{Inicjalizacja chromosomu}{chapter.3}% 10
+\BOOKMARK [1][-]{section.3.4}{Operator krzyzowania}{chapter.3}% 11
+\BOOKMARK [1][-]{section.3.5}{Operator mutacji}{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.6}{Funkcje oceny}{chapter.3}% 13
+\BOOKMARK [1][-]{section.3.7}{Metoda selekcji}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.8}{Wersja r\363wnoleg\233a}{chapter.3}% 15
+\BOOKMARK [2][-]{subsection.3.8.1}{Modele algorytmu}{section.3.8}% 16
+\BOOKMARK [1][-]{section.3.9}{Parametry algorytmu}{chapter.3}% 17
+\BOOKMARK [0][-]{chapter.4}{Wyniki eksperymentalne}{}% 18
+\BOOKMARK [1][-]{section.4.1}{Dob\363r parametr\363w dla algorytmu}{chapter.4}% 19
+\BOOKMARK [1][-]{section.4.2}{Model klasyczny algorytmu ewolucyjnego}{chapter.4}% 20
+\BOOKMARK [1][-]{section.4.3}{Model wyspowy algorytmu ewolucyjnego}{chapter.4}% 21
+\BOOKMARK [1][-]{section.4.4}{Por\363wnanie modelu klasycznego i wyspowego}{chapter.4}% 22
 \BOOKMARK [0][-]{chapter.5}{Podsumowanie}{}% 23
 \BOOKMARK [0][-]{chapter*.6}{Bibliografia}{}% 24
 \BOOKMARK [0][-]{appendix.A}{Zawartosc p\233yty CD}{}% 25
