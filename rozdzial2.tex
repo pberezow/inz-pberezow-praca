@@ -95,40 +95,8 @@ Projektowanie algorytmu ewolucyjnego możemy podzielić na kilka oddzielnych cz�
 
 \end{itemize}
 
-W kolejnych sekcjach zaproponujemy algorytm ewolucyjny przystosowany dla zadania transportowego oparty na algorytmie zaprezentowanym przez 
+W kolejnych sekcjach zaproponujemy algorytm ewolucyjny przystosowany do zadania transportowego, oparty na algorytmie zaprezentowanym przez 
 dr. Zbigniewa Michalewicza\cite{ALG-GEN-BOOK}.
-
-% NA KONIEC
-% \section{Użyte technologie}
-% Do implementacji algorytmu zastosowano język Julia\cite{JULIA-PUB} w wersji 1.3. Julia jest stosunkowo nowym językiem programowania. Został zaprojektowany 
-% z myślą o zastosowaniach w obliczeniach numerycznych i analizie danych. Łączy on w sobie zalety języków niskopoziomowych i wysokopoziomowych takie jak szybkość 
-% i czytelność kodu. Testy pokazują, że program napisany w Julii może być równie szybki, jak odpowiadający mu program napisany w C\cite{JULIA-PERFORMANCE}. 
-% Dodatkową zaletą jest możliwość bezpośredniego wywoływania bibliotek napisanych w C, Fortranie i kilku innych językach popularnych w dziedzinie 
-% obliczeń numerycznych bezpośrednio z Julii.
-
-% Ostatnie aktualizacje w znaczącym stopniu rozwinęły wsparcie języka dla obliczeń równoległych i rozproszonych. W tym momencie Julia oferuje wsparcie dla 
-% równoległości na poziomie wątków jak i procesów, co dodatkowo wpłynęło na wybór tego właśnie języka. Posiada własny protokół komunikacji między procesami, jednak 
-% istnieje również biblioteka implementująca najbardziej powszechny protokół MPI.
-
-% Julia używa kompilatora JIT(just-in-time), który kompiluje program tuż przed jego wykonaniem, dzięki czemu jest szybsza 
-% niż języki interpretowane. Należy pamiętać o tym, że nie każdy program napisany w Julii będzie szybki. Wszystko zależy od jakości dostarczonego kodu.
-% Głównym czynnikiem, który wpływa na szybkość są typy. Julia jest językiem dynamicznie typowanym, jednak podczas kompilacji tworzone są warianty tej samej 
-% funkcji dla różnych typów(o ile to możliwe). Pozwala to pominąć kontrolę typów podczas wykonywania kodu i tym samym znacząco przyspieszyć jego działanie.
-% Dlatego pisząc kod w julii powinniśmy pamiętać o tym, żeby unikać miejsc, w których kompilator będzie zmuszony do konwersji zmiennych do konkretnego typu. 
-% Aby identyfikować tego typu miejsca możemy używać dostarczonych w bibliotece standardowej narzędzi, które pomagają analizować nasz kod. 
-% Warte wymienienia są tutaj:
-
-% \begin{itemize}
-%     \item pakiet $Profile$, który zbiera informacje o czasie wywołania kolejnych fragmentów kodu, dzięki czemu w łatwy sposób 
-%     możemy zidentyfikować fragmenty do dalszej optymalizacji. Pozwala on też śledzić liczbę ilość pamięci alokowanej przez konkretne fragmenty 
-%     kodu, co również w wielu przypadkach może okazać się przydatną informacją.
-%     \item makro $@code\_warntype$, które zwraca strukturę AST(abstract syntax tree) dla wykonywanego kodu, dzięki czemu możemy zobaczyć możliwe typy dla wszystkich zmiennych. 
-%     Dodatkowo miejsca w których kompilator nie jest w stanie jednoznacznie określić typu danej zmiennej jest zaznaczony na czerwono.
-% \end{itemize}
-
-% Julia udostępnia też środowisko uruchomieniowe $REPL$(read-eval-print loop), dzięki któremu możemy w bardzo łatwy sposób testować napisany kod. 
-% Dzięki dostępnym bibliotekom takim jak $Debugger.jl$ oraz $Rebugger.jl$ możemy w razie potrzeby debugować napisany kod z poziomu $REPL$ co 
-% znacznie przyspiesza znajdowanie błędów.
 
 
 \section{Reprezentacja chromosomu}
@@ -167,7 +135,7 @@ $$v_{ij} \ge 0, \text{ dla } i = 1, 2, \dots, n \text{ i } j = 1, 2, \dots, m$$
 \section{Inicjalizacja chromosomu}
 Projektując procedurę inicjalizacji rozwiązania musimy pamiętać o tym, żeby generowane rozwiązania spełniały ograniczenia przedstawione 
 w poprzedniej sekcji oraz obejmowały jak największą część przestrzeni wszystkich rozwiązań. Zaproponowana procedura przyjmuje jako argumenty 
-wektory popytu i podaży. Iterując po kolejnych, losowych komórkach macierzy przypisujemy im wartość $val = min(supply[i], demand[j])$, gdzie 
+wektory popytu i podaży. Iterując po kolejnych, losowych komórkach macierzy przypisujemy im wartość $val = \min(supply[i], demand[j])$, gdzie 
 $i, j$ są indeksami wylosowanej komórki macierzy, a $supply[i]$ oraz $demand[j]$ odpowiadającymi im wartościami w wektorach popytu i podaży. 
 Następnie zmniejszamy wartości w wektorach o wpisaną wartość $val$. W ten sposób ograniczenia zadania zostają spełnione. Wygenerowane rozwiązania są 
 wierzchołkami sympleksu, opisującego wypukły brzeg przestrzeni dopuszczalnych rozwiązań.
@@ -182,7 +150,7 @@ wierzchołkami sympleksu, opisującego wypukły brzeg przestrzeni dopuszczalnych
     $indices \gets$ lista wszystkich indeksów macierzy $V$ w losowej kolejności\;
     \BlankLine
     \For{$(s, d) \in indices$} {
-        $val \gets min(demand[d], supply[s])$\;
+        $val \gets \min(demand[d], supply[s])$\;
         $demand[d] \gets demand[d] - val$\;
         $supply[s] \gets supply[s] - val$\;
         $V[s, d] \gets val$\;
@@ -276,9 +244,9 @@ macierzy $V$.
 
 Zdefiniowano dwa operatory mutacji. Różnią się one jedynie procedurą inicjalizacji. W pierwszym używamy tej samej procedury, którą inicjalizujemy 
 nowe chromosomy podczas generowania populacji początkowej(patrz \ref{inicjalizacja-1}). Druga jest modyfikacją tej procedury. Modyfikacja polega na tym, że zamiast wybierać 
-jako wartość pola $val = min(demand[j], supply[i])$ wybieramy liczbę z zakresu $[0, val]$. Zmiana ta powoduje, że otrzymana macierz może naruszać 
+jako wartość pola $val = \min(demand[j], supply[i])$ wybieramy liczbę z zakresu $[0, val]$. Zmiana ta powoduje, że otrzymana macierz może naruszać 
 ograniczenia zadania, dlatego po wstępnym wyznaczeniu wartości naprawiamy rozwiązanie poprzez zrobienie wymaganych dodawań w taki sposób, żeby 
-rozwiązanie spełniało ograniczenia. 
+rozwiązanie spełniało ograniczenia.
 
 Poniżej przedstawiono schemat zmodyfikowanej procedury inicjalizacji w postaci pseudokodu.
 
@@ -292,14 +260,14 @@ Poniżej przedstawiono schemat zmodyfikowanej procedury inicjalizacji w postaci 
     $indices \gets$ lista wszystkich indeksów macierzy $V$ w losowej kolejności\;
     \BlankLine
     \For{$(s, d) \in indices$} {
-        $val \gets$ wartość z przedziału $[0, min(demand[d], supply[s])]$\;
+        $val \gets$ wartość z przedziału $[0, \min(demand[d], supply[s])]$\;
         $demand[d] \gets demand[d] - val$\;
         $supply[s] \gets supply[s] - val$\;
         $V[s, d] \gets val$\;
     }
     \BlankLine
     \For{$(s, d) \in indices$} {
-        $val \gets min(demand[d], supply[s])$\;
+        $val \gets \min(demand[d], supply[s])$\;
         $demand[d] \gets demand[d] - val$\;
         $supply[s] \gets supply[s] - val$\;
         $V[s, d] \gets V[s, d] + val$\;
@@ -397,8 +365,8 @@ Każdy z trybów różni się przebiegiem procedury \textit{nextGeneration}(patr
 \end{figure}
 
 Model klasyczny nie różni się wiele od standardowego algorytmu ewolucyjnego. Mamy tutaj jedną populacje, która ewoluuje przez 
-określoną przy starcie liczbę pokoleń. Wszystkie dostępne parametry algorytmu oraz ich dopuszczalne wartości opisane są w dalczej części pracy, 
-w sekcji \textit{Pliki konfiguracyjne}.
+określoną przy starcie liczbę pokoleń. Wszystkie dostępne parametry algorytmu zostały krótko opisane w dalczej części pracy, 
+w sekcji \textit{Parametry algorytmu}.
 
 W modelu klasycznym zrównoleglenie odbywa się na poziomie pojedynczej iteracji(patrz \ref{next_gen_klasyczny_img}). 
 Ewolucję populacji możemy podzielić tutaj na dwie części:
@@ -437,23 +405,59 @@ musi być odpowiednio duża, żeby jej podział na mniejsze części się sprawd
 % W tym momencie każda z częściowych populacji w modelu wyspowym posiada takie same parametry. [...]
 
 \section{Parametry algorytmu}
-Opiszmy teraz krótko jakie parametry muszą zostać określone dla prezentowanego algorytmu i o czym będą decydować.
+Opiszmy teraz krótko jakie parametry muszą zostać określone dla prezentowanego algorytmu i o czym będą one decydować.
 
 \begin{itemize}
     \item $populationSize$ - rozmiar całkowitej populacji.
     \item $eliteProc$ - ułamek najlepszych rozwiązań, które zostają przepisane do następnego pokolenia.
-    \item $mutationProb$ - prawdopodobieństwo mutacji.
+    \item $mutationProb$ - prawdopodobieństwo z jaką występuje mutacja.
     \item $mutationRate$ - wielkość mutacji, określa stosunek rozmiaru podmacierzy, wybieranej do ponownej inicjalizacji podczas mutacji, 
     do macierzy rozwiązania.
     \item $crossoverProb$ - prawdopodobieństwo krzyżowania. Należy pamiętać o tym, że suma parametrów eliteProc i crossoverProb nie 
     może być większa niż $1$.
-    \item mode - tryb w jakim ma działać algorytm. Określa wybrany model ewolucji.
+    \item $mode$ - tryb w jakim ma działać algorytm. Określa wybrany model ewolucji.
     \item $numberOfSeparateGenerations$ - określa ilość iteracji jakie wykona algorytm pomiędzy rozdzieleniem populacji na 
     mniejsze części, a ponownym jej scaleniem. Ma wpływ jedynie na model wyspowy. 
 \end{itemize}
 
+\section{Użyte technologie}
+Do implementacji algorytmu zastosowano język Julia\cite{JULIA-PUB} w wersji 1.3. Julia jest stosunkowo nowym językiem programowania. Został zaprojektowany 
+z myślą o zastosowaniach w obliczeniach numerycznych i analizie danych. Łączy on w sobie zalety języków niskopoziomowych i wysokopoziomowych takie jak szybkość 
+i czytelność kodu. Testy pokazują, że program napisany w Julii może być równie szybki, jak odpowiadający mu program napisany w C\cite{JULIA-PERFORMANCE}. 
+Dodatkową zaletą jest możliwość bezpośredniego wywoływania bibliotek napisanych w C, Fortranie i kilku innych językach popularnych w dziedzinie 
+obliczeń numerycznych bezpośrednio z Julii.
 
-% Przeniesc
+Julia używa kompilatora JIT(just-in-time), który kompiluje program tuż przed jego wykonaniem, dzięki czemu jest szybsza 
+niż języki interpretowane. Należy pamiętać o tym, że nie każdy program napisany w Julii będzie szybki. Wszystko zależy od jakości dostarczonego kodu.
+Głównym czynnikiem, który wpływa na szybkość są typy. Julia jest językiem dynamicznie typowanym, jednak podczas kompilacji tworzone są warianty tej samej 
+funkcji dla różnych typów(o ile to możliwe). Pozwala to pominąć kontrolę typów podczas wykonywania kodu i tym samym znacząco przyspieszyć jego działanie.
+Dlatego pisząc kod w julii powinniśmy pamiętać o tym, żeby unikać miejsc, w których kompilator będzie zmuszony do konwersji zmiennych do konkretnego typu. 
+Aby identyfikować tego typu miejsca możemy używać dostarczonych w bibliotece standardowej narzędzi, które pomagają analizować nasz kod. 
+Warte wymienienia są tutaj:
+
+\begin{itemize}
+    \item pakiet $Profile$, który zbiera informacje o czasie wywołania kolejnych fragmentów kodu, dzięki czemu w łatwy sposób 
+    możemy zidentyfikować fragmenty do dalszej optymalizacji. Pozwala on też śledzić liczbę ilość pamięci alokowanej przez konkretne fragmenty 
+    kodu, co również w wielu przypadkach może okazać się przydatną informacją.
+    \item makro $@code\_warntype$, które zwraca strukturę AST(abstract syntax tree) dla wykonywanego kodu, dzięki czemu możemy zobaczyć możliwe typy dla wszystkich zmiennych. 
+    Dodatkowo miejsca w których kompilator nie jest w stanie jednoznacznie określić typu danej zmiennej jest zaznaczony na czerwono.
+\end{itemize}
+
+Julia udostępnia też środowisko uruchomieniowe $REPL$(read-eval-print loop), dzięki któremu możemy w bardzo łatwy sposób testować napisany kod. 
+Dzięki dostępnym bibliotekom takim jak $Debugger.jl$ oraz $Rebugger.jl$ możemy w razie potrzeby debugować napisany kod z poziomu $REPL$ co 
+znacznie przyspiesza znajdowanie błędów.
+
+Ostatnie aktualizacje w znaczącym stopniu rozwinęły wsparcie języka dla obliczeń równoległych i rozproszonych. W tym momencie Julia oferuje wsparcie dla 
+równoległości na poziomie wątków jak i procesów, co dodatkowo wpłynęło na wybór tego właśnie języka. Posiada własny protokół komunikacji między procesami, jednak 
+istnieje również biblioteka implementująca najbardziej powszechny protokół MPI.
+
+Biblioteka standardowa oferuje makra, które umożliwiają podział wszystkich iteracji pętli między wątki (makro $@threads$) lub procesy(makro $@distributed$). 
+Taki podział zadań jest idealnym rozwiązaniem w przypadku kiedy iteracje pętli są niezależne od siebie i kolejność ich wykonywania nie ma 
+znaczenia. Dokładnie taka sytuacja ma miejsce w implementowanym przez nas algorytmie, kiedy np. dzielimy populacje osobników na populacje 
+częściowe, które ewoluują niezależnie od siebie. Dzięki temu mechanizm równoległości oferowany przez Julię idealnie sprawdza się w przedstawianym 
+tutaj problemie.
+
+% Przeniesc do appendix
 % \section{Pliki konfiguracyjne}
 % Dodatkowo do algorytmu został dodany moduł obsługi plików konfiguracyjnych. Używają one formatu JSON. Moduł pozwala na zapisywanie i wczytywanie 
 % całej konfiguracji algorytmu, w skład której wchodzą wektory popytu i podaży, macierz kosztu, oraz wszystkie parametry programu.

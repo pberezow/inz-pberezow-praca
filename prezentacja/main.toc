@@ -2,4 +2,4 @@
 \beamer@sectionintoc {2}{Implementacja}{9}{0}{2}
 \beamer@sectionintoc {3}{Wersja r\IeC {\'o}wnoleg\IeC {\l }a}{19}{0}{3}
 \beamer@sectionintoc {4}{Wyniki}{21}{0}{4}
-\beamer@sectionintoc {5}{Podsumowanie}{23}{0}{5}
+\beamer@sectionintoc {5}{Podsumowanie}{28}{0}{5}

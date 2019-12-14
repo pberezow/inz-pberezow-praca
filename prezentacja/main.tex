@@ -3,6 +3,10 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage{polski}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{mathabx}
 
 \usetheme{pwrlite}
 %\usetheme[nosections]{pwrlite}  % wyłączenie stron z sekcjami
@@ -56,7 +60,7 @@
 }
 \only<2> {
     Funkcja celu:
-    $$min \sum_{i=1}^{n} \sum_{j=1}^{m} f_{ij}(x_{ij})$$
+    $$\min \sum_{i=1}^{n} \sum_{j=1}^{m} f_{ij}(x_{ij})$$
     Ograniczenia:
     $$\sum_{j=1}^{m} x_{ij} = supply(i), \text{ dla } i = 1, 2, \dots, n$$
     $$\sum_{i=1}^{n} x_{ij} = demand(j), \text{ dla } j = 1, 2, \dots, m$$
@@ -66,11 +70,21 @@
 
 \begin{frame}
 \frametitle{Algorytmy ewolucyjne}
+\only<1> {
     \begin{itemize}
         \item Są podzbiorem algorytmów metaheurystycznych.
         \item Inspirowane teorią ewolucji Darwina.
-        \item 
+        \item Populacja rozwiązań ewoluuje tworząc coraz lepsze rozwiązania.
     \end{itemize}
+}
+\only<2> {
+    \begin{figure}[H]
+        \centering        
+        \includegraphics[width=0.5\textwidth]{alg_gen_szkic.png}
+        % \caption{Ogólny schemat działania algorytmu ewolucyjnego}
+        \label{alg_ewo_img}
+    \end{figure}
+}
 \end{frame}
 
 \section{Implementacja}
@@ -277,6 +291,66 @@
     \includegraphics[scale=0.5]{time_threads_compare.png}
     \caption{Zależność czasu znalezienia rozwiązania od liczby wątków}
 \end{figure}    
+\end{frame}
+
+\begin{frame}
+    \frametitle{Funkcja liniowa}
+    \only<1> {
+        \begin{table}
+            \begin{center}
+                \begin{tabular}{c||c|c|c|c}
+                    Rozmiar zadania & GLPK & Ipopt & Klasyczny & Wyspowy \\ 
+                    \hline
+                    $7\times7$ & 293.0 & 292.9 & 490.5 & 292.9 \\
+                \end{tabular}
+            \end{center}
+            \caption{Rezultaty}
+        \end{table}
+    }
+
+    \only<2> {
+        \begin{figure}[ht]
+            \centering
+            \includegraphics[scale=0.2]{resultPlot_lin_island.png}
+            \caption{Ewolucja najlepszego rozwiązania dla modelu wyspowego}
+        \end{figure}    
+    }
+    
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Funkcja nieliniowa}
+    \only<1> {
+        \begin{table}
+            \begin{center}
+                \begin{tabular}{c||c|c}
+                    Rozmiar zadania & Klasyczny & Wyspowy \\ 
+                    \hline
+                    $7\times7$ & 62.0 & 0.0 \\
+                \end{tabular}
+            \end{center}
+            \caption{Rezultaty}
+        \end{table}
+    }
+    
+    \only<2> {
+        \begin{figure}[ht]
+            \centering
+            \includegraphics[scale=0.2]{resultPlot_island.png}
+            \caption{Ewolucja najlepszego rozwiązania dla modelu wyspowego}
+        \end{figure}
+    }
+
+    \only<3> {
+        \begin{figure}[ht]
+            \centering
+            \includegraphics[scale=0.2]{resultPlot_regular.png}
+            \caption{Ewolucja najlepszego rozwiązania dla modelu klasycznego}
+        \end{figure}
+    }
+    
+
 \end{frame}
 
 \section{Podsumowanie}

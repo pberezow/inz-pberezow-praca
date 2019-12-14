@@ -1,9 +1,31 @@
 \begin{thebibliography}{1}
 
+\bibitem{Guisewite1990}
+G.~M. Guisewite,  P.~M. Pardalos.
+\newblock Minimum concave-cost network flow problems: Applications, complexity,
+  and algorithms.
+\newblock {\em Annals of Operations Research}, 25(1):75--99, Dec 1990.
+
+\bibitem{JULIA-PUB}
+S.~K. Jeff~Bezanson, Alan~Edelman,  V.~B. Shah.
+\newblock Julia: A fresh approach to numerical computing.
+\newblock {\em SIAM Review}, 59:65--98, 2017.
+
+\bibitem{JULIA-PERFORMANCE}
+V.~B.~S. Jeff~Bezanson, Stefan~Karpinski,  A.~Edelman.
+\newblock Julia: A fast dynamic language for technical computing.
+\newblock {\em ArXiv:1209.5145}, September 2012.
+
 \bibitem{TP-SYMPLEX-BOOK}
 S.~J.K.
 \newblock {\em Linear Programming and Its Applications}.
 \newblock Springer, New York, NY, 1989.
+
+\bibitem{MAX-FLOW-ALG}
+J.~S.~K. Maciej M.~Sysło, Narsingh~Deo.
+\newblock {\em Algorytmy optymalizacji dyskretnej z programami w języku
+  Pascal.}
+\newblock Wydawnictwo Naukowe PWN, 1999.
 
 \bibitem{ALG-GEN-BOOK}
 Z.~Michalewicz.
@@ -15,6 +37,12 @@ N.~Saini.
 \newblock Review of selection methods in genetic algorithms.
 \newblock {\em International Journal of Engineering and Computer Science},
   6(12):22261--22263, Dec. 2017.
+
+\bibitem{NONLINEAR-NP-HARD}
+S.~Schrenk, G.~Finke, V.-D. Cung.
+\newblock Two classical transportation problems revisited: Pure constant fixed
+  charges and the paradox.
+\newblock {\em Mathematical and Computer Modelling}, 54:2306--2315, 11 2011.
 
 \bibitem{ISLAND-MODEL-PERFORMANCE}
 D.~Whitley, S.~Rana, R.~Heckendorn.

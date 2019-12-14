@@ -31,7 +31,7 @@ musi być równa jego początkowemu zapotrzebowaniu. W przypadku zadania niezbil
 zmienić na odpowiednie nierówności. 
 
 Zadanie jest liniowe, jeśli koszt transportu między punktami nadania i odbioru jest wprost proporcjonalny 
-do ilości transportowanego towaru, tzn. jeśli $f_{ij}(x_{ij}) = cost_{ij} x_{ij}$, gdzie $cost_{ij}$ jest jednostkowym kosztem transportu 
+do ilości transportowanego towaru, tzn. jeśli $f_{ij}(x_{ij}) = c_{ij} x_{ij}$, gdzie $c_{ij}$ jest jednostkowym kosztem transportu 
 między $i$-tym punktem nadania, a $j$-tym punktem odbioru. W przypadku kiedy zależność między kosztem transportu, a ilością transportowanego 
 towaru wygląda inaczej mówimy o zadaniu nieliniowym.
 
@@ -46,14 +46,16 @@ wierzchołki, w których funkcja celu przyjmuje mniejsze wartości. W kolejnej i
 punktem, dla którego funkcja celu osiąga lepszą wartość i powtarzamy powyższe kroki. Algorytm kończy działanie w momencie, kiedy nie możemy 
 znaleźć lepszego rozwiązania do kolejnej iteracji.
 
-Zadanie transportowe posiada również interpretację sieciową. [TODO: opisać] Możemy je więc łatwo sprowadzić do zadania najtańszego przepływu. 
-[TODO: opisać]
+Zadanie transportowe posiada również interpretację sieciową. Dla $n$ punktów nadania i $m$ punktów odbioru możemy zdefiniować taki graf 
+skierowany, który ma $n + m$ wierzchołków, gdzie $n$ wierzchołków odpowiada punktom nadania, oraz $m$ wierzchołków odpowiada punktom odbioru.
+Wierzchołki są połączone krawędziami w taki sposób, że każdy z wierzchołków nadania posiada $m$ krawędzi, po jednej skierowanej do 
+każdego z wierzchołków odbioru. Koszt na krawędzi jest kosztem jednostkowym przewozu towaru. Możemy je więc łatwo sprowadzić do zadania 
+największego przepływu\cite{MAX-FLOW-ALG}. 
 
 \subsection{Wersja nieliniowa}
 O ile liniowa wersja zadania jest stosunkowo łatwa w rozwiązaniu, o tyle dla wersji nieliniowej nie ma ogólnej metody rozwiązywania. Należy 
-ono do problemów z kategorii NP-trudnych. Do jego rozwiązania używa się różnych algorytmów wyznaczających 
+ono do problemów z kategorii NP-trudnych\cite{Guisewite1990, NONLINEAR-NP-HARD}. Do jego rozwiązania używa się różnych algorytmów wyznaczających 
 rozwiązania przybliżone, takich jak algorytmy metaheurystyczne. 
 
 Wersja nieliniowa lepiej oddaje rzeczywisty problem planowania dostaw, gdzie koszty zależą od wielu czynników, które wpływają na to, 
 że zależność między kosztem, a ilością transportowanego towaru nie jest liniowa. Niniejsza praca skupia się głównie na takich problemach.
-[TODO: - znalezc publikacje]
