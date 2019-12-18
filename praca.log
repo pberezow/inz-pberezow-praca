@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.15)  14 DEC 2019 23:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.15)  18 DEC 2019 21:45
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1232,7 +1232,7 @@ LaTeX Info: Redefining \nameref on input line 541.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-<pwr.png, id=108, 260.975pt x 370.38374pt>
+<pwr.png, id=104, 260.975pt x 370.38374pt>
 File: pwr.png Graphic file (type png)
 <use pwr.png>
 Package pdftex.def Info: pwr.png  used on input line 562.
@@ -1284,7 +1284,7 @@ Rozdzia\l  1.
 
 
 ]
-<wppt-logo.png, id=165, 75.8835pt x 66.4884pt>
+<wppt-logo.png, id=160, 75.8835pt x 66.4884pt>
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
 Package pdftex.def Info: wppt-logo.png  used on input line 588.
@@ -1302,7 +1302,7 @@ Package pdftex.def Info: wppt-logo.png  used on input line 591.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
  [4] (/home/piotr/Dokumenty/studia/praca/rozdzial2.tex
 Rozdzia\l  3.
-<img/alg_ewo_szkic.png, id=198, 249.93375pt x 526.96875pt>
+<img/alg_ewo_szkic.png, id=193, 249.93375pt x 526.96875pt>
 File: img/alg_ewo_szkic.png Graphic file (type png)
 <use img/alg_ewo_szkic.png>
 Package pdftex.def Info: img/alg_ewo_szkic.png  used on input line 53.
@@ -1326,7 +1326,7 @@ Package pdftex.def Info: wppt-logo.png  used on input line 66.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<pwr-logo.png, id=227, 217.81375pt x 216.81pt>
+<pwr-logo.png, id=222, 217.81375pt x 216.81pt>
 File: pwr-logo.png Graphic file (type png)
 <use pwr-logo.png>
 Package pdftex.def Info: pwr-logo.png  used on input line 130.
@@ -1361,12 +1361,12 @@ File: pwr-logo.png Graphic file (type png)
 Package pdftex.def Info: pwr-logo.png  used on input line 342.
 (pdftex.def)             Requested size: 23.603pt x 23.49188pt.
  [11]
-<img/alg_main.png, id=329, 259.97125pt x 325.215pt>
+<img/alg_main.png, id=324, 259.97125pt x 325.215pt>
 File: img/alg_main.png Graphic file (type png)
 <use img/alg_main.png>
 Package pdftex.def Info: img/alg_main.png  used on input line 362.
 (pdftex.def)             Requested size: 188.8096pt x 236.19415pt.
-<img/next_gen_klasyczny.png, id=331, 123.46124pt x 606.265pt>
+<img/next_gen_klasyczny.png, id=326, 123.46124pt x 606.265pt>
 File: img/next_gen_klasyczny.png Graphic file (type png)
 <use img/next_gen_klasyczny.png>
 Package pdftex.def Info: img/next_gen_klasyczny.png  used on input line 383.
@@ -1376,7 +1376,7 @@ File: wppt-logo.png Graphic file (type png)
 Package pdftex.def Info: wppt-logo.png  used on input line 387.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
  [12 </home/piotr/Dokumenty/studia/praca/img/alg_main.png>]
-<img/next_gen_wyspowy.png, id=341, 340.27126pt x 506.89375pt>
+<img/next_gen_wyspowy.png, id=336, 340.27126pt x 506.89375pt>
 File: img/next_gen_wyspowy.png Graphic file (type png)
 <use img/next_gen_wyspowy.png>
 Package pdftex.def Info: img/next_gen_wyspowy.png  used on input line 400.
@@ -1407,45 +1407,61 @@ Package pdftex.def Info: wppt-logo.png  used on input line 594.
 
 ] (/home/piotr/Dokumenty/studia/praca/rozdzial3.tex
 Rozdzia\l  4.
-) [17
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [17
 
 ]
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
+Package pdftex.def Info: wppt-logo.png  used on input line 107.
+(pdftex.def)             Requested size: 23.603pt x 20.68018pt.
+ [18]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+)
+File: pwr-logo.png Graphic file (type png)
+<use pwr-logo.png>
+Package pdftex.def Info: pwr-logo.png  used on input line 597.
+(pdftex.def)             Requested size: 23.603pt x 23.49188pt.
+ [19]
+File: wppt-logo.png Graphic file (type png)
+<use wppt-logo.png>
 Package pdftex.def Info: wppt-logo.png  used on input line 597.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
- [18
-
-] (/home/piotr/Dokumenty/studia/praca/podsumowanie.tex
+ [20] (/home/piotr/Dokumenty/studia/praca/podsumowanie.tex
 Rozdzia\l  5.
-) [19
+) [21
+
 
 ]
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
 Package pdftex.def Info: wppt-logo.png  used on input line 603.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
- [20
+ [22
 
-] (/home/piotr/Dokumenty/studia/praca/praca.bbl) [21
+] (/home/piotr/Dokumenty/studia/praca/praca.bbl) [23
 
 ]
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
 Package pdftex.def Info: wppt-logo.png  used on input line 616.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
- [22
+ [24
 
 ] (/home/piotr/Dokumenty/studia/praca/dodatek1.tex
 Dodatek A.
-) [23
+) [25
 
 ]
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
 Package pdftex.def Info: wppt-logo.png  used on input line 626.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
- [24
+ [26
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 628.
@@ -1454,22 +1470,22 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 628.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 628.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 628.
 Package rerunfilecheck Info: File `praca.out' has not changed.
-(rerunfilecheck)             Checksum: C7BE1A321DFF6DC36F9C73F93E40C87D;1752.
+(rerunfilecheck)             Checksum: 080F9D3E30E9BDECEE54A61BD3B3D873;1670.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 628.
  ) 
 Here is how much of TeX's memory you used:
- 14772 strings out of 492982
- 216962 string characters out of 6134895
- 351457 words of memory out of 5000000
- 17847 multiletter control sequences out of 15000+600000
+ 14790 strings out of 492982
+ 217174 string characters out of 6134895
+ 395816 words of memory out of 5000000
+ 17856 multiletter control sequences out of 15000+600000
  72304 words of font info for 65 fonts, out of 8000000 for 9000
  1180 hyphenation exceptions out of 8191
- 41i,19n,43p,429b,557s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plmi.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plsc.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plms.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plrm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plme.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rmsc.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx7.pfb></usr/share/texmf/fonts/type1/public/lm/lmcsc10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy8.pfb>
-Output written on /home/piotr/Dokumenty/studia/praca/praca.pdf (28 pages, 431078 bytes).
+ 41i,19n,44p,429b,557s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plmi.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plsc.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plms.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plrm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plme.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rmsc.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx7.pfb></usr/share/texmf/fonts/type1/public/lm/lmcsc10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy8.pfb>
+Output written on /home/piotr/Dokumenty/studia/praca/praca.pdf (30 pages, 457125 bytes).
 PDF statistics:
- 509 PDF objects out of 1000 (max. 8388607)
- 439 compressed objects within 5 object streams
- 147 named destinations out of 1000 (max. 500000)
- 244 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 541 PDF objects out of 1000 (max. 8388607)
+ 467 compressed objects within 5 object streams
+ 156 named destinations out of 1000 (max. 500000)
+ 236 words of extra memory for PDF output out of 10000 (max. 10000000)
 

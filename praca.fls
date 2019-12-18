@@ -313,6 +313,10 @@ INPUT /home/piotr/Dokumenty/studia/praca/rozdzial3.tex
 INPUT /home/piotr/Dokumenty/studia/praca/rozdzial3.tex
 INPUT /home/piotr/Dokumenty/studia/praca/wppt-logo.png
 INPUT /home/piotr/Dokumenty/studia/praca/wppt-logo.png
+INPUT /home/piotr/Dokumenty/studia/praca/pwr-logo.png
+INPUT /home/piotr/Dokumenty/studia/praca/pwr-logo.png
+INPUT /home/piotr/Dokumenty/studia/praca/wppt-logo.png
+INPUT /home/piotr/Dokumenty/studia/praca/wppt-logo.png
 INPUT /home/piotr/Dokumenty/studia/praca/podsumowanie.tex
 INPUT /home/piotr/Dokumenty/studia/praca/podsumowanie.tex
 INPUT /home/piotr/Dokumenty/studia/praca/wppt-logo.png
@@ -345,6 +349,8 @@ INPUT /usr/share/texmf/fonts/type1/public/lm/lmr12.pfb
 INPUT /usr/share/texmf/fonts/type1/public/lm/lmr8.pfb
 INPUT /usr/share/texmf/fonts/type1/public/lm/lmr9.pfb
 INPUT /usr/share/texmf/fonts/type1/public/lm/lmri10.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/pl/plex10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi5.pfb

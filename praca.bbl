@@ -1,4 +1,22 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{NEOS-1}
+J.~Czyzyk, M.~P. Mesnier, J.~J. Mor{\'{e}}.
+\newblock The neos server.
+\newblock {\em IEEE Journal on Computational Science and Engineering}, 5(3):68
+  -- 75, 1998.
+
+\bibitem{NEOS-2}
+E.~D. Dolan.
+\newblock The neos server 4.0 administrative guide.
+\newblock Technical Memorandum ANL/MCS-TM-250, Mathematics and Computer Science
+  Division, Argonne National Laboratory, 2001.
+
+\bibitem{NEOS-3}
+W.~Gropp,  J.~J. Mor{\'{e}}.
+\newblock Optimization environments and the neos server.
+\newblock M.~D. Buhman,  A.~Iserles, redaktorzy, {\em Approximation Theory and
+  Optimization}, strony 167 -- 182. Cambridge University Press, 1997.
 
 \bibitem{Guisewite1990}
 G.~M. Guisewite,  P.~M. Pardalos.
@@ -49,5 +67,12 @@ D.~Whitley, S.~Rana, R.~Heckendorn.
 \newblock The island model genetic algorithm: On separability, population size
   and convergence.
 \newblock {\em Journal of Computing and Information Technology}, 7, 12 1998.
+
+\bibitem{GEN-TEST-DATA}
+K.~Yousefi, A.~Afshari, M.~Hajiaghaei-Keshteli.
+\newblock Solving the fixed charge transportation problem by new heuristic
+  approach.
+\newblock {\em Journal of Optimization in Industrial Engineering}, 12:41--52,
+  04 2019.
 
 \end{thebibliography}

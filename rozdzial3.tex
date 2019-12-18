@@ -1,9 +1,202 @@
 \chapter{Wyniki eksperymentalne}
 \thispagestyle{chapterBeginStyle}
 
-\section{Dobór parametrów dla algorytmu}
+W tym rozdziale pokazano wyniki testów dla prezentowanego programu oraz porównano go z innymi istniejącymi rozwiązaniami. 
+Wszystkie eksperymenty zostały wykonane na serwerze Politechniki Wrocławskiej - \textit{OTRYT}. Serwer jest wyposażony w 4 procesory 
+\textit{Intel(R) Xeon(R) CPU E7- 4850  @ 2.00GHz} posiadające po 10 rdzeni każdy oraz w 256 GB pamięci RAM. Serwer działa pod systemem 
+\textit{Linux Debian} w wersji \textit{9.11}.
+
+Dane testowe pochodzą częściowo z książki dr. Michalewicza(zadania $7 \times 7$ oraz $10 \times 10$)\cite{ALG-GEN-BOOK}, a częściowo 
+zostały wygenerowane. Sposób generowania danych zaczerpnięto z publikacji \cite{GEN-TEST-DATA}. Dla wektorów popytu i podaży ustalano 
+całkowity popyt/podaż, a następnie wypełniano je losowymi liczbami, zachowując przy tym warunek całkowitego popytu i podaży. 
+Macierz kosztu generowano w taki sposób, że na początku ustalano dolne i górne ograniczenie wartości pojedynczego przewozu, a następnie 
+macierz wypełniano losowymi liczbami z ustalonego zakresu. W przypadku jednej z funkcji kosztu, potrzebna była również macierz, która 
+określa koszt stały, jaki ponosimy niezależnie od ilości towaru przewożonego między punktami. Macierz ta jest generowana w taki sam 
+sposób, jak macierz kosztu. Charakterystyka poszczególnych zadań znajduje się w tabeli \ref{specyfika-zadan}.
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{c|c|c|c|c}
+            Rozmiar & Popyt & Podaż & Zakres dla macierzy kosztu & Zakres dla macierzy kosztów stałych \\ 
+            \hline
+            $15 \times 15$ & $15000$ & $15000$ & $[3, 8]$ & $[50, 200]$ \\
+            $30 \times 30$ & $3000$ & $3000$ & $[5, 15]$ & $[100, 400]$ \\
+            $20 \times 70$ & $30000$ & $30000$ & $[3, 8]$ & $[200, 800]$ \\
+            $30 \times 60$ & $25000$ & $25000$ & $[5, 15]$ & $[50, 400]$ \\
+            $100 \times 100$ & $45000$ & $45000$ & $[3, 8]$ & $[100, 400]$ \\
+        \end{tabular}
+    \end{center}
+    \caption{Charakterystyka wygenerowanych zadań.}
+    \label{specyfika-zadan}
+\end{table}
+
+Funkcje kosztu użyte w testach w większości pochodzą z książki \cite{ALG-GEN-BOOK}. Przedstawiono je w tabeli \ref{funkcje-kosztu}. Dodatkowo 
+użyto funkcji kosztu, która w przypadku przewozu towaru dodaje do kosztów liniowych koszt stały(Funkcja G w tabeli \ref{funkcje-kosztu}).
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{ccl}
+            Funkcja liniowa: & $f(x_{i,j})=$ & $c_{i,j} x_{i,j}$ \\
+            \hline
+            Funkcja A: & $f(x_{i,j})=$ & $c_{i,j}(\arctan(1000 (x {i,j} - S))/\pi + 0.5 +$ \\
+            & & $\arctan(1000 (x {i,j} - 2 S))/\pi + 0.5 +$ \\
+            & & $\arctan(1000 (x {i,j} - 3 S))/\pi + 0.5 +$ \\
+            & & $\arctan(1000 (x {i,j} - 4 S))/\pi + 0.5 +$ \\
+            & & $\arctan(1000 (x {i,j} - 5 S))/\pi + 0.5)$ \\ 
+            \hline
+            Funkcja B: & $f(x_{i,j})=$ & $c_{i,j}[(x_{i,j}/5) (\arctan(1000 x_{i,j})/\pi + 0.5) +$ \\
+            & & $(1 - x_{i,j}/5) (\arctan(1000(x_{i,j} - 5))/\pi + 0.5) +$ \\
+            & & $(x_{i,j}/5 - 2) (\arctan(1000(x_{i,j} - 10))/\pi + 0.5)]$ \\
+            \hline
+            Funkcja C: & $f(x_{i,j})=$ & $c_{i,j} x_{i,j}^2$ \\
+            \hline
+            Funkcja D: & $f(x_{i,j})=$ & $c_{i,j} \sqrt{x_{i,j}}$ \\
+            \hline
+            Funkcja E: & $f(x_{i,j})=$ & $c_{i,j}[(1 + (x_{i,j} - 10)^2)^{-1} +$ \\
+            & & $(1 + (x_{i,j} - 11.25)^2)^{-1} +$ \\
+            & & $(1 + (x_{i,j} - 8.75)^2)^{-1}]$ \\
+            \hline
+            Funkcja F: & $f(x_{i,j})=$ & $c_{i,j} x_{i,j} (\sin(5 \pi x_{i,j}/20) + 1)$ \\
+            \hline
+            Funkcja G: & $f(x_{i,j})=$ & $c_{i,j} x_{i,j} + c'_{i,j} y_{i,j}$ \\
+        \end{tabular}
+    \end{center}
+    \caption{Funkcje kosztu}
+    \label{funkcje-kosztu}
+\end{table}
+
+W eksperymentach porównano przedstawiany algorytm z wybranymi solverami wspieranymi przez system \textbf{GAMS}. Dostęp do solverów był możliwy poprzez serwis 
+\textbf{NEOS Server} \cite{NEOS-1,NEOS-2,NEOS-3}, który pozwala na używanie kilkudziesięciu różnych solverów do optymalizacji problemów różnej kategorii. Do wybranych 
+solverów należą:
+
+\begin{itemize}
+    \item LINDOGlobal
+    \item MINOS
+    \item SNOPT
+    \item CONOPT
+    \item scip
+\end{itemize}
+
+Z uwagi na to że serwis NEOS narzuca limit czasowy na wykonywanie pojedynczego zadania, przedstawione rozwiązania są najlepszym wynikiem znalezionym 
+przez solver w czasie nie większym niż 8 godzin.
+
+Dodatkowo prezentowany algorytm jest porównywany z systemem \textbf{GENETIC2}\cite{ALG-GEN-BOOK} który równierz implementuje algorytm ewolucyjny 
+dostosowany do zadania transportowego.
+
+Aby dostosować parametry dla testowanego systemu, na początku przeprowadzono serię testów dla różnych zadań i na podstawie tych wyników ustawiono 
+odpowiednio parametry programu:
+
+\begin{itemize}
+    \item Rozmiar populacji: $100$(model klasyczny), $400$(model wyspowy)
+    \item Prawdopodobieństwo krzyżowania: $0.5$
+    \item Prawdopodobieństwo mutacji: $0.1$
+    \item Wielkość mutacji: $0.05$
+    \item Ułamek najlepszych osobników przepisywanych do nowej generacji: $0.1$
+    \item Ilość niezależnych generacji dla populacji częściowej(model wyspowy): $50$
+\end{itemize}
+
+Maksymalną ilość iteracji algorytmu ustalono na $20000$.
 
 \section{Model klasyczny algorytmu ewolucyjnego}
+
+Wyniki przeprowazdone dla modelu klasycznego znajdują się w tabelach \ref{wyniki-0} oraz \ref{wyniki-1}. W przypadku jeśli solver zwrócił jedynie 
+optimum lokalne przy wyniku znajduje się litera \textit{L}, w przypadku jeśli znaleziono optimum globalne, wynik jest zaznaczony literą \textit{G}. 
+W kolumnie \textit{Gap} znaje się błąd względny między wartością otrzymaną a optimum globalnym lub dolnym ograniczeniem w przypadku, jeśli żaden 
+solver nie znalazł globalnego optimum w maksymalnym czasie. Wartość ta jest obliczana jako $Gap = \frac{|OPT - \widetilde{OPT}|}{|OPT|} 100 \%$, gdzie 
+$OPT$ jest optimum globalnym, lub dolnym ograniczeniem, a $\widetilde{OPT}$ znalezionym rozwiązaniem.
+
+\begin{table}[H]
+    \begin{center}
+        \resizebox{\textwidth}{!}{%
+        \begin{tabular}{c|c|c|c|c}
+            Rozmiar Zadania & Funkcja celu & Model klasyczny & GENOCOP & LindoGlobal \\
+             & & \begin{tabular}{@{}ccc@{}}min & avg & max\end{tabular} &  & \\ 
+            \hline
+            \hline
+            $7 \times 7$ & Liniowa & \begin{tabular}{@{}ccc@{}}$1132.03$ & $1203.98$ & $1265.20$\end{tabular} & $---$ & $1132.0$ \\
+            $7 \times 7$ & A & \begin{tabular}{@{}ccc@{}}$0.0$ & $13.62$ & $67.0$\end{tabular} & $24.15$ & $4.26$ \\
+            $7 \times 7$ & B & \begin{tabular}{@{}ccc@{}}$180.65$ & $193.31$ & $224.07$\end{tabular} & $205.60$ & $183.59$ \\
+            $7 \times 7$ & C & \begin{tabular}{@{}ccc@{}}$2535.29$ & $2535.29$ & $2535.29$\end{tabular} & $2571.04$ & $2535.29$ \\
+            $7 \times 7$ & D & \begin{tabular}{@{}ccc@{}}$480.16$ & $565.57$ & $1046.45$\end{tabular} & $480.16$ & $480.16$ \\
+            $7 \times 7$ & E & \begin{tabular}{@{}ccc@{}}$204.71$ & $206.64$ & $221.52$\end{tabular} & $204.82$ & $204.84$ \\
+            $7 \times 7$ & F & \begin{tabular}{@{}ccc@{}}$67.31$ & $196.48$ & $351.38$\end{tabular} & $119.61$ & $70.25$ \\
+            $7 \times 7$ & G & \begin{tabular}{@{}ccc@{}}$1813.99$ & $1856.83$ & $1916.12$\end{tabular} & $---$ & $1796.0$ \\
+            \hline
+            $10 \times 10$ & Liniowa & \begin{tabular}{@{}ccc@{}}$1179.0$ & $1188.96$ & $1213.24$\end{tabular} & $---$ & $1179.0$ \\
+            $10 \times 10$ & A & \begin{tabular}{@{}ccc@{}}$192.0$ & $200.2$ & $212.0$\end{tabular} & $---$ & $174.07$ \\
+            $10 \times 10$ & B & \begin{tabular}{@{}ccc@{}}$147.15$ & $154.19$ & $166.82$\end{tabular} & $---$ & $146.99$ \\
+            $10 \times 10$ & C & \begin{tabular}{@{}ccc@{}}$4401.65$ & $4401.65$ & $4401.65$\end{tabular} & $---$ & $4401.65$ \\
+            $10 \times 10$ & D & \begin{tabular}{@{}ccc@{}}$388.41$ & $409.36$ & $459.0$\end{tabular} & $---$ & $388.91$ \\
+            $10 \times 10$ & E & \begin{tabular}{@{}ccc@{}}$71.66$ & $72.99$ & $75.48$\end{tabular} & $---$ & $71.66$ \\
+            $10 \times 10$ & F & \begin{tabular}{@{}ccc@{}}$118.57$ & $215.90$ & $300.21$\end{tabular} & $---$ & $153.49$ \\
+            $10 \times 10$ & G & \begin{tabular}{@{}ccc@{}}$2010.50$ & $2075.15$ & $2194.69$\end{tabular} & $---$ & $1987.14$ \\
+        \end{tabular}
+        }
+    \end{center}
+    \caption{Wyniki dla zadań rozmiaru $7 \times 7$ i $10 \times 10$.}
+    \label{wyniki-0}
+\end{table}
+
+\begin{table}[h!]
+    \begin{center}
+        \resizebox{\textwidth}{!}{%
+        \begin{tabular}{c|c|c|c|c}
+            Rozmiar Zadania & Funkcja celu & Model klasyczny & MINOS & LindoGlobal \\
+             & & \begin{tabular}{@{}ccc@{}}min & avg & max\end{tabular} &  & \\ 
+            \hline
+            \hline
+            $15 \times 15$ & Liniowa & \begin{tabular}{@{}ccc@{}}$54533.80$ & $55062.96$ & $55419.21$\end{tabular} & $53862.32$ & $53862.32$ \\
+            $15 \times 15$ & A & \begin{tabular}{@{}ccc@{}}$621.52$ & $627.98$ & $679.35$\end{tabular} & $743.05$ & $470.500$ \\
+            $15 \times 15$ & B & \begin{tabular}{@{}ccc@{}}$10607.71$ & $10657.78$ & $10933.70$\end{tabular} & $10581.32$ & $10454.801$ \\
+            $15 \times 15$ & C & \begin{tabular}{@{}ccc@{}}$5225274.22$ & $5225274.24$ & $5225274.30$\end{tabular} & $5225274.19$ & $5225274.19$ \\
+            $15 \times 15$ & D & \begin{tabular}{@{}ccc@{}}$2187.99$ & $2211.11$ & $2273.07$\end{tabular} & $3229.68$ & $2314.41$ \\
+            $15 \times 15$ & E & \begin{tabular}{@{}ccc@{}}$1.20$ & $1.20$ & $1.20$\end{tabular} & $33.13$ & $6.44$ \\
+            $15 \times 15$ & F & \begin{tabular}{@{}ccc@{}}$179.61$ & $180.16$ & $185.35$\end{tabular} & $11852.89$ & $59.23$ \\
+            $15 \times 15$ & G & \begin{tabular}{@{}ccc@{}}$---$ & $---$ & $---$\end{tabular} & $---$ & $---$ \\
+            \hline
+            $30 \times 30$ & Liniowa & \begin{tabular}{@{}ccc@{}}$17365.25$ & $17479.06$ & $17795.71$\end{tabular} & $16586.20$ & $16586.20$ \\
+            $30 \times 30$ & A & \begin{tabular}{@{}ccc@{}}$1763.86$ & $1795.62$ & $1846.44$\end{tabular} & $2260.7914$ & $2040.23$ \\
+            $30 \times 30$ & B & \begin{tabular}{@{}ccc@{}}$2309.83$ & $2323.66$ & $2370.13$\end{tabular} & $2699.25$ & $2704.73$ \\
+            $30 \times 30$ & C & \begin{tabular}{@{}ccc@{}}$104650.12$ & $104650.40$ & $104651.73$\end{tabular} & $104650.12$ & $104650.12$ \\
+            $30 \times 30$ & D & \begin{tabular}{@{}ccc@{}}$2872.53$ & $2986.45$ & $3084.81$\end{tabular} & $3805.08$ & $2770.29$ \\
+            $30 \times 30$ & E & \begin{tabular}{@{}ccc@{}}$249.70$ & $249.84$ & $256.32$\end{tabular} & $262.08$ & $317.94$ \\
+            $30 \times 30$ & F & \begin{tabular}{@{}ccc@{}}$737.98$ & $823.82$ & $1063.14$\end{tabular} & $4630.83$ & $384.87$ \\
+            $30 \times 30$ & G & \begin{tabular}{@{}ccc@{}}$---$ & $---$ & $---$\end{tabular} & $---$ & $---$ \\
+            \hline
+            $20 \times 70$ & Liniowa & \begin{tabular}{@{}ccc@{}}$102681.39$ & $102980.75$ & $103318.46$\end{tabular} & $98476.50$ & $98476.50$ \\
+            $20 \times 70$ & A & \begin{tabular}{@{}ccc@{}}$1926.42$ & $1997.94$ & $2099.43$\end{tabular} & $2437.58$ & $1473.70$ \\
+            $20 \times 70$ & B & \begin{tabular}{@{}ccc@{}}$19294.37$ & $19777.36$ & $20164.15$\end{tabular} & $19164.16$ & $19498.77$ \\
+            $20 \times 70$ & C & \begin{tabular}{@{}ccc@{}}$3356726.47$ & $3356779.29$ & $3356994.88$\end{tabular} & $3356719.33$ & $3356719.33$ \\
+            $20 \times 70$ & D & \begin{tabular}{@{}ccc@{}}$6703.65$ & $6747.31$ & $6823.62$\end{tabular} & $8947.35$ & $6245.85$ \\
+            $20 \times 70$ & E & \begin{tabular}{@{}ccc@{}}$111.69$ & $113.03$ & $114.37$\end{tabular} & $221.51$ & $139.55$ \\
+            $20 \times 70$ & F & \begin{tabular}{@{}ccc@{}}$1594.30$ & $1644.51$ & $1697.70$\end{tabular} & $40503.51$ & $575.38$ \\
+            $20 \times 70$ & G & \begin{tabular}{@{}ccc@{}}$---$ & $---$ & $---$\end{tabular} & $---$ & $---$ \\
+            \hline
+            $30 \times 60$ & Liniowa & \begin{tabular}{@{}ccc@{}}$145468.29$ & $146323.93$ & $146948.53$\end{tabular} & $135028.71$ & $135028.71$ \\
+            $30 \times 60$ & A & \begin{tabular}{@{}ccc@{}}$3532.37$ & $3544.40$ & $3631.18$\end{tabular} & $4310.14$ & $2336.59$ \\
+            $30 \times 60$ & B & \begin{tabular}{@{}ccc@{}}$26093.88$ & $26962.21$ & $27024.11$\end{tabular} & $26082.37$ & $28656.34$ \\
+            $30 \times 60$ & C & \begin{tabular}{@{}ccc@{}}$3283244.35$ & $3283249.33$ & $3283363.39$\end{tabular} & $3282784.56$ & $3282784.56$ \\
+            $30 \times 60$ & D & \begin{tabular}{@{}ccc@{}}$11090.32$ & $11172.53$ & $11275.56$\end{tabular} & $13799.71$ & $Err$ \\
+            $30 \times 60$ & E & \begin{tabular}{@{}ccc@{}}$351.38$ & $351.57$ & $351.74$\end{tabular} & $526.34$ & $438.39$ \\
+            $30 \times 60$ & F & \begin{tabular}{@{}ccc@{}}$2981.06$ & $3498.70$ & $4404.37$\end{tabular} & $73724.43$ & $2390.12$ \\
+            $30 \times 60$ & G & \begin{tabular}{@{}ccc@{}}$---$ & $---$ & $---$\end{tabular} & $---$ & $---$ \\
+            \hline
+            $100 \times 100$ & Liniowa & \begin{tabular}{@{}ccc@{}}$---$ & $---$ & $---$\end{tabular} & $138605.09$ & $1$ \\
+            $100 \times 100$ & A & \begin{tabular}{@{}ccc@{}}$4162.49$ & $4176.67$ & $4180.39$\end{tabular} & $Err$ & $1$ \\
+            $100 \times 100$ & B & \begin{tabular}{@{}ccc@{}}$27175.45$ & $27320.57$ & $3$\end{tabular} & $Err$ & $1$ \\
+            $100 \times 100$ & C & \begin{tabular}{@{}ccc@{}}$1079937.33$ & $1083882.67$ & $3$\end{tabular} & $Err$ & $1$ \\
+            $100 \times 100$ & D & \begin{tabular}{@{}ccc@{}}$12308.57$ & $12414.59$ & $3$\end{tabular} & $Err$ & $1$ \\
+            $100 \times 100$ & E & \begin{tabular}{@{}ccc@{}}$1531.03$ & $1531.32$ & $1532.51$\end{tabular} & $Err$ & $1$ \\
+            $100 \times 100$ & F & \begin{tabular}{@{}ccc@{}}$---$ & $---$ & $---$\end{tabular} & $Err$ & $1$ \\
+            $100 \times 100$ & G & \begin{tabular}{@{}ccc@{}}$---$ & $---$ & $---$\end{tabular} & $Err$ & $1$ \\
+        \end{tabular}
+        }
+    \end{center}
+    \caption{Wyniki.}
+    \label{wyniki-1}
+\end{table}
+
+
 
 \section{Model wyspowy algorytmu ewolucyjnego}
 

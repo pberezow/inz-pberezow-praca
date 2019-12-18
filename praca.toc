@@ -19,10 +19,9 @@
 \contentsline {section}{\numberline {3.9}Parametry algorytmu}{14}{section.3.9}
 \contentsline {section}{\numberline {3.10}U\IeC {\.z}yte technologie}{15}{section.3.10}
 \contentsline {chapter}{\numberline {4}Wyniki eksperymentalne}{17}{chapter.4}
-\contentsline {section}{\numberline {4.1}Dob\IeC {\'o}r parametr\IeC {\'o}w dla algorytmu}{17}{section.4.1}
-\contentsline {section}{\numberline {4.2}Model klasyczny algorytmu ewolucyjnego}{17}{section.4.2}
-\contentsline {section}{\numberline {4.3}Model wyspowy algorytmu ewolucyjnego}{17}{section.4.3}
-\contentsline {section}{\numberline {4.4}Por\IeC {\'o}wnanie modelu klasycznego i wyspowego}{17}{section.4.4}
-\contentsline {chapter}{\numberline {5}Podsumowanie}{19}{chapter.5}
-\contentsline {chapter}{Bibliografia}{21}{chapter*.6}
-\contentsline {chapter}{\numberline {A}Zawarto\IeC {\'s}\IeC {\'c} p\IeC {\l }yty CD}{23}{appendix.A}
+\contentsline {section}{\numberline {4.1}Model klasyczny algorytmu ewolucyjnego}{19}{section.4.1}
+\contentsline {section}{\numberline {4.2}Model wyspowy algorytmu ewolucyjnego}{19}{section.4.2}
+\contentsline {section}{\numberline {4.3}Por\IeC {\'o}wnanie modelu klasycznego i wyspowego}{19}{section.4.3}
+\contentsline {chapter}{\numberline {5}Podsumowanie}{21}{chapter.5}
+\contentsline {chapter}{Bibliografia}{23}{chapter*.10}
+\contentsline {chapter}{\numberline {A}Zawarto\IeC {\'s}\IeC {\'c} p\IeC {\l }yty CD}{25}{appendix.A}
