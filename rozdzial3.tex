@@ -22,7 +22,7 @@ sposób, jak macierz kosztu. Charakterystyka poszczególnych zadań znajduje si�
             $15 \times 15$ & $15000$ & $15000$ & $[3, 8]$ & $[50, 200]$ \\
             $30 \times 30$ & $3000$ & $3000$ & $[5, 15]$ & $[100, 400]$ \\
             $20 \times 70$ & $30000$ & $30000$ & $[3, 8]$ & $[200, 800]$ \\
-            $30 \times 60$ & $25000$ & $25000$ & $[5, 15]$ & $[50, 400]$ \\
+            $30 \times 60$ & $25000$ & $25000$ & $[5, 15]$ & $[50, 100]$ \\
             $100 \times 100$ & $45000$ & $45000$ & $[3, 8]$ & $[100, 400]$ \\
         \end{tabular}
     \end{center}
@@ -38,15 +38,15 @@ użyto funkcji kosztu, która w przypadku przewozu towaru dodaje do kosztów lin
         \begin{tabular}{ccl}
             Funkcja liniowa: & $f(x_{i,j})=$ & $c_{i,j} x_{i,j}$ \\
             \hline
-            Funkcja A: & $f(x_{i,j})=$ & $c_{i,j}(\arctan(1000 (x {i,j} - S))/\pi + 0.5 +$ \\
-            & & $\arctan(1000 (x {i,j} - 2 S))/\pi + 0.5 +$ \\
-            & & $\arctan(1000 (x {i,j} - 3 S))/\pi + 0.5 +$ \\
-            & & $\arctan(1000 (x {i,j} - 4 S))/\pi + 0.5 +$ \\
-            & & $\arctan(1000 (x {i,j} - 5 S))/\pi + 0.5)$ \\ 
+            Funkcja A: & $f(x_{i,j})=$ & $c_{i,j}(\text{arctg}(1000 (x {i,j} - S))/\pi + 0.5 +$ \\
+            & & $\text{arctg}(1000 (x {i,j} - 2 S))/\pi + 0.5 +$ \\
+            & & $\text{arctg}(1000 (x {i,j} - 3 S))/\pi + 0.5 +$ \\
+            & & $\text{arctg}(1000 (x {i,j} - 4 S))/\pi + 0.5 +$ \\
+            & & $\text{arctg}(1000 (x {i,j} - 5 S))/\pi + 0.5)$ \\ 
             \hline
-            Funkcja B: & $f(x_{i,j})=$ & $c_{i,j}[(x_{i,j}/5) (\arctan(1000 x_{i,j})/\pi + 0.5) +$ \\
-            & & $(1 - x_{i,j}/5) (\arctan(1000(x_{i,j} - 5))/\pi + 0.5) +$ \\
-            & & $(x_{i,j}/5 - 2) (\arctan(1000(x_{i,j} - 10))/\pi + 0.5)]$ \\
+            Funkcja B: & $f(x_{i,j})=$ & $c_{i,j}[(x_{i,j}/5) (\text{arctg}(1000 x_{i,j})/\pi + 0.5) +$ \\
+            & & $(1 - x_{i,j}/5) (\text{arctg}(1000(x_{i,j} - 5))/\pi + 0.5) +$ \\
+            & & $(x_{i,j}/5 - 2) (\text{arctg}(1000(x_{i,j} - 10))/\pi + 0.5)]$ \\
             \hline
             Funkcja C: & $f(x_{i,j})=$ & $c_{i,j} x_{i,j}^2$ \\
             \hline
@@ -73,7 +73,6 @@ solverów należą:
     \item LINDOGlobal
     \item MINOS
     \item SNOPT
-    \item CONOPT
     \item scip
 \end{itemize}
 
@@ -82,6 +81,10 @@ przez solver w czasie nie większym niż 8 godzin.
 
 Dodatkowo prezentowany algorytm jest porównywany z systemem \textbf{GENETIC2}\cite{ALG-GEN-BOOK} który równierz implementuje algorytm ewolucyjny 
 dostosowany do zadania transportowego.
+
+W następnych sekcjach zaprezentowano wyniki dla dwóch przedstawionych w poprzednim rozdziale modeli równoległości. Na początku zaprezentowano wyniki 
+dla modelu klasycznego, który operuje na jednej populacji. Następnie z wynikami solverów zestawiono wyniki modelu wyspowego, w którym 
+populacja jest dzielona na populacje częściowe. Na końcu porównano ze sobą oba modele.
 
 Aby dostosować parametry dla testowanego systemu, na początku przeprowadzono serię testów dla różnych zadań i na podstawie tych wyników ustawiono 
 odpowiednio parametry programu:
@@ -95,41 +98,40 @@ odpowiednio parametry programu:
     \item Ilość niezależnych generacji dla populacji częściowej(model wyspowy): $50$
 \end{itemize}
 
-Maksymalną ilość iteracji algorytmu ustalono na $20000$.
+Maksymalną ilość iteracji algorytmu ustalono na $30000$.
 
 \section{Model klasyczny algorytmu ewolucyjnego}
 
-Wyniki przeprowazdone dla modelu klasycznego znajdują się w tabelach \ref{wyniki-0} oraz \ref{wyniki-1}. W przypadku jeśli solver zwrócił jedynie 
-optimum lokalne przy wyniku znajduje się litera \textit{L}, w przypadku jeśli znaleziono optimum globalne, wynik jest zaznaczony literą \textit{G}. 
-W kolumnie \textit{Gap} znaje się błąd względny między wartością otrzymaną a optimum globalnym lub dolnym ograniczeniem w przypadku, jeśli żaden 
-solver nie znalazł globalnego optimum w maksymalnym czasie. Wartość ta jest obliczana jako $Gap = \frac{|OPT - \widetilde{OPT}|}{|OPT|} 100 \%$, gdzie 
-$OPT$ jest optimum globalnym, lub dolnym ograniczeniem, a $\widetilde{OPT}$ znalezionym rozwiązaniem.
+Wyniki przeprowazdone dla modelu klasycznego znajdują się w tabelach \ref{wyniki-0} oraz \ref{wyniki-1}. Tabela \ref{wyniki-0} zawiera porównanie 
+modelu klasycznego z systemem GENOCOP(wyniki pochodzą z książki\cite{ALG-GEN-BOOK}), który pozwala optymalizować wszelkiego rodzaju zadania z ograniczeniami liniowymi i nieliniową funkcją celu. 
+Widzimy tutaj że nasz algorytm wypada lepiej niż system GENOCOP w większości testów. Niestety nie udało się uzyskać wyników GENOCOPA dla zadania rozmiaru 
+$10 \times 10$.
 
 \begin{table}[H]
     \begin{center}
         \resizebox{\textwidth}{!}{%
-        \begin{tabular}{c|c|c|c|c}
-            Rozmiar Zadania & Funkcja celu & Model klasyczny & GENOCOP & LindoGlobal \\
-             & & \begin{tabular}{@{}ccc@{}}min & avg & max\end{tabular} &  & \\ 
+        \begin{tabular}{c|c|c|c|c|c|c}
+            Rozmiar & Funkcja & \multicolumn{3}{c|}{Model klasyczny} & GENOCOP & LindoGlobal \\ \cline{3-5}
+            zadania & celu & min & śr  & max &  & \\ 
             \hline
             \hline
-            $7 \times 7$ & Liniowa & \begin{tabular}{@{}ccc@{}}$1132.03$ & $1203.98$ & $1265.20$\end{tabular} & $---$ & $1132.0$ \\
-            $7 \times 7$ & A & \begin{tabular}{@{}ccc@{}}$0.0$ & $13.62$ & $67.0$\end{tabular} & $24.15$ & $4.26$ \\
-            $7 \times 7$ & B & \begin{tabular}{@{}ccc@{}}$180.65$ & $193.31$ & $224.07$\end{tabular} & $205.60$ & $183.59$ \\
-            $7 \times 7$ & C & \begin{tabular}{@{}ccc@{}}$2535.29$ & $2535.29$ & $2535.29$\end{tabular} & $2571.04$ & $2535.29$ \\
-            $7 \times 7$ & D & \begin{tabular}{@{}ccc@{}}$480.16$ & $565.57$ & $1046.45$\end{tabular} & $480.16$ & $480.16$ \\
-            $7 \times 7$ & E & \begin{tabular}{@{}ccc@{}}$204.71$ & $206.64$ & $221.52$\end{tabular} & $204.82$ & $204.84$ \\
-            $7 \times 7$ & F & \begin{tabular}{@{}ccc@{}}$67.31$ & $196.48$ & $351.38$\end{tabular} & $119.61$ & $70.25$ \\
-            $7 \times 7$ & G & \begin{tabular}{@{}ccc@{}}$1813.99$ & $1856.83$ & $1916.12$\end{tabular} & $---$ & $1796.0$ \\
+            $7 \times 7$ & Liniowa & $1132.03$ & $1203.98$ & $1265.20$ & $---$ & $1132.0$ \\
+            $7 \times 7$ & A & $0.0$ & $13.62$ & $67.0$ & $24.15$ & $4.26$ \\
+            $7 \times 7$ & B & $180.65$ & $193.31$ & $224.07$ & $205.60$ & $183.59$ \\
+            $7 \times 7$ & C & $2535.29$ & $2535.29$ & $2535.29$ & $2571.04$ & $2535.29$ \\
+            $7 \times 7$ & D & $480.16$ & $565.57$ & $1046.45$ & $480.16$ & $480.16$ \\
+            $7 \times 7$ & E & $204.71$ & $206.64$ & $221.52$ & $204.82$ & $204.84$ \\
+            $7 \times 7$ & F & $67.31$ & $196.48$ & $351.38$ & $119.61$ & $70.25$ \\
+            $7 \times 7$ & G & $1813.99$ & $1856.83$ & $1916.12$ & $---$ & $1796.0$ \\
             \hline
-            $10 \times 10$ & Liniowa & \begin{tabular}{@{}ccc@{}}$1179.0$ & $1188.96$ & $1213.24$\end{tabular} & $---$ & $1179.0$ \\
-            $10 \times 10$ & A & \begin{tabular}{@{}ccc@{}}$192.0$ & $200.2$ & $212.0$\end{tabular} & $---$ & $174.07$ \\
-            $10 \times 10$ & B & \begin{tabular}{@{}ccc@{}}$147.15$ & $154.19$ & $166.82$\end{tabular} & $---$ & $146.99$ \\
-            $10 \times 10$ & C & \begin{tabular}{@{}ccc@{}}$4401.65$ & $4401.65$ & $4401.65$\end{tabular} & $---$ & $4401.65$ \\
-            $10 \times 10$ & D & \begin{tabular}{@{}ccc@{}}$388.41$ & $409.36$ & $459.0$\end{tabular} & $---$ & $388.91$ \\
-            $10 \times 10$ & E & \begin{tabular}{@{}ccc@{}}$71.66$ & $72.99$ & $75.48$\end{tabular} & $---$ & $71.66$ \\
-            $10 \times 10$ & F & \begin{tabular}{@{}ccc@{}}$118.57$ & $215.90$ & $300.21$\end{tabular} & $---$ & $153.49$ \\
-            $10 \times 10$ & G & \begin{tabular}{@{}ccc@{}}$2010.50$ & $2075.15$ & $2194.69$\end{tabular} & $---$ & $1987.14$ \\
+            $10 \times 10$ & Liniowa & $1179.0$ & $1188.96$ & $1213.24$ & $---$ & $1179.0$ \\
+            $10 \times 10$ & A & $192.0$ & $200.2$ & $212.0$ & $---$ & $174.07$ \\
+            $10 \times 10$ & B & $147.15$ & $154.19$ & $166.82$ & $---$ & $146.99$ \\
+            $10 \times 10$ & C & $4401.65$ & $4401.65$ & $4401.65$ & $---$ & $4401.65$ \\
+            $10 \times 10$ & D & $388.41$ & $409.36$ & $459.0$ & $---$ & $388.91$ \\
+            $10 \times 10$ & E & $71.66$ & $72.99$ & $75.48$ & $---$ & $71.66$ \\
+            $10 \times 10$ & F & $118.57$ & $215.90$ & $300.21$ & $---$ & $153.49$ \\
+            $10 \times 10$ & G & $2010.50$ & $2075.15$ & $2194.69$ & $---$ & $1987.14$ \\
         \end{tabular}
         }
     \end{center}
@@ -137,67 +139,200 @@ $OPT$ jest optimum globalnym, lub dolnym ograniczeniem, a $\widetilde{OPT}$ znal
     \label{wyniki-0}
 \end{table}
 
+Tabela \ref{wyniki-1} przedstawia wyniki dla pozostałych zadań wygenerowanych w sposób opisany na początku tego rozdziału. Porównano tutaj model klasyczny 
+algorytmu ewolucyjnego z solverami MINOS oraz LINDOGlobal. O ile w przypadku MINOSa nie wiemy czy zwrócona wartość jest optimum globalnym, o tyle 
+solver LINDOGlobal informuje o tym czy znalezione rozwiązanie to optimum lokalne czy globalne. Dodatkowo w przypadku optimum lokalnego podaje on 
+informację o najlepszym obliczonym dolnym ograniczeniu minimalizowanej funkcji. 
+
+W przypadku jeśli LINDO zwrócił jedynie optimum lokalne przy wyniku znajduje się litera \textit{L}, w przypadku jeśli znaleziono optimum globalne, 
+wynik jest oznaczony literą \textit{G}. W kolumnie \textit{luka} znaje się błąd względny między wartością otrzymaną a optimum globalnym, 
+a więc $luka = \frac{|OPT - \tilde{C}|}{|OPT|} 100 \%$. W przypadku jeśli optimum globalne nie zostało znalezione, wiemy że w pesymistycznym 
+przypadku znajduje się ono nie dalej niż ograniczenie dolne, tzn. $LB \le OPT$, gdzie $LB$ - ograniczenie dolne wyniku, oraz $OPT$ - optimum 
+lokalne znalezione przez solver. W takim przypadku luka jest obliczana jako błąd względny między znalezionym rozwiązaniem, a dolnym ograniczeniem 
+funkcji, czyli $luka = \frac{|LB - \tilde{C}|}{|LB|}$. 
+
+Warto zwrócić uwagę na fakt, że podane dolne ograniczenie może być złej jakości, przez co błąd względny może wydawać się bardzo duży. Sytuacja 
+taka miała miejsce w przypadku funkcji B oraz F, gdzie ograniczenie dolne dla wszystkich zestawów zadań testowych było równe $0$, czyli najmniejszemu 
+możliwemu wynikowi w każdym zadaniu transportowym(z założenia wiemy, że koszt nie może być ujemny).
+
 \begin{table}[h!]
     \begin{center}
         \resizebox{\textwidth}{!}{%
-        \begin{tabular}{c|c|c|c|c}
-            Rozmiar Zadania & Funkcja celu & Model klasyczny & MINOS & LindoGlobal \\
-             & & \begin{tabular}{@{}ccc@{}}min & avg & max\end{tabular} &  & \\ 
-            \hline
-            \hline
-            $15 \times 15$ & Liniowa & \begin{tabular}{@{}ccc@{}}$54533.80$ & $55062.96$ & $55419.21$\end{tabular} & $53862.32$ & $53862.32$ \\
-            $15 \times 15$ & A & \begin{tabular}{@{}ccc@{}}$621.52$ & $627.98$ & $679.35$\end{tabular} & $743.05$ & $470.500$ \\
-            $15 \times 15$ & B & \begin{tabular}{@{}ccc@{}}$10607.71$ & $10657.78$ & $10933.70$\end{tabular} & $10581.32$ & $10454.801$ \\
-            $15 \times 15$ & C & \begin{tabular}{@{}ccc@{}}$5225274.22$ & $5225274.24$ & $5225274.30$\end{tabular} & $5225274.19$ & $5225274.19$ \\
-            $15 \times 15$ & D & \begin{tabular}{@{}ccc@{}}$2187.99$ & $2211.11$ & $2273.07$\end{tabular} & $3229.68$ & $2314.41$ \\
-            $15 \times 15$ & E & \begin{tabular}{@{}ccc@{}}$1.20$ & $1.20$ & $1.20$\end{tabular} & $33.13$ & $6.44$ \\
-            $15 \times 15$ & F & \begin{tabular}{@{}ccc@{}}$179.61$ & $180.16$ & $185.35$\end{tabular} & $11852.89$ & $59.23$ \\
-            $15 \times 15$ & G & \begin{tabular}{@{}ccc@{}}$---$ & $---$ & $---$\end{tabular} & $---$ & $---$ \\
-            \hline
-            $30 \times 30$ & Liniowa & \begin{tabular}{@{}ccc@{}}$17365.25$ & $17479.06$ & $17795.71$\end{tabular} & $16586.20$ & $16586.20$ \\
-            $30 \times 30$ & A & \begin{tabular}{@{}ccc@{}}$1763.86$ & $1795.62$ & $1846.44$\end{tabular} & $2260.7914$ & $2040.23$ \\
-            $30 \times 30$ & B & \begin{tabular}{@{}ccc@{}}$2309.83$ & $2323.66$ & $2370.13$\end{tabular} & $2699.25$ & $2704.73$ \\
-            $30 \times 30$ & C & \begin{tabular}{@{}ccc@{}}$104650.12$ & $104650.40$ & $104651.73$\end{tabular} & $104650.12$ & $104650.12$ \\
-            $30 \times 30$ & D & \begin{tabular}{@{}ccc@{}}$2872.53$ & $2986.45$ & $3084.81$\end{tabular} & $3805.08$ & $2770.29$ \\
-            $30 \times 30$ & E & \begin{tabular}{@{}ccc@{}}$249.70$ & $249.84$ & $256.32$\end{tabular} & $262.08$ & $317.94$ \\
-            $30 \times 30$ & F & \begin{tabular}{@{}ccc@{}}$737.98$ & $823.82$ & $1063.14$\end{tabular} & $4630.83$ & $384.87$ \\
-            $30 \times 30$ & G & \begin{tabular}{@{}ccc@{}}$---$ & $---$ & $---$\end{tabular} & $---$ & $---$ \\
-            \hline
-            $20 \times 70$ & Liniowa & \begin{tabular}{@{}ccc@{}}$102681.39$ & $102980.75$ & $103318.46$\end{tabular} & $98476.50$ & $98476.50$ \\
-            $20 \times 70$ & A & \begin{tabular}{@{}ccc@{}}$1926.42$ & $1997.94$ & $2099.43$\end{tabular} & $2437.58$ & $1473.70$ \\
-            $20 \times 70$ & B & \begin{tabular}{@{}ccc@{}}$19294.37$ & $19777.36$ & $20164.15$\end{tabular} & $19164.16$ & $19498.77$ \\
-            $20 \times 70$ & C & \begin{tabular}{@{}ccc@{}}$3356726.47$ & $3356779.29$ & $3356994.88$\end{tabular} & $3356719.33$ & $3356719.33$ \\
-            $20 \times 70$ & D & \begin{tabular}{@{}ccc@{}}$6703.65$ & $6747.31$ & $6823.62$\end{tabular} & $8947.35$ & $6245.85$ \\
-            $20 \times 70$ & E & \begin{tabular}{@{}ccc@{}}$111.69$ & $113.03$ & $114.37$\end{tabular} & $221.51$ & $139.55$ \\
-            $20 \times 70$ & F & \begin{tabular}{@{}ccc@{}}$1594.30$ & $1644.51$ & $1697.70$\end{tabular} & $40503.51$ & $575.38$ \\
-            $20 \times 70$ & G & \begin{tabular}{@{}ccc@{}}$---$ & $---$ & $---$\end{tabular} & $---$ & $---$ \\
-            \hline
-            $30 \times 60$ & Liniowa & \begin{tabular}{@{}ccc@{}}$145468.29$ & $146323.93$ & $146948.53$\end{tabular} & $135028.71$ & $135028.71$ \\
-            $30 \times 60$ & A & \begin{tabular}{@{}ccc@{}}$3532.37$ & $3544.40$ & $3631.18$\end{tabular} & $4310.14$ & $2336.59$ \\
-            $30 \times 60$ & B & \begin{tabular}{@{}ccc@{}}$26093.88$ & $26962.21$ & $27024.11$\end{tabular} & $26082.37$ & $28656.34$ \\
-            $30 \times 60$ & C & \begin{tabular}{@{}ccc@{}}$3283244.35$ & $3283249.33$ & $3283363.39$\end{tabular} & $3282784.56$ & $3282784.56$ \\
-            $30 \times 60$ & D & \begin{tabular}{@{}ccc@{}}$11090.32$ & $11172.53$ & $11275.56$\end{tabular} & $13799.71$ & $Err$ \\
-            $30 \times 60$ & E & \begin{tabular}{@{}ccc@{}}$351.38$ & $351.57$ & $351.74$\end{tabular} & $526.34$ & $438.39$ \\
-            $30 \times 60$ & F & \begin{tabular}{@{}ccc@{}}$2981.06$ & $3498.70$ & $4404.37$\end{tabular} & $73724.43$ & $2390.12$ \\
-            $30 \times 60$ & G & \begin{tabular}{@{}ccc@{}}$---$ & $---$ & $---$\end{tabular} & $---$ & $---$ \\
-            \hline
-            $100 \times 100$ & Liniowa & \begin{tabular}{@{}ccc@{}}$---$ & $---$ & $---$\end{tabular} & $138605.09$ & $1$ \\
-            $100 \times 100$ & A & \begin{tabular}{@{}ccc@{}}$4162.49$ & $4176.67$ & $4180.39$\end{tabular} & $Err$ & $1$ \\
-            $100 \times 100$ & B & \begin{tabular}{@{}ccc@{}}$27175.45$ & $27320.57$ & $3$\end{tabular} & $Err$ & $1$ \\
-            $100 \times 100$ & C & \begin{tabular}{@{}ccc@{}}$1079937.33$ & $1083882.67$ & $3$\end{tabular} & $Err$ & $1$ \\
-            $100 \times 100$ & D & \begin{tabular}{@{}ccc@{}}$12308.57$ & $12414.59$ & $3$\end{tabular} & $Err$ & $1$ \\
-            $100 \times 100$ & E & \begin{tabular}{@{}ccc@{}}$1531.03$ & $1531.32$ & $1532.51$\end{tabular} & $Err$ & $1$ \\
-            $100 \times 100$ & F & \begin{tabular}{@{}ccc@{}}$---$ & $---$ & $---$\end{tabular} & $Err$ & $1$ \\
-            $100 \times 100$ & G & \begin{tabular}{@{}ccc@{}}$---$ & $---$ & $---$\end{tabular} & $Err$ & $1$ \\
+        \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c}
+            Rozmiar         & Funkcja      & \multicolumn{4}{c|}{Model klasyczny}               & MINOS         & \multicolumn{2}{c|}{LindoGlobal}& \multicolumn{2}{c}{CPLEX} \\ \cline{3-6} \cline{8-9} \cline{10-11}
+            zadania         & celu         & min & śr  & max & luka                             &               & wynik & luka                    & wynik & luka \\
+            \hline  
+            \hline  
+            $15 \times 15$ & Liniowa       & $54533.80$ & $55062.96$ & $55419.21$ & $1.24$      & $53862.32$    & $53862.32$ G & $0.00$           & $53862.32$ G & $0.00$ \\
+            $15 \times 15$ & A             & $621.52$ & $627.98$ & $679.35$ & $40.42$           & $743.05$      & $470.50$ L & $21.27$            & $-$ & $-$ \\
+            $15 \times 15$ & B             & $10607.71$ & $10657.78$ & $10933.70$ & $-$(*)      & $10581.32$    & $10454.80$ L & $-$(*)           & $-$ & $-$ \\
+            $15 \times 15$ & C             & $5225274.22$ & $5225274.24$ & $5225274.30$ & $0.00$& $5225274.19$  & $5225274.19$ G & $0.00$         & $-$ & $-$ \\
+            $15 \times 15$ & D             & $2187.99$ & $2211.11$ & $2273.07$ & $-$(*)         & $3229.68$     & $2314.41$ L & $-$(*)            & $-$ & $-$ \\
+            $15 \times 15$ & E             & $1.20$ & $1.20$ & $1.20$ & $-$(*)                  & $33.13$       & $1.90$ L & $-$(*)               & $-$ & $-$ \\
+            $15 \times 15$ & F             & $179.61$ & $180.16$ & $185.35$ & $-$(*)            & $11852.89$    & $59.23$ L & $-$(*)              & $-$ & $-$ \\
+            $15 \times 15$ & G             & $62185.11$ & $62438.42$ & $63610.24$ & $9.65$      & $57366.75$    & $58546.32$ L & $2.74$           & $56985.03$ G & $0.00$ \\
+            \hline  
+            $30 \times 30$ & Liniowa       & $17365.25$ & $17479.06$ & $17795.71$ & $4.69$      & $16586.20$    & $16586.20$ G & $0.00$           & $16586.20$ G & $0.00$ \\
+            $30 \times 30$ & A             & $1763.86$ & $1795.62$ & $1846.44$ & $27.60$        & $2260.7914$   & $2040.23$ L & $36.27$           & $-$ & $-$ \\
+            $30 \times 30$ & B             & $2309.83$ & $2323.66$ & $2370.13$ & $-$(*)         & $2699.25$     & $2696.38$ L & $-$(*)            & $-$ & $-$ \\
+            $30 \times 30$ & C             & $104650.12$ & $104650.40$ & $104651.73$ & $0.00$   & $104650.12$   & $104650.12$ G & $0.00$          & $-$ & $-$ \\
+            $30 \times 30$ & D             & $2872.53$ & $2986.45$ & $3084.81$ & $-$(*)         & $3805.08$     & $2770.29$ L & $-$(*)            & $-$ & $-$ \\
+            $30 \times 30$ & E             & $249.70$ & $249.84$ & $256.32$ & $61.33$           & $262.08$      & $285.34$ L & $66.14$            & $-$ & $-$ \\
+            $30 \times 30$ & F             & $737.98$ & $823.82$ & $1063.14$ & $-$(*)           & $4630.83$     & $384.87$ L & $-$(*)             & $-$ & $-$ \\
+            $30 \times 30$ & G             & $23533.16$ & $24813.93$ & $26622.49$ & $27.43$     & $19912.58$    & $20117.31$ L & $3.25$           & $19482.41$ G & $0.00$ \\
+            \hline  
+            $20 \times 70$ & Liniowa       & $102681.39$ & $102980.75$ & $103318.46$ & $4.57$   & $98476.50$    & $98476.50$ G & $0.00$           & $98476.50$ G & $0.00$ \\
+            $20 \times 70$ & A             & $1926.42$ & $1997.94$ & $2099.43$ & $50.56$        & $2437.58$     & $1473.70$ L & $32.98$           & $-$ & $-$ \\
+            $20 \times 70$ & B             & $19294.37$ & $19777.36$ & $20164.15$ & $-$(*)      & $19164.16$    & $18524.19$ L & $-$(*)           & $-$ & $-$ \\
+            $20 \times 70$ & C             & $3356726.47$ & $3356779.29$ & $3356994.88$ & $0.00$& $3356719.33$  & $3356719.33$ G & $0.00$         & $-$ & $-$ \\
+            $20 \times 70$ & D             & $6703.65$ & $6747.31$ & $6823.62$ & $-$(*)         & $8947.35$     & $6245.85$ L & $-$(*)            & $-$ & $-$ \\
+            $20 \times 70$ & E             & $111.69$ & $113.03$ & $114.37$ & $-$(*)            & $221.51$      & $139.55$ L & $-$(*)             & $-$ & $-$ \\
+            $20 \times 70$ & F             & $1594.30$ & $1644.51$ & $1697.70$ & $-$(*)         & $40503.51$    & $575.38$ L & $-$(*)             & $-$ & $-$ \\
+            $20 \times 70$ & G             & $169931.77$ & $172399.15$ & $179244.49$ & $30.61$  & $135150.04$   & $134327.33$ L & $1.81$          & $131938.45$ G & $0.00$ \\
+            \hline  
+            $30 \times 60$ & Liniowa       & $145468.29$ & $146323.93$ & $146948.53$ & $7.67$   & $135028.71$   & $135028.71$ G & $0.00$          & $135028.71$ G & $0.00$ \\
+            $30 \times 60$ & A             & $3532.37$ & $3544.40$ & $3631.18$ & $53.30$        & $4310.14$     & $2336.59$ L & $29.17$           & $-$ & $-$ \\
+            $30 \times 60$ & B             & $26033.88$ & $26962.21$ & $27024.11$ & $-$(*)      & $26082.37$    & $26775.34$ L & $-$(*)           & $-$ & $-$ \\
+            $30 \times 60$ & C             & $3283244.35$ & $3283249.33$ & $3283363.39$ & $0.00$& $3282784.56$  & $3282784.56$ G & $0.00$         & $-$ & $-$ \\
+            $30 \times 60$ & D             & $11090.32$ & $11172.53$ & $11275.56$ & $-$(*)      & $13799.71$    & $Time out$ & $-$(*)             & $-$ & $-$ \\
+            $30 \times 60$ & E             & $351.38$ & $351.57$ & $351.74$ & $-$(*)            & $526.34$      & $438.39$ L & $-$(*)             & $-$ & $-$ \\
+            $30 \times 60$ & F             & $2981.06$ & $3498.70$ & $4404.37$ & $-$(*)         & $73724.43$    & $2390.12$ L & $-$(*)            & $-$ & $-$ \\
+            $30 \times 60$ & G             & $176947.28$ & $180834.11$ & $187061.33$ & $27.54$  & $143907.24$   & $145316.08$ L & $2.51$          & $141761.66$ G & $0.00$ \\
+            \hline  
+            $100 \times 100$ & Liniowa     & $152120.75$ & $157299.10$ & $163931.16$ & $-$      & $138605.09$   & $Err$ & $-$                     & $138605.09$ G & $0.00$ \\
+            $100 \times 100$ & A           & $4162.49$ & $4176.67$ & $4180.39$ & $-$            & $Err$         & $Err$ & $-$                     & $-$ & $-$ \\
+            $100 \times 100$ & B           & $27175.45$ & $27320.57$ & $27993.08$ & $-$         & $Err$         & $Err$ & $-$                     & $-$ & $-$ \\
+            $100 \times 100$ & C           & $1079937.33$ & $1080471.39$ & $1081882.67$ & $-$   & $Err$         & $Err$ & $-$                     & $-$ & $-$ \\
+            $100 \times 100$ & D           & $12308.57$ & $12414.59$ & $12991.94$ & $-$         & $Err$         & $Err$ & $-$                     & $-$ & $-$ \\
+            $100 \times 100$ & E           & $1531.03$ & $1531.32$ & $1532.51$ & $-$            & $Err$         & $Err$ & $-$                     & $-$ & $-$ \\
+            $100 \times 100$ & F           & $---$ & $7405.57$ & $---$ &                        & $Err$         & $Err$ & $-$                     & $-$ & $-$ \\
+            $100 \times 100$ & G           & $232139.70$ & $235821.75$ & $239278.53$ & $37.20$  & $175472.60$   & $Err$ & $-$                     & $171871.92$ G & $0.00$ \\
         \end{tabular}
         }
     \end{center}
-    \caption{Wyniki.}
+    \caption{Wyniki. (*) oznacza, że znalezione ograniczenie dolne dla problemu było słabej jakości, tzn. że było równe, lub bardzo bliskie $0$.}
     \label{wyniki-1}
 \end{table}
 
 
+Jak możemy zauważyć na prezentowanym porównaniu(tabela \ref{wyniki-1}) model klasyczny wypada lepiej niż solver MINOS w niemalże każdym teście. Jedyny 
+wyjątek stanowi przypadek liniowej funkcji kosztu, gdzie MINOS zawsze znajdował optimum globalne. W przypadku funkcji B MINOS wypadał nieznacznie 
+lepiej niż średni wynik dla modelu klasycznego, jednak była to z reguły różnica pomijalna(poniżej $1\%$). Z kolei dla funkcji D oraz F model 
+klasyczny był znacznie lepszy niż MINOS, który w niektórych przypadkach zwrócił nawet kilkukrotnie gorszy wynik(funkcja F). Pozostałe wyniki były raczej 
+zbliżone. Dla funkcji nieliniowych A-G i macierzy $100 \times 100$ MINOS nie zwrócił żadnego wyniku ze względu na ograniczone zasoby pamięci oferowane 
+przez serwis NEOS. 
+
+Dla solvera LINDOGlobal, w wielu przypadkach wynikiem obliczeń było jedynie optimum lokalne(funkcje A,B,D,E,F). W tych przypadkach możemy 
+porównywać odległości od dolnego ograniczenia wyniku wskazanego przez LINDOGlobal. Jest ono jednak w wielu przypadkach bardzo nieprecyzyjne. 
+Mimo wszystko dla większości testów model klasyczny dawał wyniki zbliżone do wynkiów solvera. Przypadki łatwe, w których zostało znalezione optimum 
+globalne były rozwiązywane przez model klasyczny z raczej akceptowalnym błędem rzędu kilku procent.
+
+Możemy zauważyć, że w przypadku liniowej funkcji kosztu model klasyczny radzi sobie gorzej niż pozostałe programy, jest to jednak problem bardzo 
+łatwy i znamy dużo lepsze algorytmy, któwe są w stanie w krótkim czasie znaleźć dla niego optimum globalne. W tego typu prostych zadaniach stosowanie 
+algorytmów metaheurystycznych, do których zalicza się opisywany algorytm ewolucyjny raczej mija się z celem. Z kolei dla dużo trudniejszych, nieliniowych 
+funkcji celu model klasyczny radzi sobie znacznie lepiej. Przede wszystkim prezentuje się dużo lepiej niż pozostałe solvery w porównaniu czasu 
+potrzebnego na znalezienie rozwiązania. Dla algorytmu ewolucyjnego nawet problem rozmiaru $100 \times 100$ nie był żadną trudnością i 
+był rozwiązywany w czasie kilkudziesięciu sekund. Pokazuje to główną zaletę algorytmów ewolucyjnych, jaką jest czas znajdowania rozwiązania.
+
+Z uwagi na to, że w wielu przypadkach LINDO nie znalazł optimum globalnego, a ograniczenie dolne było niezadowalającej jakości, zdecydowano się 
+porównać wyniki algorytmu ewolucyjnego z wynikami innych solverów, które również są w stanie optymalizować nieliniową funkcję celu 
+przy liniowych ograniczeniach. Porównanie to znajduje się w tabeli \ref{wyniki-2}. Dla zwiększenia czytelności w tabeli pokazano jedynie średni wynik 
+zwracany przez algorytm ewolucyjny. W kolumnach oznaczonych jako \% pokazano błąd względny pomiędzy najlepszym wynikiem dla konkretnego testu oraz 
+wynikiem solvera. Takie porównanie daje lepszy obraz tego, jak prezentowany algorytm ewolucyjny wypada na tle innych istniejących rozwiązań.
+
+\begin{table}[h!]
+    \begin{center}
+        \resizebox{\textwidth}{!}{%
+        \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c}
+            Rozmiar         & Funkcja    & \multicolumn{2}{c|}{Model klasyczny}  & \multicolumn{2}{c|}{MINOS} & \multicolumn{2}{c|}{scip} & \multicolumn{2}{c|}{SNOPT}& \multicolumn{2}{c}{LindoGlobal} \\ \cline{3-4} \cline{5-6} \cline{7-8} \cline{9-10} \cline{11-12}
+            zadania         & celu       & śr wynik & \%                         & wynik & \%                 & wynik & \%                & wynik & \%                & wynik & \% \\
+            \hline
+            \hline
+            $15 \times 15$ & Liniowa     & $55062.96$ & $2.2$                    & $53862.32$ & $0.0$         & $53862.32$ & $0.0$        & $53862.32$ & $0.00$       & $53862.32$ & $0.0$ \\
+            $15 \times 15$ & A           & $627.98$ & $33.4$                     & $743.05$ & $57.9$          & $696.75$ & $48.1$         & $743.05$ & $57.9$         & $470.50$ & $0.0$ \\
+            $15 \times 15$ & B           & $10657.78$ & $1.9$                    & $10581.32$ & $1.2$         & $10630.82$ & $1.7$        & $10510.23$ & $0.5$        & $10454.80$ & $0.0$ \\
+            $15 \times 15$ & C           & $5225274.24$ & $0.0$                  & $5225274.19$ & $0.0$       & $5225274.19$ & $0.0$      & $5225274.19$ & $0.0$      & $5225274.19$ & $0.0$ \\
+            $15 \times 15$ & D           & $2211.11$ & $0.0$                     & $3229.68$ & $46.1$         & $2867.07$ & $29.7$        & $3229.68$ & $46.1$        & $2314.41$ & $4.67$ \\
+            $15 \times 15$ & E           & $1.20$ & $0.0$                        & $33.13$ & $2660.8$         & $20.41$ & $1600.8$        & $33.50$ & $2691.7$        & $1.90$ & $58.3$ \\
+            $15 \times 15$ & F           & $180.16$ & $204.2$                    & $11852.89$ & $19911.6$     & $2646.60$ & $4368.3$      & $10150.31$ & $17037.1$    & $59.23$ & $0.0$ \\
+            $15 \times 15$ & G           & $62438.42$ & $8.9$                    & $57366.75$ & $0.0$         & $57327.80$ & $0.0$        & $57366.75$ & $0.0$        & $58546.32$ & $2.1$ \\
+            \hline
+            $30 \times 30$ & Liniowa     & $17479.06$ & $5.4$                    & $16586.20$ & $0.0$         & $16586.20$ & $0.0$        & $16586.20$ & $0.0$        & $16586.20$ & $0.0$ \\
+            $30 \times 30$ & A           & $1795.62$ & $0.0$                     & $2260.7914$ & $25.9$       & $1888.26$ & $5.15$        & $2295.27$ & $27.8$        & $2040.23$ & $13.6$ \\
+            $30 \times 30$ & B           & $2323.66$ & $0.0$                     & $2699.25$ & $16.2$         & $2664.35$ & $14.7$        & $2547.94$ & $9.7$         & $2696.38$ & $16.0$ \\
+            $30 \times 30$ & C           & $104650.40$ & $0.0$                   & $104650.12$ & $0.0$        & $104650.12$ & $0.0$       & $144947.97$ & $38.5$      & $104650.12$ & $0.0$ \\
+            $30 \times 30$ & D           & $2986.45$ & $7.8$                     & $3805.08$ & $37.3$         & $3410.94$ & $23.1$        & $3805.08$ & $37.3$        & $2770.29$ & $0.0$ \\
+            $30 \times 30$ & E           & $249.84$ & $0.0$                      & $262.08$ & $4.9$           & $309.33$ & $23.8$         & $262.08$ & $4.9$          & $285.34$ & $14.2$ \\
+            $30 \times 30$ & F           & $823.82$ & $114.0$                    & $4630.83$ & $1103.2$       & $957.32$ & $148.7$        & $4171.94$ & $984.0$       & $384.87$ & $0.0$ \\
+            $30 \times 30$ & G           & $24813.93$ & $24.6$                   & $19912.58$ & $0.0$         & $19981.01$ & $0.4$        & $19912.58$ & $0.0$        & $20117.31$ & $1.0$ \\
+            \hline
+            $20 \times 70$ & Liniowa     & $102980.75$ & $4.6$                   & $98476.50$ & $0.0$         & $98476.50$ & $0.0$        & $98476.50$ & $0.0$        & $98476.50$ & $0.0$ \\
+            $20 \times 70$ & A           & $1997.94$ & $35.5$                    & $2437.58$ & $65.4$         & $1781.99$ & $20.9$        & $2437.58$ & $65.4$        & $1473.70$ & $0.0$ \\
+            $20 \times 70$ & B           & $19777.36$ & $7.26$                   & $19164.16$ & $3.9$         & $18763.24$ & $1.8$        & $18438.52$ & $0.0$        & $18524.19$ & $0.5$ \\
+            $20 \times 70$ & C           & $3356779.29$ & $0.0$                  & $3356719.33$ & $0.0$       & $3356719.33$ & $0.0$      & $7808433.26$ & $132.6$    & $3356719.33$ & $0.0$ \\
+            $20 \times 70$ & D           & $6747.31$ & $11.6$                    & $8947.35$ & $47.9$         & $6047.94$ & $0.0$         & $8947.35$ & $47.9$        & $6245.85$ & $3.27$ \\
+            $20 \times 70$ & E           & $113.03$ & $0.0$                      & $221.51$ & $96.0$          & $176.21$ & $56.0$         & $221.51$ & $96.0$         & $139.55$ & $23.5$ \\
+            $20 \times 70$ & F           & $1644.51$ & $186.0$                   & $40503.51$ & $6939.4$      & $7462.94$ & $1197.0$      & $40939.03$ & $7015.1$     & $575.38$ & $0.0$ \\
+            $20 \times 70$ & G           & $172399.15$ & $28.3$                  & $135150.04$ & $0.6$        & $135150.0$ & $0.6$        & $135150.0$ & $0.6$        & $134327.33$ & $0.0$ \\
+            \hline
+            $30 \times 60$ & Liniowa     & $146323.93$ & $8.3$                   & $135028.71$ & $0.0$        & $135028.71$ & $0.0$       & $135028.71$ & $0.0$       & $135028.71$ & $0.0$ \\
+            $30 \times 60$ & A           & $3544.40$ & $51.7$                    & $4310.14$ & $84.5$         & $3767.46$ & $61.2$        & $4310.14$ & $84.5$        & $2336.59$ & $0.0$ \\
+            $30 \times 60$ & B           & $26962.21$ & $7.3$                    & $26082.37$ & $3.8$         & $26355.05$ & $4.9$        & $25126.84$ & $0.0$        & $26775.34$ & $6.6$ \\
+            $30 \times 60$ & C           & $3283249.33$ & $0.0$                  & $3282784.56$ & $0.0$       & $3282784.56$ & $0.0$      & $9640058.72$ & $193.7$    & $3282784.56$ & $0.0$ \\
+            $30 \times 60$ & D           & $11172.53$ & $0.8$                    & $13799.71$ & $24.5$        & $11081.48$ & $0.0$        & $13799.71$ & $24.5$       & $Time out$ & $-$ \\
+            $30 \times 60$ & E           & $351.57$ & $0.0$                      & $526.34$ & $49.7$          & $1158.46$ & $230.0$       & $526.34$ & $49.7$         & $438.39$ & $24.7$ \\
+            $30 \times 60$ & F           & $3498.70$ & $46.4$                    & $73724.43$ & $2984.5$      & $6935.45$ & $190.2$       & $68411.66$ & $2762.3$     & $2390.12$ & $0.0$ \\
+            $30 \times 60$ & G           & $180834.11$ & $25.6$                  & $143907.24$ & $0.0$        & $143953.62$ & $0.1$       & $143907.24$ & $0.0$        & $145316.08$ & $0.9$ \\
+            \hline
+            $100 \times 100$ & Liniowa   & $157299.10$ & $13.5$                  & $138605.09$ & $0.0$        & $138605.09$ & $0.0$       & $138605.09$ & $0.0$       & $Err$ & $-$ \\
+            $100 \times 100$ & A         & $4176.67$ & $0.0$                     & $Err$ & $-$                & $4657.38$ & $11.5$        & $25858.31$ & $519.1$      & $Err$ & $-$ \\
+            $100 \times 100$ & B         & $27320.57$ & $0.0$                    & $Err$ & $-$                & $35556.19$ & $30.1$       & $35556.19$ & $30.1$       & $Err$ & $-$ \\
+            $100 \times 100$ & C         & $1080471.39$ & $1.3$                  & $Err$ & $-$                & $1066457.36$ & $0.0$      & $15080858.45$ & $1314.1$  & $Err$ & $-$ \\
+            $100 \times 100$ & D         & $12414.59$ & $0.0$                    & $Err$ & $-$                & $13910.55$ & $12.1$       & $15844.99$ & $27.6$       & $Err$ & $-$ \\
+            $100 \times 100$ & E         & $1531.32$ & $0.0$                     & $Err$ & $-$                & $1741.40$ & $13.7$        & $1657.65$ & $8.2$         & $Err$ & $-$ \\
+            $100 \times 100$ & F         & $7405.57$ & $0.0$                     & $Err$ & $-$                & $10064.85$ & $36.0$       & $31191.89$ & $321.2$      & $Err$ & $-$ \\
+            $100 \times 100$ & G         & $235821.75$ & $34.3$                  & $175472.60$ & $0.0$        & $175517.69$ & $0.0$       & $175472.60$ & $0.0$       & $Err$ & $-$ \\
+        \end{tabular}
+        }
+    \end{center}
+    \caption{Porównanie modelu klasycznego algorytmu ewolucyjnego i innych dostępnych solverów.}
+    \label{wyniki-2}
+\end{table}
+
+Jakość rozwiązań zwracanych przez algorytm ewolucyjny jest zadowalająca. Łatwo zauważyć, że radzi on sobie najgorzej w zadaniach z liniową funkcją celu 
+oraz z funkcją G, która dodaje do kosztu transportu koszt stały. Powodem tego jest to, że w tych przypadkach wiemy, że rozwiązanie optymalne jest 
+wierzchołkiem przestrzeni dopuszczalnych rozwiązań(przy zadaniu z funkcją liniową\cite{ALG-GEN-BOOK}), lub przeważają w nim elementy zerowe(funkcja G). 
+W takich przypadkach prezentowany algorytm wypada przeciętnie, ponieważ używany operator krzyżowania sprawia, że elementów zerowych w rozwiązaniu 
+jest bardzo mało. Operatorem, który wprowadza elementy zerowe do rozwiązania jest operator mutacji i nawet jeśli znaczne zwiększenie prawdopodobieństwa 
+mutacji może poprawić wyniki dla tych przypadków, to algorytm działa wtedy dużo bardziej jak przeszukiwanie losowe. W obu przypadkach, w których 
+algorytm genetyczny wypadał dużo gorzej, pozostałe solvery radziły sobie bardzo dobrze, w szczególności CPLEX, który w każdym z tych przypadków zwrócił 
+optimum globalne. 
+
+W pozostałych zadaniach algorytm wypada bardzo dobrze. Konkurować z nim może tylko solver LINDO, który jednak potrzebuje znacznie więcej czasu, 
+aby wyliczyć optymalne rozwiązanie. Dodatkowo posiada on dość mały limit zmiennych, co nie pozwoliło na obliczenie zadania rozmiaru $100 \times 100$. 
 
 \section{Model wyspowy algorytmu ewolucyjnego}
 
 \section{Porównanie modelu klasycznego i wyspowego}
+
+\begin{figure}[H]
+    \centering        
+    \includegraphics[width=0.7\textwidth]{img/plot_regular_threads_100x100.png}
+    \caption{Zaleność czasu wykonania programu od ilości używanych wątków dla modelu klasycznego dla zadania rozmiaru $100\times100$}
+    \label{threads_regular_100x100}
+\end{figure}
+
+\begin{figure}[H]
+    \centering        
+    \includegraphics[width=0.7\textwidth]{img/plot_island_threads_100x100.png}
+    \caption{Zaleność czasu wykonania programu od ilości używanych wątków dla modelu wyspowego dla zadania rozmiaru $100\times100$}
+    \label{threads_regular_100x100}
+\end{figure}
+
+\begin{figure}[H]
+    \centering        
+    \includegraphics[width=0.7\textwidth]{img/plot_compare_threads_100x100.png}
+    \caption{Porównanie modeli klasycznego i wyspowego pod względem zależności czasu wykonania programu od ilości używanych wątków dla zadania 
+    rozmiaru $100\times100$}
+    \label{threads_regular_100x100}
+\end{figure}

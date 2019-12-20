@@ -20,8 +20,8 @@
 \contentsline {section}{\numberline {3.10}U\IeC {\.z}yte technologie}{15}{section.3.10}
 \contentsline {chapter}{\numberline {4}Wyniki eksperymentalne}{17}{chapter.4}
 \contentsline {section}{\numberline {4.1}Model klasyczny algorytmu ewolucyjnego}{19}{section.4.1}
-\contentsline {section}{\numberline {4.2}Model wyspowy algorytmu ewolucyjnego}{19}{section.4.2}
-\contentsline {section}{\numberline {4.3}Por\IeC {\'o}wnanie modelu klasycznego i wyspowego}{19}{section.4.3}
-\contentsline {chapter}{\numberline {5}Podsumowanie}{21}{chapter.5}
-\contentsline {chapter}{Bibliografia}{23}{chapter*.10}
-\contentsline {chapter}{\numberline {A}Zawarto\IeC {\'s}\IeC {\'c} p\IeC {\l }yty CD}{25}{appendix.A}
+\contentsline {section}{\numberline {4.2}Model wyspowy algorytmu ewolucyjnego}{22}{section.4.2}
+\contentsline {section}{\numberline {4.3}Por\IeC {\'o}wnanie modelu klasycznego i wyspowego}{22}{section.4.3}
+\contentsline {chapter}{\numberline {5}Podsumowanie}{25}{chapter.5}
+\contentsline {chapter}{Bibliografia}{27}{chapter*.14}
+\contentsline {chapter}{\numberline {A}Zawarto\IeC {\'s}\IeC {\'c} p\IeC {\l }yty CD}{29}{appendix.A}
