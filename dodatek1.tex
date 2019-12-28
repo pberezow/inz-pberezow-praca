@@ -2,5 +2,286 @@
 \thispagestyle{chapterBeginStyle}
 \label{plytaCD}
 
-W tym rozdziale należy krótko omówić zawartość dołączonej płyty CD.
+\section{Wymagania i instalacja}
+
+Opisywany w poprzednich rozdziałach algorytm został zaimplementowany w języku Julia w wersji 1.3. Była testowana na komputerze z zainstalowanym 
+systemem Ubuntu 18.04 w wersji, dla architektury 64-bitowej. Prezentowany pakiet powinien jednak działać na każdym systemie, na którym 
+Julia 1.3 działa poprawnie.
+
+Dodatkowo pakiet wymaga zainstalowanych następujących bibliotek:
+
+\begin{itemize}
+    \item Random
+    \item JSON
+    \item PyPlot
+    \item Distributions
+    \item JuMP(skrypt \textit{optimizers.jl})
+\end{itemize}
+
+W przypadku, jeśli wymagane biblioteki nie są zainstalowane należy otworzyć \textit{REPL} Julii i przy pomocy modułu \textit{Pkg} dodać wymagane 
+biblioteki poprzez wywołanie funkcji \textit{Pkg.add()}, gdzie w argumencie podajemy nazwę instalowanego pakietu, np:
+
+\begin{lstlisting}
+    Pkg.add("Distributions")
+\end{lstlisting}
+
+Po zainstalowaniu wyżej wymienionych zależności, biblioteka jest gotowa do użytku. Instrukcja obsługi została zamieszczona w kolejnych sekcjach.
+
+Udostępniony pakiet zawiera zestaw testów jednostkowych, które weryfikują poprawność działania składowych algorytmu. Dodatkowo załączono przykładowy 
+plik konfiguracyjny oraz definicje kilku funkcji kosztu.
+
+W katalogu głównym znajdują się 3 foldery:
+
+\begin{itemize}
+    \item \textbf{src} - zawiera implementacje opisywanego algorytmu
+    \item \textbf{tests} - zawiera testy jednostkowe
+    \item \textbf{examples} - zawiera przykładowe pliki konfiguracyjne
+\end{itemize}
+
+W katalogu \textbf{src} znajdują się pliki:
+
+\begin{itemize}
+    \item \textbf{chromosom.jl} - zawiera definicje struktury reprezentującej pojedynczego osobnika w populacji. Znajdują się tutaj też wszystkie 
+        funkcje operujące na zdefiniowanej strukturze takie jak operatory mutacji, krzyżowania, inicjalizacja, walidacja rozwiązania.
+    \item \textbf{population.jl} - zawiera definicje struktury reprezentującej całą populację rozwiązań. Znajdują się tutaj wszystkie główne 
+        funkcje operujące na populacji.
+    \item \textbf{config.jl} - zawiera definicje struktury pliku konfiguracyjnego. Znajdują się tutaj funkcje odpowiedzialne za zapisywanie i wczytywanie 
+        pliku konfiguracyjnego.
+    \item \textbf{functions.jl} - w tym pliku znajdują się definicje wszystkich dostępnych funkcji celu. Każda taka funkcja powinna przyjmować 
+        jeden argument typu \textit{Array\{Float64, 2\}}. Zdefiniowano tutaj też słownik, który mapuje nazwy funkcji do ich implementacji. Aby dodać 
+        nową funkcje celu, użytkownik powinien zaimplementować ją w tym pliku, a następnie przypisać ją do konkretnej nazwy w słowniku.
+    \item \textbf{GeneticNTP.jl} - zawiera definicje całego modułu o nazwie \textit{GeneticNTP}.
+\end{itemize}
+
+Dodatkowo w katalogu głównym znajduje się pliki:
+\begin{itemize}
+    \item \textit{run\_example.jl} - uruchamia przykładowe zadanie transportowe. Komentarze w pliku opisują krok po kroku jak używać algorytmu 
+        korzystając z \textit{REPL} Julii.
+    \item \textit{run.jl} - umożliwia uruchomienie programu dla dowolnego pliku konfiguracyjnego za pomocą polecenia:
+    \begin{lstlisting}[language=bash]
+$ julia run.jl plik_konfiguracyjny ilość_pokoleń nazwa_funkcji_kosztu
+    \end{lstlisting}
+    \item \textit{optimizers.jl} - umożliwia optymalizacje zadania transportowego z użyciem solverów \textbf{GLPK, Ipopt} i \textbf{CPLEX}. 
+        Używa biblioteki JuMP w celu uruchomienia sloverów.
+    \item \textit{configToGams.jl} - umożliwia konwersje pliku konfiguracyjnego na plik wejściowy GAMS.
+\end{itemize} 
+
+Przykładowe uruchomienie skryptu \textit{run\_example.jl}:
+
+[TODO: uruchomienie]
+
+Przykładowe uruchomienie skryptu \textit{optimizers.jl}:
+
+\begin{lstlisting}[language=bash, frame=single]
+piotr@piotr-hp:~$ julia optimizers.jl ./examples/ex_7x7.json GLPK Linear
+START
+Config loaded.
+Using GLPK...
+DONE.
+Status: OPTIMAL
+Result: 1132.0
+\end{lstlisting}
+
+\section{Pliki konfiguracyjne}
+
+Do biblioteki został dodany moduł obsługi plików konfiguracyjnych. Używają one formatu JSON. Moduł pozwala na zapisywanie i wczytywanie 
+całej konfiguracji algorytmu, w skład której wchodzą wektory popytu i podaży, macierz kosztu, oraz wszystkie parametry programu.
+Definicja poszczególnych parametrów:
+
+\begin{itemize}
+    \item $populationSize$ - rozmiar całkowitej populacji. Powinien być dodatnią liczbą całkowitą.
+    \item $eliteProc$ - ułamek najlepszych rozwiązań, które zostają przepisane do następnego pokolenia. 
+    Wartość powinna znajdować się w przedziale $[0, 1]$. Testy pokazują, że najlepsze rozwiązania są generowane dla wartości parametru w przedziale
+    $[0.1, 0.3]$.
+    \item $mutationProb$ - prawdopodobieństwo mutacji. Przyjmuje wartość z zakresu $[0, 1]$. Warto pamiętać o tym, że zalecane prawdopodobieństwo 
+    mutacji nie powinno przekraczać kilkanastu procent.
+    \item $mutationRate$ - wielkość mutacji, określa stosunek rozmiaru podmacierzy, wybieranej do ponownej inicjalizacji podczas mutacji, 
+    do macierzy rozwiązania. Przyjmuje wartości z zakresu $[0, 1]$. Tak jak w przypadku prawdopodobieństwa mutacji, jej wielkość nie powinna 
+    przekraczać kilkunastu procent, ponieważ zbyt duża mutacja może niszczyć znalezione rozwiązania.
+    \item $crossoverProb$ - prawdopodobieństwo krzyżowania. Przyjmuje wartości z przedziału $[0, 1]$. Zaleca się ustawialnie wartości z przedziału 
+    $[0.5, 0.9]$. Należy pamiętać o tym, że suma parametrów eliteProc i crossoverProb nie może być większa niż $1$.
+    \item mode - tryb w jakim ma działać algorytm. Przyjmuje wartości $regular$(w przypadku wyboru klasycznego modelu) lub $island$(w przypadku 
+    modelu wyspowego).
+    \item $numberOfSeparateGenerations$ - liczba naturalna określająca ilość iteracji jakie wykona algorytm pomiędzy rozdzieleniem populacji na 
+    mniejsze części, a ponownym jej scaleniem. Dla wyboru modelu klasycznego należy ustawić wartość parametru na $1$.
+\end{itemize}
+
+Dodatkowo w pliku konfiguracyjnym określamy wektor popytu, podaży i macierz kosztów:
+
+\begin{itemize}
+    \item $demand$ - wektor popytu. Przyjmuje jako wartość listę elementów, które składają się z dwóch pól - $i$, które określa indeks wektora i 
+    $val$, które określa wartosć wektora w miejscu $i$ - $demand[i] = val$.
+    \item $supply$ - wektor podaży. Przyjmuje jako wartość listę elementów, o polach takich samych jak w przypadku wektora popytu. Pojedynczy element 
+    opisuje pole wektora $supply[i] = val$.
+    \item $costMatrix$ - macierz kosztu, która może być wykorzystywana w funkcji celu. Przyjmuje jako wartość listę elementów, które składają się 
+    z trzech pól: $s$ - określa indeks odpowiadający indeksowi wektora podaży, $d$ - określa indeks odpowiadający indeksowi wektora popytu, oraz 
+    $val$ - określa wartość macierzy w polu o podanych indeksach $costMatrix[d, s] = val$.
+\end{itemize}
+
+Przykładowy plik konfiguracyjny:
+
+\begin{lstlisting}[language=json, firstnumber=1, frame=single]
+{
+    "populationSize": 100,
+    "eliteProc": 0.3,
+    "mutationProb": 0.1,
+    "mutationRate": 0.05,
+    "crossoverProb": 0.2,
+    "mode": "regular",
+    "numberOfSeparateGenerations": 1,
+    "demand": [
+        {
+            "val": 1.0,
+            "i": 1
+        },
+        {
+            "val": 10.0,
+            "i": 2
+        }
+    ],
+    "supply": [
+        {
+            "val": 1.0,
+            "i": 1
+        },
+        {
+            "val": 5.0,
+            "i": 2
+        },
+        {
+            "val": 5.0,
+            "i": 3
+        }
+    ],
+    "costMatrix": [
+        {
+            "val": 1.0,
+            "s": 1,
+            "d": 1
+        },
+        {
+            "val": 2.0,
+            "s": 2,
+            "d": 1
+        },
+        {
+            "val": 3.0,
+            "s": 3,
+            "d": 1
+        },
+        {
+            "val": 10.0,
+            "s": 1,
+            "d": 2
+        },
+        {
+            "val": 20.0,
+            "s": 2,
+            "d": 2
+        },
+        {
+            "val": 30.0,
+            "s": 3,
+            "d": 2
+        }
+    ]
+}
+\end{lstlisting}
+
+\section{Uruchomienie biblioteki}
+
+Przed uruchomieniem biblioteki należy zdefiniować w pliku \textit{functions.jl} funkcję kosztu dla zadania transportowego, lub skorzystać z 
+wcześniej zdefiniowanych funkcji znajdujących się już w tym pliku. Następnie musimy stworzyć plik konfiguracyjny, według opisu znajdującego 
+się w poprzedniej sekcji.
+
+W celu uruchomienia biblioteki możemy używać przygotowanego skryptu znajdującego się w pliku \textit{run.jl}. Uruchamiamy go poprzez wywołanie 
+interpretera julii z argumentami:
+\begin{enumerate}
+    \item ścieżka do pliku \textit{run.jl}
+    \item ścieżka do pliku konfiguracyjnego 
+    \item maksymalna ilość pokoleń
+    \item nazwa funkcji kosztu
+\end{enumerate}
+
+Przykład uruchomienia pliku:
+
+\begin{lstlisting}[language=bash, frame=single]
+piotr@piotr-hp:~/geneticNTP$ julia run.jl ./examples/ex_7x7.json 1000 B
+Path: ./examples/ex_7x7.json
+Running on 4 threads
+==================== CONFIG ====================
+Population Size: 100
+Crossover: 70.0%
+Mutation: 10.0% / rate: 0.05
+Elite: 30.0%
+Iterations: 1000
+Cost Func: B
+
+Best result in first generation: 660.8
+Done in: 0.52914400100708 s
+Best result: 265.8226422107641
+\end{lstlisting}
+
+W przypadku, jeśli chcielibyśmy używać biblioteki z poziomu \textit{REPL} Julii musimy wykonać następujące kroki:
+
+\begin{enumerate}
+    \item Włączamy \textit{REPL} Julii.
+\begin{lstlisting}[language=bash, frame=single]
+piotr@piotr-hp:~$ julia 
+               _
+   _       _ _(_)_     |  Documentation: https://docs.julialang.org
+  (_)     | (_) (_)    |
+   _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 1.3.0 (2019-11-26)
+ _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release
+|__/                   |
+
+julia> 
+
+\end{lstlisting}
+
+    \item Dołączamy bibliotekę \textit{GeneticNTP}.
+\begin{lstlisting}[language=bash, frame=single]
+julia> include("GeneticNTP.jl")
+Main.GeneticNTP
+
+julia> using .GeneticNTP
+\end{lstlisting}
+
+    \item Uruchamiamy algorytm wywołując funkcję \textit{runEA()}, gdzie w argumentach podajemy ścieżkę do pliku konfiguracyjnego, 
+        maksymalną ilość pokoleń oraz nazwę funkcji kosztu z słownika znajdującego się w pliku \textit{functions.jl}
+\begin{lstlisting}[language=bash, frame=single]
+julia> c = GeneticNTP.runEA("../examples/ex_7x7.json", 1000, "A")
+==================== CONFIG ====================
+Population Size: 100
+Crossover: 70.0%
+Mutation: 10.0% / rate: 0.05
+Elite: 30.0%
+Iterations: 1000
+Cost Func: A
+
+Best result in first generation: 643.0    
+\end{lstlisting}
+
+    \item Wynikiem jest obiekt \textit{Chromosom}, który w polu \textit{result} posiada macierz rozwiązania, a w polu \textit{cost} koszt 
+    znalezionego rozwiązania.
+    
+\begin{lstlisting}[language=bash, frame=single]
+julia> c.result
+7 x 7 Array{Float64,2}:
+18.0516   0.386976  0.424021  0.285102  0.235168  0.273782  0.34338 
+0.674536  16.1462   0.463446  0.999492  0.509193  0.40339   0.80372 
+1.50289   1.54443   14.8906   0.809828  0.317118  0.306721  0.628409
+1.90339   1.74331   3.83536   12.4525   0.0       1.31811   1.74737 
+1.72222   1.47616   1.70419   3.91253   16.5287   0.391483  0.26473 
+1.75765   1.10214   1.68994   0.975765  1.53068   16.6977   1.24612 
+1.38773   5.60076   1.99244   0.564831  0.879151  0.608813  14.9663 
+
+julia> c.cost
+183.0
+
+\end{lstlisting}
+
+\end{enumerate}
 

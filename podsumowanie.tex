@@ -1,7 +1,18 @@
 \chapter{Podsumowanie}
 \thispagestyle{chapterBeginStyle}
 
-W tym rozdziale znajdzie się podsumowanie pracy.
+Celem niniejszej pracy było opracowanie równoległej wersji algorytmu ewolucyjnego, który rozwiązywałby zadanie transportowe z nieliniową funkcją 
+kosztu, oraz przetestowanie go i porównanie z innymi algorytmami służącymi do optymalizacji tego typu zadań. Cel został osiągnięty, a analiza 
+eksperymentalna pokazała, że zaimplementowany algorytm osiąga wyniki lepsze, lub bardzo podobne do tych otrzymywanych przy użyciu innych 
+metod optymalizacji. Udało się to osiągnąć poprzez dostosowanie reprezentacji chromosomu, jak i poszczególnych operatorów w postaci mutacji 
+i krzyżowania do specyfiki zadania transportowego. Dzięki temu użycie operatorów pozwalało na zachowanie ograniczeń zadania. Algorytm działa 
+poprawnie nie zależnie od wybranej funkcji kosztu, w dodatku nie wymaga on tego, żeby używana funkcja była różniczkowalna, co jest wymogiem 
+w przypadku używania innych dostępnych solverów.
+
+Głównym atutem przedstawionego algorytmu jest szybkość z jaką znajdował rozwiązania, co udało 
+się osiągnąć dzięki wprowadzonej równoległości i wykorzystaniu języka Julia, który jest tworzony z myślą o szybkich obliczeniach. Zaprezentowany 
+algorytm ewolucyjny potrzebował jedynie kilkudziesięciu sekund na rozwiązanie dużych zadań, których rozmiar wynosił $100 \times 100$, gdzie reszta 
+solverów potrzebowała od kilkudziesięciu minut do nawet ośmiu godzin.
 
 % W podsumowanie należy określić stan zakończonych prac projektowych i implementacyjnych. Zaznaczyć, które z zakładanych funkcjonalności systemu udało się zrealizować. Omówić aspekty pielęgnacji systemu w środowisku wdrożeniowym. Wskazać dalsze możliwe kierunki rozwoju systemu, np.\ dodawanie nowych komponentów realizujących nowe funkcje.
 

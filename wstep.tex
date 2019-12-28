@@ -1,3 +1,19 @@
 \chapter{Wstęp}
 \thispagestyle{chapterBeginStyle}
-\cite{ALG-GEN-BOOK}
+
+W niniejszej pracy przedstawiono ewolucyjne podejście do rozwiązywania zadania transportowego. Pokazano w niej elementy, z których składa się algorytm 
+ewolucyjny, oraz przedstawiono zasadę jego działania. Następnie pokazano w jaki sposób można dostosować algorytm pod konkretny problem jakim 
+jest omawiane zadanie transportowe. W tym celu zastosowano niestandardową reprezentację rozwiązania, oraz dostosowano do niej operatory mutacji 
+i krzyżowania w taki sposób, żeby ich użycie nie naruszało ograniczeń zadania. W celu uzyskania lepszych wyników czasowych zaproponowano dwa 
+modele zrównoleglenia algorytmu. 
+
+Praca została podzielona na dwie części. Pierwsza z nich składa się z rodziałów ,,Analiza problemu'' oraz 
+,,Ewolucyjne podejście do nieliniowego zadania transportowego''. Przedstawiono w niej problem transportowy i w sposób teoretyczny opisano budowę 
+prezentowanego algorytmu. 
+Znajduje się w tutaj też opis użytych rozwiązań wraz z pseudokodem i przykładami, które w przejrzysty sposób pokazują zasadę ich działania. 
+W drugiej części, w rozdziale zatytułowanym ,,Wyniki eksperymentalne'' przeprowadzono analizę eksperymentalną algorytmu ewolucyjnego, w której między 
+innymi porównano go z dostępnymi solverami służącymi do optymalizacji. Pokazano również jaki zysk daje wprowadzenie opisanych modeli zrównoleglenia. 
+
+Do implementacji opisanego rozwiązania użyto języka Julia w wersji 1.3. Szczegóły dotyczące implementacji znajdują się w dodatku \ref{plytaCD}. 
+Wykresy przedstawione w części eksperymentalnej zostały stworzone przy użyciu bibliotyki \textit{PyPlot}. Dostęp do solverów był możliwy dzięki 
+serwisowi NEOS, który został opsiany na początku rozdziału \ref{rozdzial3}.

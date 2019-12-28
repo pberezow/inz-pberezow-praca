@@ -30,27 +30,27 @@ przejście określonej liczby iteracji.
 Ogólny schemat działania algorytmu ewolucyjnego przedstawiono w postaci pseudokodu \ref{alg_ewo} oraz schematu blokowego \ref{alg_ewo_img}.
 
 \begin{pseudokod}[H]
-\caption{Ogólny schemat działania algorytmu ewolucyjnego}
 \label{alg_ewo}
-    $P(t)$: Populacja w t-tej iteracji algorytmu\;
-    $O(t)$: Populacja dzieci w t-tej iteracji algorytmu\;
+    \caption{Ogólny schemat działania algorytmu ewolucyjnego}
+    $P_t$: Populacja w t-tej iteracji algorytmu\;
+    $O_t$: Populacja dzieci w t-tej iteracji algorytmu\;
     \BlankLine
     $t \gets 0$\;
-    inicjalizacja $P(t)$\;
+    inicjalizacja $P_t$\;
     \BlankLine
     \While{Warunek końcowy nie został spełniony} {
-        $parents \gets$ selekcja z $P(t)$\;
-        $O(t+1) \gets$ zastosuj operator krzyżowania na $parents$\;
-        $O(t+1) \gets$ zastosuj operator mutacji na $O(t+1)$\;
-        $P(t+1) \gets$ wybierz osobniki do następnej generacji z $O(t+1)$\;
+        $parents \gets$ selekcja z $P_t$\;
+        $O_{t+1} \gets$ zastosuj operator krzyżowania na $parents$\;
+        $O_{t+1} \gets$ zastosuj operator mutacji na $O_{t+1}$\;
+        $P_{t+1} \gets$ wybierz osobniki do następnej generacji z $O_{t+1}$\;
         $t \gets t+1$\;
     }
-    \Return{najlepszy osobnik z $P(t)$}\;
+    \Return{najlepszy osobnik z $P_t$}\;
 \end{pseudokod}
 
 \begin{figure}[H]
     \centering        
-    \includegraphics[width=0.4\textwidth]{img/alg_ewo_szkic.png}
+    \includegraphics[width=0.6\textwidth]{img/alg_ewo_szkic.png}
     \caption{Ogólny schemat działania algorytmu ewolucyjnego}
     \label{alg_ewo_img}
 \end{figure}
@@ -70,21 +70,27 @@ Projektowanie algorytmu ewolucyjnego możemy podzielić na kilka oddzielnych cz�
     \item \textbf{Operator krzyżowania} - jest jednym z operatorów używanych do generowania kolejnego pokolenia w algorytmach ewolucyjnych. Z założenia 
     przyjmuje on jako argumenty dwa lub więcej rozwiązań(rodziców) i generuje na ich podstawie nowe(dzieci), które łączą w sobie cechy rodziców. 
     
-    [TODO: przykład]
+    \begin{figure}[H]
+        \centering        
+        \includegraphics[width=0.9\textwidth]{img/cross_example.png}
+        \caption{Przykład krzyżowania przez rozcięcie.}
+    \end{figure}
 
     \item \textbf{Operator mutacji} - jest drugim z operatorów używanych do generowania następnych pokoleń w algorytmach ewolucyjnych. Jego celem jest 
     poszerzene obszaru przeszukiwanych rozwiązań. Ten operator powinien wprowadzać minimalną zmianę w rozwiązaniu, co zapobiega zbyt szybkiej 
     zbieżności algorytmu i pozwala na wprowadzenie dodatkowej różnorodności w populacji. Należy pamiętać o tym, że wprowadzana zmiana nie może 
     być za duża, bo może to prowadzić do odwrotnego rezultatu, czyli zamiast różnicować rozwiązania nasz operator może je niszczyć.
     
-    [TODO: przykład]
+    \begin{figure}[H]
+        \centering        
+        \includegraphics[width=0.9\textwidth]{img/mut_example.png}
+        \caption{Przykład mutacji przez zanegowanie jednego bitu w rozwiązaniu.}
+    \end{figure}
 
     \item \textbf{Selekcja} - określa sposób wyboru rodziców na których użyjemy operatora krzyżowania. Istnieje wiele opisanych metod selekcji\cite{SELECTION-METHODS} 
     takich jak np. metoda koła ruletki czy metoda rankingowa. Przy tworzeniu procedury selekcji należy pamiętać 
     o tym, że rozwiązania lepiej przystosowane powinny mieć większe szanse na zostanie rodzicami dla kolejnego pokolenia. Zapewnia to większe 
     szanse na wygenerowanie lepszych dzieci do następnej generacji.
-    
-    [TODO: przyklad]
 
     \item \textbf{Wybór następnego pokolenia} - ostateczny krok algorytmu, w którym wybieramy które osobniki wejdą w skład populacji początkowej w 
     kolejnej iteracji algorytmu. Podstawową składową tej populacji powinny być oczywiście osobniki wygenerowane za pomącą krzyżowania. Często 
@@ -142,9 +148,11 @@ wierzchołkami sympleksu, opisującego wypukły brzeg przestrzeni dopuszczalnych
 
 \begin{pseudokod}[H]
     \label{inicjalizacja-1}
+    \SetKwInOut{Input}{Wejście}
+    \SetKwInOut{Output}{Wyjście}
     \caption{Procedura inicjalizacji chromosomu}
-    \KwData{$supply$ - wektor popytu rozmiaru $n$, $demand$ - wektor podaży rozmiaru $m$}
-    \KwResult{$V$ - zainicjalizowana macierz}
+    \Input{$supply$ - wektor popytu rozmiaru $n$, $demand$ - wektor podaży rozmiaru $m$}
+    \Output{$V$ - zainicjalizowana macierz}
     \BlankLine
     $V \gets zeros(n, m)$\tcc*[r]{generujemy macierz zerową rozmiaru $n \times m$}
     $indices \gets$ lista wszystkich indeksów macierzy $V$ w losowej kolejności\;
@@ -159,7 +167,79 @@ wierzchołkami sympleksu, opisującego wypukły brzeg przestrzeni dopuszczalnych
     \Return{$V$}
 \end{pseudokod}
 
-[TODO: Przykład zastosowania]
+\begin{example}
+    Przyklad inicjalizacji dla 3 dostawców i 2 odbiorców.
+
+    1. Weźmy następujące wektory popytu i podaży:
+    $$demand = [10, 12]$$
+    $$supply = [8, 7, 7]$$
+
+    2. Wygenerujmy zerową macierz rozwiązania $V$.
+
+    $$
+        V
+        =
+        \begin{bmatrix}
+            0 & 0 & 0 \\
+            0 & 0 & 0 \\
+        \end{bmatrix}
+    $$
+
+    3. Wygenerujmy losowy wektor permutacji wszystkich indeksów macierzy rozwiązania.
+
+    $$indices = [(1,1), (3,2), (1,2), (2,1), (3,1), (2,2)]$$
+
+    4. Zainicjalizujmy komórki macierzy $V[s,d] = \min(supply[s], demand[d])$, gdzie $(s,d) \in indices$
+    
+    $$
+        \begin{bmatrix}
+            0 & 0 & 0 \\
+            0 & 0 & 0 \\
+        \end{bmatrix}
+        \rightarrow^{(1,1)}
+        \begin{bmatrix}
+            \textbf{8} & 0 & 0 \\
+            0 & 0 & 0 \\
+        \end{bmatrix}
+        \rightarrow^{(3,2)}
+        \begin{bmatrix}
+            8 & 0 & 0 \\
+            0 & 0 & \textbf{7} \\
+        \end{bmatrix}
+        \rightarrow^{(1,2)}
+        \begin{bmatrix}
+            8 & 0 & 0 \\
+            \textbf{0} & 0 & 7 \\
+        \end{bmatrix}
+        \rightarrow^{(2,1)}
+        $$
+        $$
+        \begin{bmatrix}
+            8 & \textbf{2} & 0 \\
+            0 & 0 & 7 \\
+        \end{bmatrix}
+        \rightarrow^{(3,1)}
+        \begin{bmatrix}
+            8 & 2 & \textbf{0} \\
+            0 & 0 & 7 \\
+        \end{bmatrix}
+        \rightarrow^{(2,2)}
+        \begin{bmatrix}
+            8 & 2 & 0 \\
+            0 & \textbf{5} & 7 \\
+        \end{bmatrix}
+    $$
+
+    5. W tym momencie kończymy procedurę inicjalizacji, nasza macierz rozwiązania ma postać:
+    $$
+    V
+    =
+    \begin{bmatrix}
+        8 & 2 & 0 \\
+        0 & 5 & 7 \\
+    \end{bmatrix}
+    $$
+\end{example}
 
 
 \section{Operator krzyżowania}
@@ -168,9 +248,11 @@ rozwiązania.
 
 \begin{pseudokod}[H]
     \label{krzyżowanie}
+    \SetKwInOut{Input}{Wejście}
+    \SetKwInOut{Output}{Wyjście}
     \caption{Operator krzyżowania}
-    \KwData{$P_1, P_2$ - rodzice wybrani do krzyżowania}
-    \KwResult{$O_1, O_2$ - otrzymane dzieci}
+    \Input{$P_1, P_2$ - rodzice wybrani do krzyżowania}
+    \Output{$O_1, O_2$ - otrzymane dzieci}
     \BlankLine
     $c_1 \gets rand(0,\dots,1)$\tcc*[r]{losujemy liczbę z przedziału $[0,1]$}
     $c_2 \gets 1.0 - c_1$\;
@@ -182,7 +264,74 @@ rozwiązania.
 Zdefiniowany tak operator krzyżowania nie narusza ograniczeń zadania, ponieważ przestrzeń rozwiązań jest wypukła. Wynika z tego, że jeśli 
 rodzice spełniali ograniczenia, to otrzymane w ten sposób dzieci również muszą spełniać ograniczenia.
 
-[TODO: Przykład zastosowania]
+\begin{example}
+    Przykład zastowania operatora krzyżowania dla macierzy rozwiązania rozmiaru $3 \times 2$.
+
+    1. Wybierzmy rodziców do krzyżowania:
+
+    $$
+        P_1
+        =
+        \begin{bmatrix}
+            8 & 2 & 0 \\
+            0 & 5 & 7 \\
+        \end{bmatrix}
+    $$
+    $$
+        P_2
+        =
+        \begin{bmatrix}
+            0 & 3 & 7 \\
+            8 & 4 & 0 \\
+        \end{bmatrix}
+    $$
+
+    2. Wylosujmy współczynniki $c_1 = 0.6$ oraz $c_2 = 1 - c_1 = 0.4$
+
+    3. Zastosujmy krzyżowanie.
+
+    $$
+        O_1
+        =
+        0.6
+        \begin{bmatrix}
+            8 & 2 & 0 \\
+            0 & 5 & 7 \\
+        \end{bmatrix}
+        +
+        0.4
+        \begin{bmatrix}
+            0 & 3 & 7 \\
+            8 & 4 & 0 \\
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            4.8 & 2.4 & 2.8 \\
+            3.2 & 4.6 & 4.2 \\
+        \end{bmatrix}
+    $$
+    $$
+        O_2
+        =
+        0.4
+        \begin{bmatrix}
+            8 & 2 & 0 \\
+            0 & 5 & 7 \\
+        \end{bmatrix}
+        +
+        0.6
+        \begin{bmatrix}
+            0 & 3 & 7 \\
+            8 & 4 & 0 \\
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            3.2 & 2.6 & 4.2 \\
+            4.8 & 4.4 & 2.8 \\
+        \end{bmatrix}
+    $$
+
+\end{example}
 
 \section{Operator mutacji}
 Operator mutacji opiera się na modyfikacji rozwiązania poprzez wybranie z niego podmacierzy i jej ponowną inicjalizacje(patrz \ref{mutacja}). 
@@ -207,8 +356,10 @@ macierzy $V$.
 \begin{pseudokod}[H]
     \label{mutacja}
     \caption{Operator mutacji}
-    \KwData{$V$ - osobnik wybrany do mutacji wielkości $n \times m$, $k, l$ - wielkość podmacierzy}
-    \KwResult{$V$ - osobnik po mutacji}
+    \SetKwInOut{Input}{Wejście}
+    \SetKwInOut{Output}{Wyjście}
+    \Input{$V$ - osobnik wybrany do mutacji wielkości $n \times m$, $k, l$ - wielkość podmacierzy}
+    \Output{$V$ - osobnik po mutacji}
     \BlankLine
     $supply\_idx \gets$ wylosuj podzbiór długości $k$ ze zbioru $\{1, \dots, n\}$\;
     $demand\_idx \gets$ wylosuj podzbiór długości $l$ ze zbioru $\{1, \dots, m\}$\;
@@ -253,8 +404,10 @@ Poniżej przedstawiono schemat zmodyfikowanej procedury inicjalizacji w postaci 
 \begin{pseudokod}[H]
     \label{inicjalizacja-2}
     \caption{Zmodyfikowana procedura inicjalizacji}
-    \KwData{$supply$ - wektor podaży rozmiaru $n$, $demand$ - wektor popytu rozmiaru $m$}
-    \KwResult{$V$ - zainicjalizowana macierz}
+    \SetKwInOut{Input}{Wejście}
+    \SetKwInOut{Output}{Wyjście}
+    \Input{$supply$ - wektor podaży rozmiaru $n$, $demand$ - wektor popytu rozmiaru $m$}
+    \Output{$V$ - zainicjalizowana macierz}
     \BlankLine
     $V \gets zeros(n, m)$\tcc*[r]{generujemy macierz zerową rozmiaru $n \times m$}
     $indices \gets$ lista wszystkich indeksów macierzy $V$ w losowej kolejności\;
@@ -276,14 +429,15 @@ Poniżej przedstawiono schemat zmodyfikowanej procedury inicjalizacji w postaci 
     \Return{$V$}
 \end{pseudokod}
 
-[TODO: Przykład zastosowania]
+[TODO: przykład]
 
 \section{Funkcje oceny}
-W przypadku omawianego problemu funkcja oceny jest równoważna funkcji celu dla zadania transportowego. Powinna więc mieć postać:
-$$\sum_{i=1}^{n}\sum_{j=1}^{m} f(v_{ij})$$, 
+W przypadku omawianego problemu funkcja oceny jest równoważna odwrotności funkcji celu dla zadania transportowego. Powinna więc mieć postać:
+$$\frac{1}{\sum_{i=1}^{n}\sum_{j=1}^{m} f(v_{ij})}$$, 
 gdzie $f(v_{ij})$ jest dowolną funkcją przyjmującą jako argument ilość towaru transportowanego między punktami $i$ oraz $j$.
+Bierzemy odwrotnośc, ponieważ chemy minimalizować funkcję celu, tzn. im mniejszy koszt osobnika, tym większa wartość funkcji przystosowania.
 
-[TODO: Przykłady funkcji oceny użytych w części eksperymentalnej + wykresy]
+Przykładowe funkcje celu znajdują się w części eksperymentalnej.
 
 \section{Metoda selekcji}
 W algorytmie zastosowano standardową metodę selekcji - metodę koła ruletki. W tej metodzie lepiej przystosowane osobniki mają odpowiednio większe 
@@ -296,8 +450,10 @@ Bardziej formalnie procedura została przedstawiona na poniższym pseudokodzie.
 \begin{pseudokod}[H]
     \label{selekcja}
     \caption{Procedura selekcji}
-    \KwData{$population$ - populacja chromosomów, $n$ - ilość rodziców do wybrania}
-    \KwResult{$parents$ - wektor wybranych rodziców}
+    \SetKwInOut{Input}{Wejście}
+    \SetKwInOut{Output}{Wyjście}
+    \Input{$population$ - populacja chromosomów, $n$ - ilość rodziców do wybrania}
+    \Output{$parents$ - wektor wybranych rodziców}
     \BlankLine
     $parents \gets$ stwórz pusty wektor długości n\;
     $k \gets length(population)$\;
@@ -311,20 +467,47 @@ Bardziej formalnie procedura została przedstawiona na poniższym pseudokodzie.
     \BlankLine
     \For{$i \in 1,\dots, n$} {
         $num \gets rand(0,\dots, 1)$\tcc*[r]{losujemy wycinek koła}
-        $selectedIdx \gets$ wybierz pierwszy taki $x$, że $x \le num$\;
+        $selectedIdx \gets$ wybierz pierwszy taki $x$, że $wheel[x] \ge num$\;
         $parents[i] \gets population[selectedIdx]$\;
     }
 
     \Return{$parents$}
 \end{pseudokod}
 
-% Na początku obliczana jest suma kumulatywna dla całego pokolenia. Następnie 
-% otrzymane wartości skalujemy tak, aby znajdowały się w przedziale $[0, 1]$. W ten sposób przedział $[0, 1]$ zostaje podzielony na mniejsze, które 
-% odpowiadają pojedynczym osobnikom z populacji. Następnie generujemy losową liczbę z tego przedziału. Do zbioru rodziców dodawany jest osobnik, 
-% w którego przedziale znajduje się wylosowana liczba. Warto zauważyć że tak zaprojektowana selekcja pozwala na to, że jeden osobnik zostanie wybany 
-% kilkukrotnie na rodzica.
+\begin{example}
+    Przykład konstrukcji koła ruletki dla populacji 5 osobników. 
 
-[TODO: przykład]
+    Weźmy populację liczącą 5 osobników $V_1, \dots, V_5$. Niech wartość funkcji przystosowania dla osobnika $V_i$ będzie równa $c_i$.
+
+    Załużmy, że $c_1 = 5, c_2 = 10, c_3 = 15, c_4 = 20, c_5 = 25$.
+
+    1. Tworzymy zerowy wektor o długości równej wielkości populacji, czyli w naszym wypadku długości 5.
+
+    $$wheel = [0, 0, 0, 0, 0]$$
+
+    2. Sumujemy wartość funkcji przystosowania wszystkich osobników w populacji.
+
+    $$total = \sum_{i=1}^{5} c_i = 75$$
+
+    3. Obliczamy kolejne przedziały dla każdego z osobników.
+
+    $$wheel[1] = c_1 / total = 0.0667$$
+    $$wheel[2] = c_2 / total + wheel[1] = 0.1333 + 0.0667 = 0.2$$
+    $$wheel[3] = c_3 / total + wheel[2] = 0.2 + 0.2 = 0.4$$
+    $$wheel[4] = c_4 / total + wheel[3] = 0.2667 + 0.4 = 0.6667$$
+    $$wheel[5] = c_5 / total + wheel[4] = 0.3333 + 0.6667 = 1$$
+
+    4. Ostatecznie nasze koło ma postać $wheel = [0.0667, 0.2, 0.4, 0.6667, 1]$
+
+    Teraz, aby wybrać rodzica losujemy liczbę z zakresu $[0, 1]$ i wybieramy osobnika, w którego przedziale znajduje się wylosowana liczba, np.
+    załużmy, że wylosowaliśmy liczbe $r = 0.5$. Szukamy wtedy takiej liczby w naszym wektorze $wheel$ takiej liczby, $x \ge r$, która będzie najbliższa 
+    naszemu $r$. W naszym przypadku jest to $0.6667$. Indeks wybranego rodzica jest indeksem na którym znajduje się $x$, czyli w tym wypadku $idx = 4$.
+    Wybieramy więc jako rodzica osobnika $V_4$.
+
+    Możemy łatwo zauważyć, że losując rodziców w ten sposób, osobniki z większą wartością funkcji przystosowania mają większe przedziały na kole 
+    ruletki, a co za tym idzie mają wieksze szanse na to, że zostaną wybrane.
+    
+\end{example}
 
 \section{Wersja równoległa}
 
@@ -334,8 +517,6 @@ które są od siebie niezależne, to znaczy, że operacje wykonane na jednym oso
 obliczając wartość funkcji przystosowania dla całej populacji nie musimy się martwić o kolejność w jakiej będziemy wybierać osobniki. Możemy więc 
 podzielić populacje na mniejsze części i następnie zlecić obliczenie funkcji przystosowania poszczególnych części pojedynczym wątkom. W ten 
 sposób, wszystkie części mogą być obliczane w tym samym czasie, co powinno skutkować skróceniem czasu całkowitych obliczeń dla całej populacji.
-
-[TODO: obrazek przedstawiający proces]
 
 Podobnie możemy postąpić w przypadku zastosowania operatorów genetycznych, które również wpływają tylko na poszczególne osobniki, a nie całą 
 populację.
@@ -357,9 +538,11 @@ Na początku procedura inicjalizacji generuje losową populacje o określonej li
 Następnie przechodzimy do głównej pętli algorytmu, która kończy się w momencie kiedy populacja osiągnie maksymalną ilość generacji. 
 Każdy z trybów różni się przebiegiem procedury \textit{nextGeneration}(patrz \ref{alg_main_img}), która tworzy nową generacje osobników.
 
+\newpage
+
 \begin{figure}[H]
     \centering        
-    \includegraphics[width=0.4\textwidth]{img/alg_main.png}
+    \includegraphics[width=0.6\textwidth]{img/alg_main.png}
     \caption{Przebieg zaimplementowanego algorytmu ewolucyjnego}
     \label{alg_main_img}
 \end{figure}
@@ -378,9 +561,11 @@ Ewolucję populacji możemy podzielić tutaj na dwie części:
     z poprzedniej populacji. Następnie te dodane osobniki są poddawane mutacji i obliczana jest dla nich funkcja oceny.
 \end{itemize}
 
+\newpage
+
 \begin{figure}[H]
     \centering        
-    \includegraphics[width=0.2\textwidth]{img/next_gen_klasyczny.png}
+    \includegraphics[width=0.4\textwidth]{img/next_gen_klasyczny.png}
     \caption{Przebieg procedury nextGeneration dla modelu klasycznego}
     \label{next_gen_klasyczny_img}
 \end{figure}
@@ -397,7 +582,7 @@ musi być odpowiednio duża, żeby jej podział na mniejsze części się sprawd
 
 \begin{figure}[H]
     \centering        
-    \includegraphics[width=0.5\textwidth]{img/next_gen_wyspowy.png}
+    \includegraphics[width=0.7\textwidth]{img/next_gen_wyspowy.png}
     \caption{Przebieg procedury nextGeneration dla modelu wyspowego}
     \label{next_gen_wyspowy_img}
 \end{figure}
@@ -456,109 +641,3 @@ Taki podział zadań jest idealnym rozwiązaniem w przypadku kiedy iteracje pęt
 znaczenia. Dokładnie taka sytuacja ma miejsce w implementowanym przez nas algorytmie, kiedy np. dzielimy populacje osobników na populacje 
 częściowe, które ewoluują niezależnie od siebie. Dzięki temu mechanizm równoległości oferowany przez Julię idealnie sprawdza się w przedstawianym 
 tutaj problemie.
-
-% Przeniesc do appendix
-% \section{Pliki konfiguracyjne}
-% Dodatkowo do algorytmu został dodany moduł obsługi plików konfiguracyjnych. Używają one formatu JSON. Moduł pozwala na zapisywanie i wczytywanie 
-% całej konfiguracji algorytmu, w skład której wchodzą wektory popytu i podaży, macierz kosztu, oraz wszystkie parametry programu.
-% Definicja poszczególnych parametrów:
-
-% \begin{itemize}
-%     \item $populationSize$ - rozmiar całkowitej populacji. Powinien być dodatnią liczbą całkowitą.
-%     \item $eliteProc$ - ułamek najlepszych rozwiązań, które zostają przepisane do następnego pokolenia. 
-%     Wartość powinna znajdować się w przedziale $[0, 1]$. Testy pokazują, że najlepsze rozwiązania są generowane dla wartości parametru w przedziale
-%     $[0.1, 0.3]$.
-%     \item $mutationProb$ - prawdopodobieństwo mutacji. Przyjmuje wartość z zakresu $[0, 1]$. Warto pamiętać o tym, że zalecane prawdopodobieństwo 
-%     mutacji nie powinno przekraczać kilkanastu procent.
-%     \item $mutationRate$ - wielkość mutacji, określa stosunek rozmiaru podmacierzy, wybieranej do ponownej inicjalizacji podczas mutacji, 
-%     do macierzy rozwiązania. Przyjmuje wartości z zakresu $[0, 1]$. Tak jak w przypadku prawdopodobieństwa mutacji, jej wielkość nie powinna 
-%     przekraczać kilkunastu procent, ponieważ zbyt duża mutacja może niszczyć znalezione rozwiązania.
-%     \item $crossoverProb$ - prawdopodobieństwo krzyżowania. Przyjmuje wartości z przedziału $[0, 1]$. Zaleca się ustawialnie wartości z przedziału 
-%     $[0.5, 0.9]$. Należy pamiętać o tym, że suma parametrów eliteProc i crossoverProb nie może być większa niż $1$.
-%     \item mode - tryb w jakim ma działać algorytm. Przyjmuje wartości $regular$(w przypadku wyboru klasycznego modelu) lub $island$(w przypadku 
-%     modelu wyspowego).
-%     \item $numberOfSeparateGenerations$ - liczba naturalna określająca ilość iteracji jakie wykona algorytm pomiędzy rozdzieleniem populacji na 
-%     mniejsze części, a ponownym jej scaleniem. Dla wyboru modelu klasycznego należy ustawić wartość parametru na $1$.
-% \end{itemize}
-
-% Dodatkowo w pliku konfiguracyjnym określamy wektor popytu, podaży i macierz kosztów:
-
-% \begin{itemize}
-%     \item $demand$ - wektor popytu. Przyjmuje jako wartość listę elementów, które składają się z dwóch pól - $i$, które określa indeks wektora i 
-%     $val$, które określa wartosć wektora w miejscu $i$ - $demand[i] = val$.
-%     \item $supply$ - wektor podaży. Przyjmuje jako wartość listę elementów, o polach takich samych jak w przypadku wektora popytu. Pojedynczy element 
-%     opisuje pole wektora $supply[i] = val$.
-%     \item $costMatrix$ - macierz kosztu, która może być wykorzystywana w funkcji celu. Przyjmuje jako wartość listę elementów, które składają się 
-%     z trzech pól: $s$ - określa indeks odpowiadający indeksowi wektora podaży, $d$ - określa indeks odpowiadający indeksowi wektora popytu, oraz 
-%     $val$ - określa wartość macierzy w polu o podanych indeksach $costMatrix[d, s] = val$.
-% \end{itemize}
-
-% Przykładowy plik konfiguracyjny:
-
-% \begin{lstlisting}[language=json, firstnumber=1, frame=single]
-% {
-%     "populationSize": 100,
-%     "eliteProc": 0.3,
-%     "mutationProb": 0.1,
-%     "mutationRate": 0.05,
-%     "crossoverProb": 0.2,
-%     "mode": "regular",
-%     "numberOfSeparateGenerations": 1,
-%     "demand": [
-%         {
-%             "val": 1.0,
-%             "i": 1
-%         },
-%         {
-%             "val": 10.0,
-%             "i": 2
-%         }
-%     ],
-%     "supply": [
-%         {
-%             "val": 1.0,
-%             "i": 1
-%         },
-%         {
-%             "val": 5.0,
-%             "i": 2
-%         },
-%         {
-%             "val": 5.0,
-%             "i": 3
-%         }
-%     ],
-%     "costMatrix": [
-%         {
-%             "val": 1.0,
-%             "s": 1,
-%             "d": 1
-%         },
-%         {
-%             "val": 2.0,
-%             "s": 2,
-%             "d": 1
-%         },
-%         {
-%             "val": 3.0,
-%             "s": 3,
-%             "d": 1
-%         },
-%         {
-%             "val": 10.0,
-%             "s": 1,
-%             "d": 2
-%         },
-%         {
-%             "val": 20.0,
-%             "s": 2,
-%             "d": 2
-%         },
-%         {
-%             "val": 30.0,
-%             "s": 3,
-%             "d": 2
-%         }
-%     ]
-% }
-% \end{lstlisting}

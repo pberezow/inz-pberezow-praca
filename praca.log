@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.15)  20 DEC 2019 02:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.15)  28 DEC 2019 23:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1125,14 +1125,7 @@ Package: multirow 2016/11/25 v2.2 Span multiple rows of a table
 \c@example=\count155
 \c@corollary=\count156
 \c@definition=\count157
- (/home/piotr/Dokumenty/studia/praca/praca.aux
-
-LaTeX Warning: Label `threads_regular_100x100' multiply defined.
-
-
-LaTeX Warning: Label `threads_regular_100x100' multiply defined.
-
-)
+ (/home/piotr/Dokumenty/studia/praca/praca.aux)
 \openout1 = `praca.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 540.
@@ -1239,7 +1232,7 @@ LaTeX Info: Redefining \nameref on input line 540.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-<pwr.png, id=104, 260.975pt x 370.38374pt>
+<pwr.png, id=116, 260.975pt x 370.38374pt>
 File: pwr.png Graphic file (type png)
 <use pwr.png>
 Package pdftex.def Info: pwr.png  used on input line 561.
@@ -1291,7 +1284,7 @@ Rozdzia\l  1.
 
 
 ]
-<wppt-logo.png, id=160, 75.8835pt x 66.4884pt>
+<wppt-logo.png, id=177, 75.8835pt x 66.4884pt>
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
 Package pdftex.def Info: wppt-logo.png  used on input line 587.
@@ -1309,11 +1302,11 @@ Package pdftex.def Info: wppt-logo.png  used on input line 590.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
  [4] (/home/piotr/Dokumenty/studia/praca/rozdzial2.tex
 Rozdzia\l  3.
-<img/alg_ewo_szkic.png, id=193, 249.93375pt x 526.96875pt>
+<img/alg_ewo_szkic.png, id=209, 1050.92625pt x 1336.995pt>
 File: img/alg_ewo_szkic.png Graphic file (type png)
 <use img/alg_ewo_szkic.png>
 Package pdftex.def Info: img/alg_ewo_szkic.png  used on input line 53.
-(pdftex.def)             Requested size: 188.8096pt x 398.10422pt.
+(pdftex.def)             Requested size: 283.22162pt x 360.32025pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1330,214 +1323,308 @@ File: wppt-logo.png Graphic file (type png)
 Package pdftex.def Info: wppt-logo.png  used on input line 66.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
  [6 </home/piotr/Dokumenty/studia/praca/img/alg_ewo_szkic.png>]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<pwr-logo.png, id=222, 217.81375pt x 216.81pt>
+<img/cross_example.png, id=235, 1682.285pt x 464.73625pt>
+File: img/cross_example.png Graphic file (type png)
+<use img/cross_example.png>
+Package pdftex.def Info: img/cross_example.png  used on input line 75.
+(pdftex.def)             Requested size: 424.82523pt x 117.36093pt.
+<img/mut_example.png, id=236, 1612.0225pt x 79.29625pt>
+File: img/mut_example.png Graphic file (type png)
+<use img/mut_example.png>
+Package pdftex.def Info: img/mut_example.png  used on input line 86.
+(pdftex.def)             Requested size: 424.82523pt x 20.89723pt.
+<pwr-logo.png, id=239, 217.81375pt x 216.81pt>
 File: pwr-logo.png Graphic file (type png)
 <use pwr-logo.png>
-Package pdftex.def Info: pwr-logo.png  used on input line 130.
+Package pdftex.def Info: pwr-logo.png  used on input line 110.
 (pdftex.def)             Requested size: 23.603pt x 23.49188pt.
-[7 </home/piotr/Dokumenty/studia/praca/pwr-logo.png>]
+ [7 </home/piotr/Dokumenty/studia/praca/pwr-logo.png> </home/piotr/Dokumenty/studia/praca/img/cross_example.png> </home/piotr/Dokumenty/studia/praca/img/mut_example.png>]
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <8> on input line 149.
+(Font)              <8> on input line 157.
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <6> on input line 149.
-
-Underfull \vbox (badness 4608) has occurred while \output is active []
-
+(Font)              <6> on input line 157.
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
-Package pdftex.def Info: wppt-logo.png  used on input line 182.
+Package pdftex.def Info: wppt-logo.png  used on input line 174.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
  [8]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 File: pwr-logo.png Graphic file (type png)
 <use pwr-logo.png>
-Package pdftex.def Info: pwr-logo.png  used on input line 245.
+Package pdftex.def Info: pwr-logo.png  used on input line 332.
 (pdftex.def)             Requested size: 23.603pt x 23.49188pt.
  [9]
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
-Package pdftex.def Info: wppt-logo.png  used on input line 283.
+Package pdftex.def Info: wppt-logo.png  used on input line 401.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
  [10]
 File: pwr-logo.png Graphic file (type png)
 <use pwr-logo.png>
-Package pdftex.def Info: pwr-logo.png  used on input line 342.
+Package pdftex.def Info: pwr-logo.png  used on input line 478.
 (pdftex.def)             Requested size: 23.603pt x 23.49188pt.
  [11]
-<img/alg_main.png, id=324, 259.97125pt x 325.215pt>
-File: img/alg_main.png Graphic file (type png)
-<use img/alg_main.png>
-Package pdftex.def Info: img/alg_main.png  used on input line 362.
-(pdftex.def)             Requested size: 188.8096pt x 236.19415pt.
-<img/next_gen_klasyczny.png, id=326, 123.46124pt x 606.265pt>
-File: img/next_gen_klasyczny.png Graphic file (type png)
-<use img/next_gen_klasyczny.png>
-Package pdftex.def Info: img/next_gen_klasyczny.png  used on input line 383.
-(pdftex.def)             Requested size: 94.4048pt x 463.6062pt.
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
-Package pdftex.def Info: wppt-logo.png  used on input line 387.
+Package pdftex.def Info: wppt-logo.png  used on input line 520.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
- [12 </home/piotr/Dokumenty/studia/praca/img/alg_main.png>]
-<img/next_gen_wyspowy.png, id=336, 340.27126pt x 506.89375pt>
+ [12]
+File: pwr-logo.png Graphic file (type png)
+<use pwr-logo.png>
+Package pdftex.def Info: pwr-logo.png  used on input line 541.
+(pdftex.def)             Requested size: 23.603pt x 23.49188pt.
+ [13]
+<img/alg_main.png, id=358, 1141.26375pt x 1216.545pt>
+File: img/alg_main.png Graphic file (type png)
+<use img/alg_main.png>
+Package pdftex.def Info: img/alg_main.png  used on input line 545.
+(pdftex.def)             Requested size: 283.22162pt x 301.88939pt.
+File: wppt-logo.png Graphic file (type png)
+<use wppt-logo.png>
+Package pdftex.def Info: wppt-logo.png  used on input line 564.
+(pdftex.def)             Requested size: 23.603pt x 20.68018pt.
+ [14 </home/piotr/Dokumenty/studia/praca/img/alg_main.png>]
+<img/next_gen_klasyczny.png, id=366, 731.73375pt x 1818.795pt>
+File: img/next_gen_klasyczny.png Graphic file (type png)
+<use img/next_gen_klasyczny.png>
+Package pdftex.def Info: img/next_gen_klasyczny.png  used on input line 568.
+(pdftex.def)             Requested size: 188.8096pt x 469.29547pt.
+<img/next_gen_wyspowy.png, id=368, 1472.50125pt x 1668.2325pt>
 File: img/next_gen_wyspowy.png Graphic file (type png)
 <use img/next_gen_wyspowy.png>
-Package pdftex.def Info: img/next_gen_wyspowy.png  used on input line 400.
-(pdftex.def)             Requested size: 236.01561pt x 351.59016pt.
+Package pdftex.def Info: img/next_gen_wyspowy.png  used on input line 585.
+(pdftex.def)             Requested size: 330.42041pt x 374.34337pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 File: pwr-logo.png Graphic file (type png)
 <use pwr-logo.png>
-Package pdftex.def Info: pwr-logo.png  used on input line 404.
+Package pdftex.def Info: pwr-logo.png  used on input line 589.
 (pdftex.def)             Requested size: 23.603pt x 23.49188pt.
- [13 </home/piotr/Dokumenty/studia/praca/img/next_gen_klasyczny.png>]
+ [15 </home/piotr/Dokumenty/studia/praca/img/next_gen_klasyczny.png>]
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
-Package pdftex.def Info: wppt-logo.png  used on input line 429.
+Package pdftex.def Info: wppt-logo.png  used on input line 614.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
- [14 </home/piotr/Dokumenty/studia/praca/img/next_gen_wyspowy.png>])
+ [16 </home/piotr/Dokumenty/studia/praca/img/next_gen_wyspowy.png>])
 File: pwr-logo.png Graphic file (type png)
 <use pwr-logo.png>
 Package pdftex.def Info: pwr-logo.png  used on input line 593.
 (pdftex.def)             Requested size: 23.603pt x 23.49188pt.
- [15]
+ [17]
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
 Package pdftex.def Info: wppt-logo.png  used on input line 593.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
- [16
+ [18
 
 ] (/home/piotr/Dokumenty/studia/praca/rozdzial3.tex
 Rozdzia\l  4.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [17
+[19
 
 ]
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
-Package pdftex.def Info: wppt-logo.png  used on input line 109.
-(pdftex.def)             Requested size: 23.603pt x 20.68018pt.
- [18]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-File: pwr-logo.png Graphic file (type png)
-<use pwr-logo.png>
-Package pdftex.def Info: pwr-logo.png  used on input line 224.
-(pdftex.def)             Requested size: 23.603pt x 23.49188pt.
-[19]
-Underfull \vbox (badness 1968) has occurred while \output is active []
-
-File: wppt-logo.png Graphic file (type png)
-<use wppt-logo.png>
-Package pdftex.def Info: wppt-logo.png  used on input line 236.
+Package pdftex.def Info: wppt-logo.png  used on input line 112.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
  [20]
 File: pwr-logo.png Graphic file (type png)
 <use pwr-logo.png>
-Package pdftex.def Info: pwr-logo.png  used on input line 310.
+Package pdftex.def Info: pwr-logo.png  used on input line 162.
 (pdftex.def)             Requested size: 23.603pt x 23.49188pt.
  [21]
-<img/plot_regular_threads_100x100.png, id=409, 462.528pt x 346.896pt>
+File: wppt-logo.png Graphic file (type png)
+<use wppt-logo.png>
+Package pdftex.def Info: wppt-logo.png  used on input line 245.
+(pdftex.def)             Requested size: 23.603pt x 20.68018pt.
+ [22]
+File: pwr-logo.png Graphic file (type png)
+<use pwr-logo.png>
+Package pdftex.def Info: pwr-logo.png  used on input line 319.
+(pdftex.def)             Requested size: 23.603pt x 23.49188pt.
+ [23]
+File: wppt-logo.png Graphic file (type png)
+<use wppt-logo.png>
+Package pdftex.def Info: wppt-logo.png  used on input line 329.
+(pdftex.def)             Requested size: 23.603pt x 20.68018pt.
+ [24]
+Underfull \vbox (badness 7081) has occurred while \output is active []
+
+File: pwr-logo.png Graphic file (type png)
+<use pwr-logo.png>
+Package pdftex.def Info: pwr-logo.png  used on input line 410.
+(pdftex.def)             Requested size: 23.603pt x 23.49188pt.
+ [25]
+File: wppt-logo.png Graphic file (type png)
+<use wppt-logo.png>
+Package pdftex.def Info: wppt-logo.png  used on input line 421.
+(pdftex.def)             Requested size: 23.603pt x 20.68018pt.
+ [26]
+<img/plot_regular_threads_100x100.png, id=462, 462.528pt x 346.896pt>
 File: img/plot_regular_threads_100x100.png Graphic file (type png)
 <use img/plot_regular_threads_100x100.png>
-Package pdftex.def Info: img/plot_regular_threads_100x100.png  used on input line 320.
-(pdftex.def)             Requested size: 330.42041pt x 247.8276pt.
-<img/plot_island_threads_100x100.png, id=410, 462.528pt x 346.896pt>
+Package pdftex.def Info: img/plot_regular_threads_100x100.png  used on input line 487.
+(pdftex.def)             Requested size: 283.22162pt x 212.42668pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+File: pwr-logo.png Graphic file (type png)
+<use pwr-logo.png>
+Package pdftex.def Info: pwr-logo.png  used on input line 491.
+(pdftex.def)             Requested size: 23.603pt x 23.49188pt.
+ [27]
+<img/plot_island_threads_100x100.png, id=471, 462.528pt x 346.896pt>
 File: img/plot_island_threads_100x100.png Graphic file (type png)
 <use img/plot_island_threads_100x100.png>
-Package pdftex.def Info: img/plot_island_threads_100x100.png  used on input line 327.
-(pdftex.def)             Requested size: 330.42041pt x 247.8276pt.
+Package pdftex.def Info: img/plot_island_threads_100x100.png  used on input line 494.
+(pdftex.def)             Requested size: 283.22162pt x 212.42668pt.
+<img/plot_compare_threads_100x100.png, id=472, 462.528pt x 346.896pt>
+File: img/plot_compare_threads_100x100.png Graphic file (type png)
+<use img/plot_compare_threads_100x100.png>
+Package pdftex.def Info: img/plot_compare_threads_100x100.png  used on input line 501.
+(pdftex.def)             Requested size: 283.22162pt x 212.42668pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
-Package pdftex.def Info: wppt-logo.png  used on input line 331.
+Package pdftex.def Info: wppt-logo.png  used on input line 506.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
- [22 </home/piotr/Dokumenty/studia/praca/img/plot_regular_threads_100x100.png>]
-<img/plot_compare_threads_100x100.png, id=418, 462.528pt x 346.896pt>
-File: img/plot_compare_threads_100x100.png Graphic file (type png)
-<use img/plot_compare_threads_100x100.png>
-Package pdftex.def Info: img/plot_compare_threads_100x100.png  used on input line 334.
-(pdftex.def)             Requested size: 330.42041pt x 247.8276pt.
-)
+ [28 </home/piotr/Dokumenty/studia/praca/img/plot_regular_threads_100x100.png> </home/piotr/Dokumenty/studia/praca/img/plot_island_threads_100x100.png>]
+<img/zla_zbieznosc_watki.png, id=481, 462.528pt x 346.896pt>
+File: img/zla_zbieznosc_watki.png Graphic file (type png)
+<use img/zla_zbieznosc_watki.png>
+Package pdftex.def Info: img/zla_zbieznosc_watki.png  used on input line 517.
+(pdftex.def)             Requested size: 283.22162pt x 212.42668pt.
 File: pwr-logo.png Graphic file (type png)
 <use pwr-logo.png>
-Package pdftex.def Info: pwr-logo.png  used on input line 596.
+Package pdftex.def Info: pwr-logo.png  used on input line 525.
 (pdftex.def)             Requested size: 23.603pt x 23.49188pt.
- [23 </home/piotr/Dokumenty/studia/praca/img/plot_island_threads_100x100.png> </home/piotr/Dokumenty/studia/praca/img/plot_compare_threads_100x100.png>]
+ [29 </home/piotr/Dokumenty/studia/praca/img/plot_compare_threads_100x100.png> </home/piotr/Dokumenty/studia/praca/img/zla_zbieznosc_watki.png>]
+<img/compare_500_1000.png, id=490, 462.528pt x 346.896pt>
+File: img/compare_500_1000.png Graphic file (type png)
+<use img/compare_500_1000.png>
+Package pdftex.def Info: img/compare_500_1000.png  used on input line 536.
+(pdftex.def)             Requested size: 283.22162pt x 212.42668pt.
+)
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
 Package pdftex.def Info: wppt-logo.png  used on input line 596.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
- [24
-
-] (/home/piotr/Dokumenty/studia/praca/podsumowanie.tex
+ [30 </home/piotr/Dokumenty/studia/praca/img/compare_500_1000.png>] (/home/piotr/Dokumenty/studia/praca/podsumowanie.tex
 Rozdzia\l  5.
-) [25
+) [31
+
 
 ]
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
 Package pdftex.def Info: wppt-logo.png  used on input line 602.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
- [26
+ [32
 
-] (/home/piotr/Dokumenty/studia/praca/praca.bbl) [27
+] (/home/piotr/Dokumenty/studia/praca/praca.bbl) [33
 
 ]
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
 Package pdftex.def Info: wppt-logo.png  used on input line 615.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
- [28
+ [34
 
 ] (/home/piotr/Dokumenty/studia/praca/dodatek1.tex
 Dodatek A.
-) [29
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 51.
+(/usr/share/texmf/tex/latex/lm/omslmr.fd
+File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 51.
+ (/usr/share/texmf/tex/latex/lm/omslmsy.fd
+File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `OMS/lmr/m/it' in size <10> not available
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 51.
+ [35
 
-]
+] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+File: wppt-logo.png Graphic file (type png)
+<use wppt-logo.png>
+Package pdftex.def Info: wppt-logo.png  used on input line 107.
+(pdftex.def)             Requested size: 23.603pt x 20.68018pt.
+ [36]
+LaTeX Font Info:    Try loading font information for OT4+lmtt on input line 123.
+ (/usr/share/texmf/tex/latex/lm/ot4lmtt.fd
+File: ot4lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OMS+lmtt on input line 124.
+LaTeX Font Info:    No file OMSlmtt.fd. on input line 124.
+
+
+LaTeX Font Warning: Font shape `OMS/lmtt/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead
+(Font)              for symbol `textbraceleft' on input line 124.
+
+File: pwr-logo.png Graphic file (type png)
+<use pwr-logo.png>
+Package pdftex.def Info: pwr-logo.png  used on input line 161.
+(pdftex.def)             Requested size: 23.603pt x 23.49188pt.
+[37]
+File: wppt-logo.png Graphic file (type png)
+<use wppt-logo.png>
+Package pdftex.def Info: wppt-logo.png  used on input line 216.
+(pdftex.def)             Requested size: 23.603pt x 20.68018pt.
+ [38]
+LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 232.
+LaTeX Font Info:    Try loading font information for OML+lmr on input line 240.
+ (/usr/share/texmf/tex/latex/lm/omllmr.fd
+File: omllmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 240.
+ (/usr/share/texmf/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `OML/lmr/m/n' in size <10> not available
+(Font)              Font shape `OML/lmm/m/it' tried instead on input line 240.
+File: pwr-logo.png Graphic file (type png)
+<use pwr-logo.png>
+Package pdftex.def Info: pwr-logo.png  used on input line 276.
+(pdftex.def)             Requested size: 23.603pt x 23.49188pt.
+ [39])
 File: wppt-logo.png Graphic file (type png)
 <use wppt-logo.png>
 Package pdftex.def Info: wppt-logo.png  used on input line 625.
 (pdftex.def)             Requested size: 23.603pt x 20.68018pt.
- [30
-
-]
+ [40]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 627.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 627.
  (/home/piotr/Dokumenty/studia/praca/praca.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 627.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 627.
 Package rerunfilecheck Info: File `praca.out' has not changed.
-(rerunfilecheck)             Checksum: 3572782B28B9D01984A5AC259AA6FF34;1670.
+(rerunfilecheck)             Checksum: 48F9F3B3B2033BD9061D43EBC4057585;1879.
 
 
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 627.
  ) 
 Here is how much of TeX's memory you used:
- 14815 strings out of 492982
- 217884 string characters out of 6134895
- 413296 words of memory out of 5000000
- 17870 multiletter control sequences out of 15000+600000
- 72304 words of font info for 65 fonts, out of 8000000 for 9000
+ 15679 strings out of 492982
+ 227918 string characters out of 6134895
+ 424602 words of memory out of 5000000
+ 18539 multiletter control sequences out of 15000+600000
+ 85955 words of font info for 71 fonts, out of 8000000 for 9000
  1180 hyphenation exceptions out of 8191
- 41i,19n,43p,429b,557s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plmi.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plsc.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plms.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plrm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plme.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rmsc.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx7.pfb></usr/share/texmf/fonts/type1/public/lm/lmcsc10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy8.pfb>
-Output written on /home/piotr/Dokumenty/studia/praca/praca.pdf (34 pages, 535363 bytes).
+ 41i,19n,51p,572b,2143s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plmi.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plsc.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plms.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plrm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plme.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rmsc.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx7.pfb></usr/share/texmf/fonts/type1/public/lm/lmbxi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmcsc10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr7.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy8.pfb>
+Output written on /home/piotr/Dokumenty/studia/praca/praca.pdf (44 pages, 1089085 bytes).
 PDF statistics:
- 568 PDF objects out of 1000 (max. 8388607)
- 486 compressed objects within 5 object streams
- 164 named destinations out of 1000 (max. 500000)
- 251 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 858 PDF objects out of 1000 (max. 8388607)
+ 751 compressed objects within 8 object streams
+ 328 named destinations out of 1000 (max. 500000)
+ 295 words of extra memory for PDF output out of 10000 (max. 10000000)
 
