@@ -33,7 +33,7 @@ sposób, jak macierz kosztu. Charakterystyka poszczególnych zadań znajduje si�
 
 
 Funkcje kosztu użyte w testach w większości pochodzą z książki \cite{ALG-GEN-BOOK}. Przedstawiono je w tabeli \ref{funkcje-kosztu}. Dodatkowo 
-użyto funkcji kosztu, która w przypadku przewozu towaru dodaje do kosztów liniowych koszt stały(Funkcja G w tabeli \ref{funkcje-kosztu}).
+użyto funkcji kosztu, która w przypadku przewozu towaru dodaje do kosztów liniowych koszt stały (Funkcja G w tabeli \ref{funkcje-kosztu}).
 
 W eksperymentach porównano przedstawiany algorytm z wybranymi solverami wspieranymi przez system \textbf{GAMS}. Dostęp do solverów był możliwy poprzez serwis 
 \textbf{NEOS Server} \cite{NEOS-1,NEOS-2,NEOS-3}, który pozwala na używanie kilkudziesięciu różnych solverów do optymalizacji problemów różnej kategorii. Do wybranych 
@@ -105,8 +105,9 @@ Maksymalną ilość iteracji algorytmu ustalono na $30000$.
 \section{Model klasyczny algorytmu ewolucyjnego}
 
 Wyniki przeprowazdone dla modelu klasycznego znajdują się w tabelach \ref{wyniki-0} oraz \ref{wyniki-1}. Tabela \ref{wyniki-0} zawiera porównanie 
-modelu klasycznego z systemem GENOCOP(wyniki pochodzą z książki\cite{ALG-GEN-BOOK}), który pozwala optymalizować wszelkiego rodzaju zadania z ograniczeniami liniowymi i nieliniową funkcją celu. 
-Widzimy tutaj że nasz algorytm wypada lepiej niż system GENOCOP w większości testów. Niestety nie udało się uzyskać wyników GENOCOPA dla zadania rozmiaru 
+modelu klasycznego z systemem GENOCOP (wyniki pochodzą z książki\cite{ALG-GEN-BOOK}), który pozwala optymalizować wszelkiego rodzaju zadania z ograniczeniami liniowymi i nieliniową funkcją celu. 
+Widzimy tutaj, że nasz algorytm wypada lepiej niż system GENOCOP w większości testów. Udało się to osiągnąć dzięki zastosowaniu w algorytmie wiedzy o zadaniu
+i dostosowaniu do niego reprezentacji rozwiązania oraz operatorów. Niestety nie udało się uzyskać wyników GENOCOPA dla zadania rozmiaru 
 $10 \times 10$.
 
 \newpage
@@ -145,7 +146,7 @@ $10 \times 10$.
 
 Tabela \ref{wyniki-1} przedstawia wyniki dla pozostałych zadań wygenerowanych w sposób opisany na początku tego rozdziału. Porównano tutaj model klasyczny 
 algorytmu ewolucyjnego z solverami MINOS oraz LINDOGlobal. O ile w przypadku MINOSa nie wiemy czy zwrócona wartość jest optimum globalnym, o tyle 
-solver LINDOGlobal informuje o tym czy znalezione rozwiązanie to optimum lokalne czy globalne. Dodatkowo w przypadku optimum lokalnego podaje on 
+solver LINDOGlobal informuje o tym czy znalezione rozwiązanie to optimum lokalne czy globalne. Dodatkowo w przypadku optimum lokalnego, podaje on 
 informację o najlepszym obliczonym dolnym ograniczeniu minimalizowanej funkcji. 
 
 W przypadku jeśli LINDO zwrócił jedynie optimum lokalne przy wyniku znajduje się litera \textit{L}, w przypadku jeśli znaleziono optimum globalne, 
@@ -157,7 +158,7 @@ funkcji, czyli $luka = \frac{|LB - \tilde{C}|}{|LB|}$.
 
 Warto zwrócić uwagę na fakt, że podane dolne ograniczenie może być złej jakości, przez co błąd względny może wydawać się bardzo duży. Sytuacja 
 taka miała miejsce w przypadku funkcji B oraz F, gdzie ograniczenie dolne dla wszystkich zestawów zadań testowych było równe $0$, czyli najmniejszemu 
-możliwemu wynikowi w każdym zadaniu transportowym(z założenia wiemy, że koszt nie może być ujemny).
+możliwemu wynikowi w każdym zadaniu transportowym (z założenia wiemy, że koszt nie może być ujemny).
 
 \newpage
 
@@ -223,14 +224,14 @@ możliwemu wynikowi w każdym zadaniu transportowym(z założenia wiemy, że kos
 \end{table}
 
 
-Jak możemy zauważyć na prezentowanym porównaniu(tabela \ref{wyniki-1}) model klasyczny wypada lepiej niż solver MINOS w niemalże każdym teście. Jedyny 
+Jak możemy zauważyć na prezentowanym porównaniu (tabela \ref{wyniki-1}) model klasyczny wypada lepiej niż solver MINOS w niemalże każdym teście. Jedyny 
 wyjątek stanowi przypadek liniowej funkcji kosztu, gdzie MINOS zawsze znajdował optimum globalne. W przypadku funkcji B MINOS wypadał nieznacznie 
-lepiej niż średni wynik dla modelu klasycznego, jednak była to z reguły różnica pomijalna(poniżej $1\%$). Z kolei dla funkcji D oraz F model 
-klasyczny był znacznie lepszy niż MINOS, który w niektórych przypadkach zwrócił nawet kilkukrotnie gorszy wynik(funkcja F). Pozostałe wyniki były raczej 
-zbliżone. Dla funkcji nieliniowych A-G i macierzy $100 \times 100$ MINOS nie zwrócił żadnego wyniku ze względu na ograniczone zasoby pamięci oferowane 
+lepiej niż średni wynik dla modelu klasycznego, jednak była to z reguły różnica pomijalna (poniżej $1\%$). Z kolei dla funkcji D oraz F model 
+klasyczny był znacznie lepszy niż MINOS, który w niektórych przypadkach zwrócił nawet kilkukrotnie gorszy wynik (funkcja F). Pozostałe wyniki były raczej 
+zbliżone. Dla funkcji nieliniowych A-G i macierzy $100 \times 100$ MINOS nie zwrócił żadnego wyniku, ze względu na ograniczone zasoby pamięci oferowane 
 przez serwis NEOS. 
 
-Dla solvera LINDOGlobal, w wielu przypadkach wynikiem obliczeń było jedynie optimum lokalne(funkcje A,B,D,E,F). W tych przypadkach możemy 
+Dla solvera LINDOGlobal, w wielu przypadkach wynikiem obliczeń było jedynie optimum lokalne (funkcje A,B,D,E,F). W tych przypadkach możemy 
 porównywać odległości od dolnego ograniczenia wyniku wskazanego przez LINDOGlobal. Jest ono jednak w wielu przypadkach bardzo nieprecyzyjne. 
 Mimo wszystko dla większości testów model klasyczny dawał wyniki zbliżone do wynkiów solvera. Przypadki łatwe, w których zostało znalezione optimum 
 globalne były rozwiązywane przez model klasyczny z akceptowalnym błędem rzędu kilku procent.
@@ -239,7 +240,7 @@ Możemy zauważyć, że w przypadku liniowej funkcji kosztu model klasyczny radz
 łatwy i znamy dużo lepsze algorytmy, któwe są w stanie w krótkim czasie znaleźć dla niego optimum globalne. W tego typu prostych zadaniach stosowanie 
 algorytmów metaheurystycznych, do których zalicza się opisywany algorytm ewolucyjny raczej mija się z celem. Stosunkowo słabe wyniki w tym przypadku 
 są wynikiem tego, że otrzymywane osobniki nie są wystarczająco zróżnicowane. Z kolei dla dużo trudniejszych, nieliniowych 
-funkcji celu model klasyczny radzi sobie znacznie lepiej. Przede wszystkim prezentuje się dużo lepiej niż pozostałe solvery w porównaniu czasu 
+funkcji celu, model klasyczny radzi sobie znacznie lepiej. Przede wszystkim prezentuje się dużo lepiej niż pozostałe solvery w porównaniu czasu 
 potrzebnego na znalezienie rozwiązania. Dla algorytmu ewolucyjnego nawet problem rozmiaru $100 \times 100$ nie był żadną trudnością i 
 był rozwiązywany w czasie kilkudziesięciu sekund. Pokazuje to główną zaletę algorytmów ewolucyjnych, jaką jest czas znajdowania rozwiązania.
 
@@ -310,7 +311,7 @@ wynikiem solvera. Takie porównanie daje lepszy obraz tego, jak prezentowany alg
 
 Jakość rozwiązań zwracanych przez algorytm ewolucyjny jest zadowalająca. Łatwo zauważyć, że radzi on sobie najgorzej w zadaniach z liniową funkcją celu 
 oraz z funkcją G, która dodaje do kosztu transportu koszt stały. Powodem tego jest to, że w tych przypadkach wiemy, że rozwiązanie optymalne jest 
-wierzchołkiem przestrzeni dopuszczalnych rozwiązań(przy zadaniu z funkcją liniową\cite{ALG-GEN-BOOK}), lub przeważają w nim elementy zerowe(funkcja G). 
+wierzchołkiem przestrzeni dopuszczalnych rozwiązań (przy zadaniu z funkcją liniową\cite{ALG-GEN-BOOK}), lub przeważają w nim elementy zerowe (funkcja G). 
 W takich przypadkach prezentowany algorytm wypada gorzej, ponieważ używany operator krzyżowania sprawia, że elementów zerowych w rozwiązaniu 
 jest bardzo mało. Operatorem, który wprowadza elementy zerowe do rozwiązania jest operator mutacji i nawet jeśli znaczne zwiększenie prawdopodobieństwa 
 mutacji może poprawić wyniki dla tych przypadków, to algorytm działa wtedy dużo bardziej jak przeszukiwanie losowe. W obu przypadkach, w których 
@@ -391,10 +392,10 @@ W tabeli \ref{wyniki-3} zaprezentowano wyniki dla wyspowego modelu algorytmu ewo
     \label{wyniki-3}
 \end{table}
 
-Widzimy że prezentuje się on podobnie do modelu klasycznego(tabela \ref{wyniki-4}). W większości testowych przypadków wypada on lepiej lub bardzo 
+Widzimy, że prezentuje się on podobnie do modelu klasycznego (tabela \ref{wyniki-4}). W większości testowych przypadków wypada on lepiej lub bardzo 
 podobnie do pozostałych solverów. LINDOGlobal znowu wygrywa w przypadku najłatwiejszych z testowanych przypadków. W przypadku modelu rozmiaru 
-$100 \times 100$ widzimy znaczącą przewagę algorytmu ewolucyjnego nad dwoma pozostałymi(scip oraz SNOPT), które poradziły sobie z tak dużym 
-modelem(w przypadku solvera MINOS ilość pamięci wymagana do rozwiązania zadania przekroczyła limit oferowany przez NEOS).
+$100 \times 100$ widzimy znaczącą przewagę algorytmu ewolucyjnego nad dwoma pozostałymi (scip oraz SNOPT), które poradziły sobie z tak dużym 
+modelem (w przypadku solvera MINOS ilość pamięci wymagana do rozwiązania zadania przekroczyła limit oferowany przez NEOS).
 
 Podobnie jak w klasycznym modelu najgorzej wypadają zadania z funkcją liniową oraz funkcją z uwzględniającą stały koszt początkowy(G), ze względu 
 na poziom trudności tych zadań. 
@@ -485,14 +486,14 @@ zaprezentowano porównanie obu modeli dla tych samych danych.
 \begin{figure}[H]
     \centering        
     \includegraphics[width=0.6\textwidth]{img/plot_regular_threads_100x100.png}
-    \caption{Zaleność czasu wykonania programu od ilości używanych wątków dla modelu klasycznego dla zadania rozmiaru $100\times100$}
+    \caption{Zależność czasu wykonania programu od ilości używanych wątków dla modelu klasycznego dla zadania rozmiaru $100\times100$.}
     \label{threads_regular_100x100}
 \end{figure}
 
 \begin{figure}[H]
     \centering        
     \includegraphics[width=0.6\textwidth]{img/plot_island_threads_100x100.png}
-    \caption{Zaleność czasu wykonania programu od ilości używanych wątków dla modelu wyspowego dla zadania rozmiaru $100\times100$}
+    \caption{Zależność czasu wykonania programu od ilości używanych wątków dla modelu wyspowego dla zadania rozmiaru $100\times100$.}
     \label{threads_island_100x100}
 \end{figure}
 
@@ -500,11 +501,11 @@ zaprezentowano porównanie obu modeli dla tych samych danych.
     \centering        
     \includegraphics[width=0.6\textwidth]{img/plot_compare_threads_100x100.png}
     \caption{Porównanie modeli klasycznego i wyspowego pod względem zależności czasu wykonania programu od ilości używanych wątków dla zadania 
-    rozmiaru $100\times100$}
+    rozmiaru $100\times100$.}
     \label{threads_comparsion_100x100}
 \end{figure}
 
-Możemy zauważyć, że spadek czasu wykonania jest dużo większy w przypadku modelu wyspowego(wykres \ref{threads_comparsion_100x100}). 
+Możemy zauważyć, że spadek czasu wykonania jest dużo większy w przypadku modelu wyspowego (wykres \ref{threads_comparsion_100x100}). 
 Wynika to z tego, że rozmiar zadania przydzielanego wątkom 
 jest dużo większy w modelu wyspowym, niż w modelu klasycznym. Wprowadza on jednak dodatkowy warunek, czyli odpowiednio większą populacje. To znaczy, że 
 im więcej wątków angażujemy, tym większa powinna być populacja całkowita, ponieważ jest ona rozdzielana na równe części, na przykład dla populacji 50 
@@ -522,13 +523,13 @@ dla 2, 4 i 8 wątków. Wykres przedstawia ewolucje kosztu najlepszego osobnika n
 Widzimy tutaj, że w przypadku zastosowania 8 populacji częściowych koszt zamiast maleć na przestrzeni pokoleń, rośnie. Pokazuje to, że odpowiednio 
 duży rozmiar populacji jest wymagany, aby algorytm ewolucyjny działał poprawnie.
 
-Używanie dużej ilości wątków w przypadku modelu klasycznego ma sens w przy rozwiązywaniu bardzo dużych zadań. W mniejszych zadaniach dodatkowy narzut w 
+Używanie dużej ilości wątków w przypadku modelu klasycznego ma sens podczas rozwiązywania bardzo dużych zadań. W mniejszych problemach dodatkowy narzut w 
 postaci podziału zadań, komunikacji oraz synchronizacji jest większy niż zysk płynący z równoległości, przez co podniesienie ilości używanych wątków ponad 
 określoną liczbę skutkuje zwiększeniem czasu potrzebnego na znalezienie rozwiązania. 
 
-W celu lepszego pokazania jak rozmiar zadania wpływa na spadek czasu potrzebnego do zakończenia obliczeń wraz z dodaniem kolejnych wątków wygenerowano 
-dwa dodatkowe zadania rozmiaru $500 \times 500$ oraz $1000 \times 1000$. Następnie zmierzono czas obliczeń używając od 1 do 25 wątków. W celu lepszego 
-porównania przeskalowano wyniki w taki sposób, żeby oś y określała stosunek czasu obliczeń, do czasu potrzebnego przy użyciu 1 wątku. Rezultat 
+W celu lepszego pokazania jak rozmiar zadania wpływa na spadek czasu potrzebnego do zakończenia obliczeń wraz z dodaniem kolejnych wątków, wygenerowano 
+dwa dodatkowe zadania rozmiaru $500 \times 500$ oraz $1000 \times 1000$. Następnie zmierzono czas obliczeń używając od 1 do 25 wątków. Dla większej 
+przejrzystości przeskalowano wyniki w taki sposób, żeby oś y określała stosunek czasu obliczeń, do czasu potrzebnego przy użyciu 1 wątku. Rezultat 
 pokazano na wykresie \ref{threads_comparsion_500x500_1000x1000}
 
 \begin{figure}[H]
@@ -538,10 +539,10 @@ pokazano na wykresie \ref{threads_comparsion_500x500_1000x1000}
     \label{threads_comparsion_500x500_1000x1000}
 \end{figure}
 
-Widzimy że w przypadku większego zadania spadek czasu był większy wraz z dokładaniem kolejnych wątków niż w przypadku mniejszego zadania. Dzieje się 
+Widzimy, że w przypadku większego zadania spadek czasu był większy wraz z dokładaniem kolejnych wątków, niż w przypadku mniejszego zadania. Dzieje się 
 tak, ponieważ większe zadania przydzielane poszczególnym wątkom wydłużają czas współbieżnego działania aplikacji, jednocześnie nie zmieniając czasu
 potrzebnego na synchronizację. Barierą, której nie jesteśmy jednak w stanie przeskoczyć 
-są fragmenty kodu, które nie pozwalają się zrównoleglić oraz dodatkowy czas którego potrzebuje garbage collector Julii na zarządzanie dostępną pamięcią. 
+są fragmenty kodu, które nie pozwalają się zrównoleglić oraz dodatkowy czas, którego potrzebuje garbage collector Julii na zarządzanie dostępną pamięcią. 
 Wynikiem tego jest wypłaszczenie wykresu w miarę wzrostu wartości na osi x.
 
 Porównując oba modele możemy dojść do wniosku, że algorytm wykorzystujący model wyspowy jest lepszy niż model klasyczny. Większe prawdopodobieństwo 

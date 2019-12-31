@@ -2,7 +2,7 @@
 \thispagestyle{chapterBeginStyle}
 
 Tak jak powiedzieliśmy w poprzednim rozdziale, nieliniowe zadanie transportowe należy do zadań optymalizacyjnych, dla których trudno jest 
-wyznaczyć dokładne rozwiązanie. Możemy za to za pomocą algorytmów przeszukujących zbiór dopuszczalnych rozwiązań, czyli algorytmów metaheurystycznych 
+wyznaczyć dokładne rozwiązanie. Możemy za to za pomocą algorytmów przeszukujących zbiór dopuszczalnych rozwiązań, czyli algorytmów metaheurystycznych, 
 postarać się wyznaczyć wystarczająco dobre rozwiązanie przybliżone. 
 
 \section{Algorytmy metaheurystyczne}
@@ -19,7 +19,7 @@ operatorów, na podstawie jednej populacji tworzona jest kolejna zawierająca w 
 lub \textbf{osobnikami}.
 
 Na początku działania algorytmu generowana jest w sposób losowy populacja startowa. Procedurę generowania pojedynczego osobnika lub 
-całej populacji nazywać będziemy \textbf{inicjalizacją}. Następnie na przestrzeni pokoleń(iteracji algorytmu) 
+całej populacji nazywać będziemy \textbf{inicjalizacją}. Następnie na przestrzeni pokoleń (iteracji algorytmu) 
 populacja ewoluuje generując coraz lepsze rozwiązania. W każdej iteracji pewna część osobników zostaje wybrana do reprodukcji. Procedurę wyboru 
 rodziców do reprodukcji nazywać będziemy \textbf{selekcją}. Wybrane osobniki krzyżujemy między sobą, tworząc w ten sposób nowe, 
 posiadające cechy wybranych wczesniej rodziców. Następnie losowo wybrane osobniki ulegają mutacji. 
@@ -51,13 +51,13 @@ Ogólny schemat działania algorytmu ewolucyjnego przedstawiono w postaci pseudo
 \begin{figure}[H]
     \centering        
     \includegraphics[width=0.6\textwidth]{img/alg_ewo_szkic.png}
-    \caption{Ogólny schemat działania algorytmu ewolucyjnego}
+    \caption{Ogólny schemat działania algorytmu ewolucyjnego.}
     \label{alg_ewo_img}
 \end{figure}
 
 Projektowanie algorytmu ewolucyjnego możemy podzielić na kilka oddzielnych części, są to: 
 \begin{itemize}
-    \item \textbf{Reprezentacja} - określa sposób zakodowania rozwiązania w chromosomie(osobniku). Wybór reprezentacji chromosomu jest bardzo ważnym etapem 
+    \item \textbf{Reprezentacja} - określa sposób zakodowania rozwiązania w chromosomie (osobniku). Wybór reprezentacji chromosomu jest bardzo ważnym etapem 
     projektowania algorytmu. Odpowiednia reprezentacja może w znacznym stopniu wpłynąć na szybkość i jakość rozwiązań znajdowanych przez 
     algorytm, ponieważ to ona w dużej mierze określa sposób w jaki przeszukiwana będzie przestrzeń rozwiązań zadania. 
     Jako reprezentacje bardzo często stosowane są wektory lub macierze genów, gdzie gen może być pojedynczą liczbą całkowitą lub rzeczywistą. 
@@ -68,7 +68,7 @@ Projektowanie algorytmu ewolucyjnego możemy podzielić na kilka oddzielnych cz�
     nasz algorytm ma minimalizować/maksymalizować, nie jest to jednak regułą. 
 
     \item \textbf{Operator krzyżowania} - jest jednym z operatorów używanych do generowania kolejnego pokolenia w algorytmach ewolucyjnych. Z założenia 
-    przyjmuje on jako argumenty dwa lub więcej rozwiązań(rodziców) i generuje na ich podstawie nowe(dzieci), które łączą w sobie cechy rodziców. 
+    przyjmuje on jako argumenty dwa lub więcej rozwiązań (rodziców) i generuje na ich podstawie nowe (dzieci), które łączą w sobie cechy rodziców. 
     
     \begin{figure}[H]
         \centering        
@@ -132,7 +132,7 @@ dla zadania transportowego.
     \caption{Przykładowe rozwiązanie.}
 \end{table}
 
-Aby ograniczenia zadania zostały zachowane macierz rozwiązania musi spełniać następujące warunki:
+Aby ograniczenia zadania zostały zachowane, macierz rozwiązania musi spełniać następujące warunki:
 $$\sum_{j=1}^{m} v_{ij} = supply[i], \text{ dla } i = 1, 2, \dots, n \text{, gdzie } n = length(supply)$$
 $$\sum_{i=1}^{n} v_{ij} = demand[j], \text{ dla } j = 1, 2, \dots, m \text{, gdzie } m = length(demand)$$
 $$v_{ij} \ge 0, \text{ dla } i = 1, 2, \dots, n \text{ i } j = 1, 2, \dots, m$$
@@ -394,7 +394,7 @@ macierzy $V$.
 \end{pseudokod}
 
 Zdefiniowano dwa operatory mutacji. Różnią się one jedynie procedurą inicjalizacji. W pierwszym używamy tej samej procedury, którą inicjalizujemy 
-nowe chromosomy podczas generowania populacji początkowej(patrz \ref{inicjalizacja-1}). Druga jest modyfikacją tej procedury. Modyfikacja polega na tym, że zamiast wybierać 
+nowe chromosomy podczas generowania populacji początkowej (patrz \ref{inicjalizacja-1}). Druga jest modyfikacją tej procedury. Modyfikacja polega na tym, że zamiast wybierać 
 jako wartość pola $val = \min(demand[j], supply[i])$ wybieramy liczbę z zakresu $[0, val]$. Zmiana ta powoduje, że otrzymana macierz może naruszać 
 ograniczenia zadania, dlatego po wstępnym wyznaczeniu wartości naprawiamy rozwiązanie poprzez zrobienie wymaganych dodawań w taki sposób, żeby 
 rozwiązanie spełniało ograniczenia.
@@ -429,11 +429,9 @@ Poniżej przedstawiono schemat zmodyfikowanej procedury inicjalizacji w postaci 
     \Return{$V$}
 \end{pseudokod}
 
-[TODO: przykład]
-
 \section{Funkcje oceny}
 W przypadku omawianego problemu funkcja oceny jest równoważna odwrotności funkcji celu dla zadania transportowego. Powinna więc mieć postać:
-$$\frac{1}{\sum_{i=1}^{n}\sum_{j=1}^{m} f(v_{ij})}$$, 
+$$\frac{1}{\sum_{i=1}^{n}\sum_{j=1}^{m} f(v_{ij})}$$
 gdzie $f(v_{ij})$ jest dowolną funkcją przyjmującą jako argument ilość towaru transportowanego między punktami $i$ oraz $j$.
 Bierzemy odwrotnośc, ponieważ chemy minimalizować funkcję celu, tzn. im mniejszy koszt osobnika, tym większa wartość funkcji przystosowania.
 
@@ -500,7 +498,7 @@ Bardziej formalnie procedura została przedstawiona na poniższym pseudokodzie.
     4. Ostatecznie nasze koło ma postać $wheel = [0.0667, 0.2, 0.4, 0.6667, 1]$
 
     Teraz, aby wybrać rodzica losujemy liczbę z zakresu $[0, 1]$ i wybieramy osobnika, w którego przedziale znajduje się wylosowana liczba, np.
-    załużmy, że wylosowaliśmy liczbe $r = 0.5$. Szukamy wtedy takiej liczby w naszym wektorze $wheel$ takiej liczby, $x \ge r$, która będzie najbliższa 
+    załóżmy, że wylosowaliśmy liczbe $r = 0.5$. Szukamy wtedy w naszym wektorze $wheel$ takiej liczby $x \ge r$, która będzie najbliższa 
     naszemu $r$. W naszym przypadku jest to $0.6667$. Indeks wybranego rodzica jest indeksem na którym znajduje się $x$, czyli w tym wypadku $idx = 4$.
     Wybieramy więc jako rodzica osobnika $V_4$.
 
@@ -518,7 +516,7 @@ obliczając wartość funkcji przystosowania dla całej populacji nie musimy si�
 podzielić populacje na mniejsze części i następnie zlecić obliczenie funkcji przystosowania poszczególnych części pojedynczym wątkom. W ten 
 sposób, wszystkie części mogą być obliczane w tym samym czasie, co powinno skutkować skróceniem czasu całkowitych obliczeń dla całej populacji.
 
-Podobnie możemy postąpić w przypadku zastosowania operatorów genetycznych, które również wpływają tylko na poszczególne osobniki, a nie całą 
+Podobnie możemy postąpić w przypadku zastosowania operatorów genetycznych, które również wpływają tylko na poszczególne osobniki, a nie na całą 
 populację.
 
 Kolejną opcją zrównoleglenia jest podział populacji na kilka mniejszych, które przez określoną liczbę pokoleń mogą ewoluować niezależnie 
@@ -536,14 +534,14 @@ Zaproponujmy i opiszmy dwa modele dla algorytmu:
 
 Na początku procedura inicjalizacji generuje losową populacje o określonej liczbie osobników i oblicza wartość funkcji oceny dla każdego z nich. 
 Następnie przechodzimy do głównej pętli algorytmu, która kończy się w momencie kiedy populacja osiągnie maksymalną ilość generacji. 
-Każdy z trybów różni się przebiegiem procedury \textit{nextGeneration}(patrz \ref{alg_main_img}), która tworzy nową generacje osobników.
+Każdy z trybów różni się przebiegiem procedury \textit{nextGeneration} (patrz \ref{alg_main_img}), która tworzy nową generacje osobników.
 
 \newpage
 
 \begin{figure}[H]
     \centering        
     \includegraphics[width=0.6\textwidth]{img/alg_main.png}
-    \caption{Przebieg zaimplementowanego algorytmu ewolucyjnego}
+    \caption{Przebieg zaimplementowanego algorytmu ewolucyjnego.}
     \label{alg_main_img}
 \end{figure}
 
@@ -551,7 +549,7 @@ Model klasyczny nie różni się wiele od standardowego algorytmu ewolucyjnego. 
 określoną przy starcie liczbę pokoleń. Wszystkie dostępne parametry algorytmu zostały krótko opisane w dalczej części pracy, 
 w sekcji \textit{Parametry algorytmu}.
 
-W modelu klasycznym zrównoleglenie odbywa się na poziomie pojedynczej iteracji(patrz \ref{next_gen_klasyczny_img}). 
+W modelu klasycznym zrównoleglenie odbywa się na poziomie pojedynczej iteracji (patrz \ref{next_gen_klasyczny_img}). 
 Ewolucję populacji możemy podzielić tutaj na dwie części:
 \begin{itemize}
     \item \textbf{Krzyżowanie} - w tej części między wątki rozdzielani są rodzice wybrani do krzyżowania. Następnie każdy z wątków generuje swoją część 
@@ -566,7 +564,7 @@ Ewolucję populacji możemy podzielić tutaj na dwie części:
 \begin{figure}[H]
     \centering        
     \includegraphics[width=0.4\textwidth]{img/next_gen_klasyczny.png}
-    \caption{Przebieg procedury nextGeneration dla modelu klasycznego}
+    \caption{Przebieg procedury nextGeneration dla modelu klasycznego.}
     \label{next_gen_klasyczny_img}
 \end{figure}
 
@@ -576,14 +574,14 @@ są na nowo łączone w jedną. Następnie najlepsze rozwiązywanie jest zapisyw
 cały proces się powtarza, do momentu w którym ilość generacji przekroczy określoną na początku liczbę. Na końcu najlepsze znalezione rozwiązanie 
 jest zwracane.
 
-W tym modelu zrównoleglenie obliczeń polega na tym, że przy każdym podziale populacji jeden wątek zarządza pojedynczą częścią populacji(patrz \ref{next_gen_wyspowy_img}).
-Model ten skaluje się lepiej niż model klasyczny ze względu na to że podzadania przydzielane wątkom są większe. Minusem jest tutaj to, że populacja 
+W tym modelu zrównoleglenie obliczeń polega na tym, że przy każdym podziale populacji jeden wątek zarządza pojedynczą częścią populacji (patrz \ref{next_gen_wyspowy_img}).
+Model ten skaluje się lepiej niż model klasyczny ze względu na to, że podzadania przydzielane wątkom są większe. Minusem jest tutaj to, że populacja 
 musi być odpowiednio duża, żeby jej podział na mniejsze części się sprawdził.
 
 \begin{figure}[H]
     \centering        
     \includegraphics[width=0.7\textwidth]{img/next_gen_wyspowy.png}
-    \caption{Przebieg procedury nextGeneration dla modelu wyspowego}
+    \caption{Przebieg procedury nextGeneration dla modelu wyspowego.}
     \label{next_gen_wyspowy_img}
 \end{figure}
 
@@ -612,12 +610,12 @@ i czytelność kodu. Testy pokazują, że program napisany w Julii może być r�
 Dodatkową zaletą jest możliwość bezpośredniego wywoływania bibliotek napisanych w C, Fortranie i kilku innych językach popularnych w dziedzinie 
 obliczeń numerycznych bezpośrednio z Julii.
 
-Julia używa kompilatora JIT(just-in-time), który kompiluje program tuż przed jego wykonaniem, dzięki czemu jest szybsza 
+Julia używa kompilatora JIT (just-in-time), który kompiluje program tuż przed jego wykonaniem, dzięki czemu jest szybsza 
 niż języki interpretowane. Należy pamiętać o tym, że nie każdy program napisany w Julii będzie szybki. Wszystko zależy od jakości dostarczonego kodu.
 Głównym czynnikiem, który wpływa na szybkość są typy. Julia jest językiem dynamicznie typowanym, jednak podczas kompilacji tworzone są warianty tej samej 
-funkcji dla różnych typów(o ile to możliwe). Pozwala to pominąć kontrolę typów podczas wykonywania kodu i tym samym znacząco przyspieszyć jego działanie.
-Dlatego pisząc kod w julii powinniśmy pamiętać o tym, żeby unikać miejsc, w których kompilator będzie zmuszony do konwersji zmiennych do konkretnego typu. 
-Aby identyfikować tego typu miejsca możemy używać dostarczonych w bibliotece standardowej narzędzi, które pomagają analizować nasz kod. 
+funkcji dla różnych typów (o ile to możliwe). Pozwala to pominąć kontrolę typów podczas wykonywania kodu i tym samym znacząco przyspieszyć jego działanie.
+Dlatego pisząc kod w Julii powinniśmy pamiętać o tym, żeby unikać miejsc, w których kompilator będzie zmuszony do konwersji zmiennych do konkretnego typu. 
+Aby identyfikować tego typu miejsca, możemy używać dostarczonych w bibliotece standardowej narzędzi, które pomagają analizować nasz kod. 
 Warte wymienienia są tutaj:
 
 \begin{itemize}

@@ -5,13 +5,13 @@
 \section{Zadanie transportowe}
 Zadanie transportowe możemy zaliczyć do grupy zadań optymalizacyjnych z ograniczeniami. Rozwiązując je, staramy się przy użyciu $n$ punktów nadania 
 zaspokoić zapotrzebowanie $m$ punktów odbioru w taki sposób, aby całkowity koszt transportu był minimalny. Zadanie wymaga określenia ilości 
-towaru znajdującej się w każdym z punktów nadania, oraz zapotrzebowania na towar w każdym z punktów odbioru. Dodatkowo musimy określić 
+towaru znajdującego się w każdym z punktów nadania, a także zapotrzebowania na ten towar w każdym z punktów odbioru. Dodatkowo musimy określić 
 koszt transportu pomiędzy poszczególnymi punktami. Klasyczne zadanie transportowe ogranicza się do transportu 
 tylko jednego rodzaju towaru, dzięki czemu punkty odbioru mogą być zaopatrywane przez jeden lub więcej punktów nadania.
 
 Zadanie transportowe nazywamy zbilansowanym, jeśli całkowita podaż towaru jest równa całkowitemu popytowi. W przeciwnym wypadku 
 zadanie jest niezbilansowane. Rozwiązywanie zadania niezbilansowanego polega na sprowadzeniu go do zadania zbilansowanego, poprzez 
-dodanie fikcyjnego dostawcy(w przypadku większego popytu), lub fikcyjnego odbiorcy(w przypadku większej podaży). Koszt transportu 
+dodanie fikcyjnego dostawcy (w przypadku większego popytu), lub fikcyjnego odbiorcy (w przypadku większej podaży). Koszt transportu 
 między fikcyjnym dostawcą a odbiorcami, lub między dostawcami a fikcyjnym odbiorcą najczęściej ustalany jest jako zerowy.
 
 Załóżmy, że mamy $n$ punktów nadania i $m$ punktów odbioru. Początkowa ilość towaru w $i$-tym punkcie nadania jest równa $supply(i)$, 
@@ -27,13 +27,13 @@ $$x_{ij} \ge 0, \text{ dla } i = 1, 2, \dots, n \text{ i } j = 1, 2, \dots, m$$
 
 Pierwszy zestaw ograniczeń mówi o tym, że całkowita ilość towaru transportowana z pojedynczego punktu nadania musi być równa jego początkowej 
 ilości znajdującej się w tym punkcie. Z kolei drugi zestaw mówi o tym, że całkowita ilość towaru transportowana do pojedynczego punktu odbioru 
-musi być równa jego początkowemu zapotrzebowaniu. W przypadku zadania niezbilansowanego równości w dwóch pierwszych zestawach ograniczeń należy 
+musi być równa jego początkowemu zapotrzebowaniu. W przypadku zadania niezbilansowanego równości w dwóch pierwszych zestawach ograniczeń, należy 
 zmienić na odpowiednie nierówności. 
 
 Zadanie jest liniowe, jeśli koszt transportu między punktami nadania i odbioru jest wprost proporcjonalny 
 do ilości transportowanego towaru, tzn. jeśli $f_{ij}(x_{ij}) = c_{ij} x_{ij}$, gdzie $c_{ij}$ jest jednostkowym kosztem transportu 
 między $i$-tym punktem nadania, a $j$-tym punktem odbioru. W przypadku kiedy zależność między kosztem transportu, a ilością transportowanego 
-towaru wygląda inaczej mówimy o zadaniu nieliniowym.
+towaru wygląda inaczej, mówimy o zadaniu nieliniowym.
 
 \subsection{Wersja liniowa}
 Zadanie transportowe w wersji liniowej możemy przedstawić jako problem programowania liniowego. Optymalne rozwiązanie możemy więc wyznaczyć 

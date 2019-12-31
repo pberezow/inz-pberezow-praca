@@ -4,7 +4,7 @@
 
 \section{Wymagania i instalacja}
 
-Opisywany w poprzednich rozdziałach algorytm został zaimplementowany w języku Julia w wersji 1.3. Była testowana na komputerze z zainstalowanym 
+Opisywany w poprzednich rozdziałach algorytm został zaimplementowany w języku Julia w wersji 1.3 oraz przetestowany na komputerze z zainstalowanym 
 systemem Ubuntu 18.04 w wersji, dla architektury 64-bitowej. Prezentowany pakiet powinien jednak działać na każdym systemie, na którym 
 Julia 1.3 działa poprawnie.
 
@@ -26,7 +26,6 @@ biblioteki poprzez wywołanie funkcji \textit{Pkg.add()}, gdzie w argumencie pod
 \end{lstlisting}
 
 Po zainstalowaniu wyżej wymienionych zależności, biblioteka jest gotowa do użytku. Instrukcja obsługi została zamieszczona w kolejnych sekcjach.
-
 Udostępniony pakiet zawiera zestaw testów jednostkowych, które weryfikują poprawność działania składowych algorytmu. Dodatkowo załączono przykładowy 
 plik konfiguracyjny oraz definicje kilku funkcji kosztu.
 
@@ -68,7 +67,21 @@ $ julia run.jl plik_konfiguracyjny ilość_pokoleń nazwa_funkcji_kosztu
 
 Przykładowe uruchomienie skryptu \textit{run\_example.jl}:
 
-[TODO: uruchomienie]
+\begin{lstlisting}[language=bash, frame=single]
+piotr@piotr-hp:~/geneticNTP$ julia run_example.jl 
+Path: ./examples/ex_7x7.json
+Running on 1 threads
+==================== CONFIG ====================
+Population Size: 100
+Crossover: 70.0%
+Mutation: 10.0% / rate: 0.05
+Elite: 30.0%
+Iterations: 10000
+Cost Func: A
+
+Best result in first generation: 1186.0
+Best result: 201.0
+\end{lstlisting}
 
 Przykładowe uruchomienie skryptu \textit{optimizers.jl}:
 
@@ -195,7 +208,7 @@ wcześniej zdefiniowanych funkcji znajdujących się już w tym pliku. Następni
 się w poprzedniej sekcji.
 
 W celu uruchomienia biblioteki możemy używać przygotowanego skryptu znajdującego się w pliku \textit{run.jl}. Uruchamiamy go poprzez wywołanie 
-interpretera julii z argumentami:
+interpretera Julii z argumentami:
 \begin{enumerate}
     \item ścieżka do pliku \textit{run.jl}
     \item ścieżka do pliku konfiguracyjnego 
